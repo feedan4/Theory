@@ -49,7 +49,7 @@ function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className='w-[20%] flex flex-col gap-10 items-center'>
+                <div className='w-[20%] flex-col gap-10 items-center hidden lg:flex'>
                     <div className='flex gap-5 md:gap-10'>
                         <FaFacebookF className='text-[20px]' />
                         <FaXTwitter className='text-[20px]' />
@@ -57,16 +57,49 @@ function Footer() {
                         <FaPinterestP className='text-[20px]' />
                         <FaYoutube className='text-[20px]' />
                     </div>
-                    <div className='hidden gap-3 lg:flex'>
+                    <div className='w-full flex items-center gap-3'>
                         <img className='w-[120px]' loading='lazy' src='https://ak-media.theory.com/i/theory/apple-store-logo?$defaultMedia$' />
                         <img className='w-[120px]' loading='lazy' src='https://ak-media.theory.com/i/theory/google-store-logo?$defaultMedia$' />
                     </div>
                 </div>
             </div>
             <hr className='w-[95%] mx-auto hidden lg:block' />
-            <div>
-
+            <div className='w-[80%] mx-auto py-[35px]'>
+                <ul type='none' className='hidden xl:flex justify-between'>
+                    <li className='text-[13px] text-[#3b3b3b]'>
+                        <img src='/public/img/az.svg' className='w-[16px] inline-block mr-2' />
+                        <span>Azerbaijan (AZN)</span>
+                    </li>
+                    <li className='text-[13px] text-[#3b3b3b]'>&copy; 2024 Theory</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Site Map</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Accessibility Statement</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Your California Privacy Rights</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Do Not Sell My Information</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Terms of Use</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Privacy Policy</li>
+                    <li className='text-[13px] text-[#3b3b3b]'>Exclusions</li>
+                </ul>
             </div>
+            <div className='mx-auto pb-[35px] flex flex-col gap-10 items-center xl:hidden'>
+                <div className='text-[13px] text-[#3b3b3b] flex items-center gap-2 lg:hidden'>
+                    <img src='/public/img/az.svg' className='w-[16px]' />
+                    <p>Azerbaijan (AZN)</p>
+                </div>
+                <div className='flex gap-5 md:gap-10'>
+                    <FaFacebookF className='text-[20px]' />
+                    <FaXTwitter className='text-[20px]' />
+                    <FaInstagramSquare className='text-[20px]' />
+                    <FaPinterestP className='text-[20px]' />
+                    <FaYoutube className='text-[20px]' />
+                </div>
+                <div>
+                    <ul className="flex lg:hidden gap-4 whitespace-nowrap">
+                        <li className="text-[13px] text-[#3b3b3b]">&copy; 2024 Theory</li>
+                        <li className="text-[13px] text-[#3b3b3b]">Site Map</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     )
 }
