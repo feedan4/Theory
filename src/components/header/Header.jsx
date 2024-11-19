@@ -2,7 +2,12 @@ import React from 'react'
 
 function Header() {
   return (
-    <div></div>
+    <div className='m-[20px] bg-transparent hover:bg-white delay-300 flex justify-between items-center'>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
   )
 }
 
