@@ -8,6 +8,8 @@ function DataContext({children}) {
   const {data, setData} = useState(null)
   const {category, setCategory} = useState([])
 
+  
+
   useEffect(() => {
     getAllCategories().then(res => getAllCategories(res))  
     getAllProducts().then(res => getAllProducts(res))   

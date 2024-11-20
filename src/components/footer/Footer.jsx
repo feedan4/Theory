@@ -82,7 +82,7 @@ function Footer() {
             </div>
             <div className='mx-auto pb-[35px] flex flex-col gap-10 items-center xl:hidden'>
                 <div className='text-[13px] text-[#3b3b3b] flex items-center gap-2 lg:hidden'>
-                    <img src='/public/img/az.svg' className='w-[16px]' />
+                    <img src='/img/az.svg' className='w-[16px]' />
                     <p>Azerbaijan (AZN)</p>
                 </div>
                 <div className='flex gap-5 md:gap-10'>
