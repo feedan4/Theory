@@ -1,10 +1,23 @@
-import React, { createContext } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { getAllCategories, getAllProducts } from '../services/api'
 
 export const DATA = createContext([])
 
 function DataContext({children}) {
+
+  const {data, setData} = useState(null)
+  const {category, setCategory} = useState([])
+
+  useEffect(() => {
+    getAllCategories().then(res => getAllCategories(res))  
+    getAllProducts().then(res => getAllProducts(res))   
+  }, [])
+
   return (
-    <DATA.Provider>
+    <DATA.Provider value={{
+      data, setData ,
+      category, setCategory
+    }}>
         {children}
     </DATA.Provider>
   )
