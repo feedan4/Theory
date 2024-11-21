@@ -6,12 +6,15 @@ export const DATA = createContext(null)
 function DataContext({children}) {
 
   const [data, setData ]= useState(null)
-  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState(null)
+  console.log(category);
+  
 
 
   useEffect(() => {
-    getAllCategories().then(res => {getAllCategories(res)})  
-    getAllProducts().then(res => {getAllProducts(res)}) 
+    getAllCategories().then(res => {setCategory(res)})  
+    getAllProducts().then(res => {setData(res.data)}) 
+    
   }, [])
  
   return (

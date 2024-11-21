@@ -7,7 +7,7 @@ async function getAllProducts() {
 }
 
 async function getAllCategories() {
-    const res = await axios.get("https://fakestoreapi.com/users")
+    const res = await axios.get("https://ecommerse.apasni.me/categories/all")
     return res.data
 }
 
