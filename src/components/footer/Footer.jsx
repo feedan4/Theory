@@ -67,7 +67,7 @@ function Footer() {
             <div className='w-[80%] mx-auto py-[35px]'>
                 <ul type='none' className='hidden xl:flex justify-between'>
                     <li className='text-[13px] text-[#3b3b3b]'>
-                        <img src='/public/img/az.svg' className='w-[16px] inline-block mr-2' />
+                        <img src='/img/az.svg' className='w-[16px] inline-block mr-2' />
                         <span>Azerbaijan (AZN)</span>
                     </li>
                     <li className='text-[13px] text-[#3b3b3b]'>&copy; 2024 Theory</li>
