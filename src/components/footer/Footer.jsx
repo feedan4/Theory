@@ -4,7 +4,7 @@ import { FaXTwitter } from 'react-icons/fa6'
 
 function Footer() {
     return (
-        <div className='flex flex-col'>
+        <footer className='relative z-30 flex flex-col'>
             <div className='bg-[#FAFAFA] py-[35px]'>
                 <div className='w-[80%] sm:w-[55%] lg:w-[80%] xl:w-[55%] mx-auto flex lg:flex-row flex-col justify-center items-center gap-5'>
                     <div className='flex flex-col gap-3 text-center lg:text-start'>
@@ -100,7 +100,7 @@ function Footer() {
                 </div>
             </div>
 
-        </div>
+        </footer>
     )
 }
 

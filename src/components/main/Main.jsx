@@ -1,21 +1,32 @@
 import React from 'react'
 
 function Main() {
+
   return (
-    <>
-    <section>
-      <video autoplay loop  muted className='w-full h-[86vh]' src='https://cdn.static.amplience.net/theory/_vid/dg_holiday_campaign_hp_hero_mobile/2fe64e60-41fb-4ab5-90dc-ab8c4972043a/video/17cb476c-da48-4131-956f-8da09e8a1466.mp4'></video>
-    </section>
-    <section className='flex items-center'>
-      <div className='section1'>
-
+    <main>
+      <div className="w-full flex items-center h-[640px]">
+        <div
+          className="bg-center bg-cover w-[50%] h-[640px] z-30 flex flex-col gap-4 justify-center items-center"
+          style={{
+            backgroundImage: `url('https://ak-media.theory.com/i/theory/1101-hp-gendertile-w?$mediaDesktopLarge$')`,
+          }}
+        >
+          <h1 className='capitalize text-white text-[34px] font-bold font-archivo tracking-wider'>the women's shop</h1>
+          <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+        </div>
+        <div
+          className="bg-center bg-cover w-[50%] h-[640px] z-30  flex flex-col gap-4 justify-center items-center"
+          style={{
+            backgroundImage: `url('https://ak-media.theory.com/i/theory/1101-hp-gendertile-m?$mediaDesktopLarge$')`,
+          }}
+        >
+          <h1 className='capitalize text-white text-[34px] font-bold font-archivo tracking-wider'>the men's shop</h1>
+          <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+        </div>
       </div>
-      <div className='section2'>
+    </main>
 
-      </div>
-    </section>
-    </>
-  )
+  );
 }
 
 export default Main

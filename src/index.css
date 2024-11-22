@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.section1 {
-    background: url("https://ak-media.theory.com/i/theory/1101-hp-gendertile-w?$mediaDesktopLarge$") center/cover;
-}
-
-.section2 {
-    background: url("https://ak-media.theory.com/i/theory/1101-hp-gendertile-m?$mediaDesktopLarge$") center/cover;
-}
