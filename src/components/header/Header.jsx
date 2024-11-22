@@ -11,7 +11,7 @@ function Header() {
   return (
     <>
       <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
-      <header className="relative px-[20px] py-[10px] bg-transparent flex flex-col h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]">
+      <header className="relative px-[20px] py-[10px] bg-transparent flex flex-col justify-between h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]">
         <video
           autoPlay
           loop
@@ -21,7 +21,7 @@ function Header() {
         ></video>
         <div className='flex flex-col relative'>
           <div className="flex justify-between items-center w-full z-10">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-[33.3%]">
               {/* hamburger menu */}
               <div>
                 <div className='flex lg:hidden gap-3 items-center'>
@@ -37,10 +37,10 @@ function Header() {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className='flex w-[33.3%] justify-center'>
               <img className='w-[80%]' src="/img/theory.png" alt="Theory Logo" />
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-[33.3%] justify-end">
               <div className="hidden lg:flex items-center">
                 <SlMagnifier className="text-white text-[11px]" />
                 <a href="#" className="text-white text-[13px]">
