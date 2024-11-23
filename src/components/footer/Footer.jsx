@@ -17,7 +17,7 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='w-[95%] md:w-[87%] mx-auto h-[79%] py-[50px] bg-white flex flex-col gap-10 lg:gap-0 lg:flex-row items-center'>
+            <div className='w-[95%] md:w-[100%] mx-auto h-[79%] p-[50px] bg-white flex flex-col gap-10 lg:gap-0 lg:flex-row items-center'>
                 <div className='w-[80%] flex flex-col md:flex-row gap-5 md:gap-0'>
                     <div className='w-full md:w-[33%]'>
                         <ul type='none' className='flex flex-col gap-2'>

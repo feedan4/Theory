@@ -1,4 +1,5 @@
 import React from 'react'
+import ProductSlider from './ProductSlider';
 
 function Main() {
 
@@ -30,6 +31,7 @@ function Main() {
         <p className='text-white text-[16px] text-center'>The season's best, styled by our staff.</p>
         <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>about us</button>
       </div>
+      <ProductSlider />
     </main>
 
   );
