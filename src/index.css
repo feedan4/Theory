@@ -8,17 +8,10 @@
     
   }
 
-.mySwiper .swiper-button-next,
-.mySwiper .swiper-button-prev {
-  color: black;
-  position: absolute;
-  font-weight: bold;
-  display: none;
-}
-  
-#app {
+  #app {
     height: 100%;
   }
+
   html,
   body {
     position: relative;
@@ -43,7 +36,6 @@
     text-align: center;
     font-size: 18px;
     background: #fff;
-    overflow: hidden;
   
     /* Center slide text vertically */
     display: flex;
@@ -57,4 +49,36 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .swiper-pagination {
+    display: none;
+  }
+
+  .swiper-button-prev, .swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5); /* Arxa fonun rəngi */
+  color: #fff; /* Düymə rəngi */
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.swiper-button-prev {
+  left: 10px; /* Sol tərəf */
+}
+
+.swiper-button-next {
+  right: 10px; /* Sağ tərəf */
+}
+
+.swiper-button-prev, .swiper-button-next {
+  font-size: 18px; /* Şrift ölçüsü */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
