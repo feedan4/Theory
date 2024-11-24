@@ -8,7 +8,8 @@ export default {
     extend: {
       screens: {
         "mq662":"662px",
-        "mq700":"700px"
+        "mq700":"700px",
+        "400":"500px"
       }
     },
   },

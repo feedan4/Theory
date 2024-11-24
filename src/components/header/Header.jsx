@@ -38,7 +38,7 @@ function Header() {
               </ul>
             </div>
             <div className='flex w-[33.3%] justify-center'>
-              <img className='w-[80%]' src="/img/theory.png" alt="Theory Logo" />
+              <img src="/img/theory.png" alt="Theory Logo" />
             </div>
             <div className="flex items-center gap-4 w-[33.3%] justify-end">
               <div className="hidden lg:flex items-center">
@@ -62,7 +62,7 @@ function Header() {
               </div>
             </div>
           </div>
-          <div className='flex flex-col gap-4 items-center transition-all duration-1000 pt-[100px] md:pt-[350px] sm:pt-[250px]'>
+          <div className='flex flex-col gap-4 items-center transition-all duration-1000 pt-[250px] sm:pt-[400px] md:pt-[550px] xl:pt-[400px]'>
             <h1 className='text-white text-[20px] sm:text-[34px] font-archivo tracking-wider font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>

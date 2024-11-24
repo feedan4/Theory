@@ -30,13 +30,13 @@ function Main() {
       <div className='w-full h-[70vh] bg-cover bg-center flex flex-col gap-3 items-center justify-center py-[30px] font-archivo tracking-wider'
         style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/1101-hp-gg-desktop?$mediaDesktopLarge$")`}}
       >
-        <h1 className='text-white text-[34px] capitalize font-archivo tracking-wider font-bold '>the gift guide</h1>
+        <h1 className='text-white text-center text-[26px] sm:text-[34px] capitalize font-archivo tracking-wider font-bold '>the gift guide</h1>
         <p className='text-white text-[16px] text-center'>Curated with care for everyone on your list.</p>
       </div>
       <ProductSlider2 />
       <div className='w-full bg-cover bg-center flex flex-col gap-3 items-center justify-center py-[30px] font-archivo tracking-wider'
         style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/InTheory-Mobile?$mediaDesktop$")` }}>
-        <h1 className='text-white text-[34px] font-archivo tracking-wider font-bold '>#InTheory</h1>
+        <h1 className='text-white text-[20px] sm:text-[34px] font-archivo tracking-wider font-bold '>#InTheory</h1>
         <p className='text-white text-[16px] text-center'>The season's best, styled by our staff.</p>
         <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>about us</button>
       </div>
