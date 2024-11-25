@@ -58,7 +58,7 @@ export default function ProductSlider2() {
                     <p className="text-black text-start text-[14px] px-[10px] pb-[10px] font-semibold">
                       {filteredItem.name}
                     </p>
-                    <div className='flex flex-col items-center'>
+                    <div className='flex flex-col items-start'>
                       <div className='flex items-start'>
                         <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
                           {(filteredItem.price).toFixed(2)} man

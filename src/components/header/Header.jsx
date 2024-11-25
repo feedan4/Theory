@@ -11,54 +11,67 @@ function Header() {
   return (
     <>
       <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
-      <header className="relative px-[20px] py-[10px] bg-transparent flex flex-col justify-between h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]">
+      <header className=" relative bg-transparent flex flex-col justify-between h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]">
         <video
           autoPlay
           loop
           muted
+          style={{ objectPosition: "center 10%" }}
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
           src="https://cdn.static.amplience.net/theory/_vid/dg_holiday_campaign_hp_hero_mobile/2fe64e60-41fb-4ab5-90dc-ab8c4972043a/video/17cb476c-da48-4131-956f-8da09e8a1466.mp4"
         ></video>
-        <div className='flex flex-col relative'>
-          <div className="flex justify-between items-center w-full z-10">
-            <div className="flex items-center gap-4 w-[33.3%]">
-              {/* hamburger menu */}
+        <div className='flex flex-col relative w-[100%]'>
+          <div className="flex justify-between items-center w-full z-10 text-white hover:text-black hover:bg-white navbar">
+            <div className="flex items-center w-[33.3%] ">
               <div>
                 <div className='flex lg:hidden gap-3 items-center'>
-                  <BsList className='text-white text-[13px] font-bold' />
-                  <SlMagnifier className="text-white text-[11px]" />
+                  <BsList className='text-[13px] font-bold hamburger' />
+                  <SlMagnifier className=" text-[11px]" />
                 </div>
               </div>
-              <ul className="gap-4 items-center hidden lg:flex">
-                {category && category.map((item) => (
-                  <li key={item.id} className="text-white text-[13px]">
-                    {item.name}
-                  </li>
-                ))}
-              </ul>
+              <div className="gap-4 pl-[20px] items-center hidden lg:flex w-[100%]">
+                {category &&
+                  category.map((item, index) => {
+                    return (
+                      <div key={index} className=" flex flex-col gap-2">
+                        <div className="text-[13px] categ">
+                          {item.name}
+                        </div>
+                        <div className="bg-white text-black flex flex-col p-[20px] text-[13px] gap-2 top-[50px] subcateg absolute w-[100%] opacity-0 hover:opacity-100 transition-opacity duration-300">
+                          {item.Subcategory &&
+                            item.Subcategory.map((elem, subIndex) => (
+                              <div key={subIndex}>
+                                {elem.name}
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-            <div className='flex w-[33.3%] justify-center'>
+            <div className='flex w-[33.3%] justify-center z-10 logo'>
               <img src="/img/theory.png" alt="Theory Logo" />
             </div>
-            <div className="flex items-center gap-4 w-[33.3%] justify-end">
+            <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
               <div className="hidden lg:flex items-center">
-                <SlMagnifier className="text-white text-[11px]" />
-                <a href="#" className="text-white text-[13px]">
+                <SlMagnifier className=" text-[11px]" />
+                <a href="#" className=" text-[13px]">
                   Search
                 </a>
               </div>
-              <a href="#" className="text-white text-[13px] capitalize hidden lg:block">
+              <a href="#" className=" text-[13px] capitalize hidden lg:block">
                 Sign in/register
               </a>
-              <a href="#" className="text-white text-[13px] hidden lg:block">
+              <a href="#" className=" text-[13px] hidden lg:block">
                 Wishlist
               </a>
-              <a href="#" className="text-white text-[13px] block lg:hidden">
+              <a href="#" className=" text-[13px] block lg:hidden">
                 <FaHeart />
               </a>
               <div className="relative">
-                <BsBasket3Fill className="text-white hover:text-black text-[13px]" />
-                <div className="absolute text-[13px] top-[-10px] right-[-10px] text-white">0</div>
+                <BsBasket3Fill className=" hover:text-black text-[13px]" />
+                <div className="absolute text-[13px] top-[-10px] right-[-10px] ">0</div>
               </div>
             </div>
           </div>

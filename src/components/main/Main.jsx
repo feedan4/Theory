@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductSlider from './ProductSlider';
 import ProductSlider2 from './ProductSlider2';
+import { Link } from 'react-router-dom';
 
 function Main() {
 
@@ -14,7 +15,9 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold font-archivo tracking-wider'>the women's shop</h1>
-          <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+          <Link to={`/category`}>
+            <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+          </Link>
         </div>
         <div
           className="bg-center bg-cover w-[50%] h-[240px] transition-all duration-1000 sm:h-[340px] mq700:h-[500px] md:h-[640px] z-30  flex flex-col gap-4 justify-center items-center"
@@ -28,7 +31,7 @@ function Main() {
       </div>
       <ProductSlider />
       <div className='w-full h-[70vh] bg-cover bg-center flex flex-col gap-3 items-center justify-center py-[30px] font-archivo tracking-wider'
-        style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/1101-hp-gg-desktop?$mediaDesktopLarge$")`}}
+        style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/1101-hp-gg-desktop?$mediaDesktopLarge$")` }}
       >
         <h1 className='text-white text-center text-[26px] sm:text-[34px] capitalize font-archivo tracking-wider font-bold '>the gift guide</h1>
         <p className='text-white text-[16px] text-center'>Curated with care for everyone on your list.</p>

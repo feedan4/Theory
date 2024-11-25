@@ -59,4 +59,19 @@
   color: black !important;
 }
 
-  
+
+.subcateg {
+  position: absolute;
+  z-index: 10; 
+  left: 0; 
+  opacity: 0;   
+  transition: opacity 0.3s ease-in-out; 
+}
+
+.categ:hover + .subcateg {
+  opacity: 1; 
+} 
+
+.navbar:hover .logo {
+  filter: invert(1);
+}
