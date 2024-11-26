@@ -15,7 +15,7 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold font-archivo tracking-wider'>the women's shop</h1>
-          <Link to={`/category`}>
+          <Link to={`/shopnow`}>
             <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
           </Link>
         </div>
@@ -26,7 +26,9 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold font-archivo tracking-wider'>the men's shop</h1>
-          <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+          <Link to={`/shopnow`}>
+            <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+          </Link>
         </div>
       </div>
       <ProductSlider />

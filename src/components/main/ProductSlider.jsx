@@ -13,7 +13,7 @@ export default function ProductSlider() {
 
 
   return (
-    <div className='w-full pb-[30px]'>
+    <div className='w-full pb-[30px] bg-[#dadada]'>
       <h1 className='text-black text-[20px] sm:text-[34px] font-bold font-archivo tracking-wider px-[20px] py-[30px]'>Women's Essential</h1>
       <div className='p-[20px] w-full transition-all duration-1000'>
         <Swiper
