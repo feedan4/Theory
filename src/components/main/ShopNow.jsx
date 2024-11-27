@@ -1,16 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation } from 'swiper/modules';
-import ProductSlider from './ProductSlider';
+import { Navigation, Pagination } from 'swiper/modules';
+import { DATA } from '../../context/DataContext';
 
 export default function ShopNow() {
+    const { category } = useContext(DATA)
+    const categImages = [
+        "https://ak-media.theory.com/i/theory/01TOP?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/01PANT?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/01SWEATERS?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/01OUTERWEAR?$mediaDesktop$"
+    ]
+
     return (
         <>
             <div className='w-[80%] mx-auto bg-white'>
@@ -35,13 +44,50 @@ export default function ShopNow() {
                         </SwiperSlide>
                     </Swiper>
                 </div>
-                <div className='flex items-center justify-between my-[40px]'>
-                    <div className='flex flex-col justify-evenly h-[400px]'>
-                        <h1 className='text-[26px] capitalize trade-gothic font-semibold  '>show by <br />category</h1>
-                        <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
+                <div className='flex flex-col items-center justify-between my-[40px]'>
+                    <div>
+                        <h1 className='text-[26px] capitalize trade-gothic font-semibold'>show by category</h1>
                     </div>
+                    <div className='w-full h-[300px]'>
+                    <Swiper
+                    slidesPerView={1}
+                    spaceBetween={30}
+                    navigation={true}
+                    pagination={{ clickable: true }}
+                    modules={[Pagination, Navigation]}
+                    breakpoints={{
+                        400: { slidesPerView: 2, spaceBetween: 20 },
+                        768: { slidesPerView: 3 },
+                        1024: { slidesPerView: 4 },
+                    }}
+                    className="h-[300px] w-full"
+                >
+                    {category &&
+                        category
+                            .filter((item) => item.category?.name === "Women")
+                            .map((filteredItem) =>
+                                filteredItem.Subcategory?.map((subItem, index) => (
+                                    <SwiperSlide key={subItem.id}>
+                                        jkerfjkegkjgkrgjk
+                                        <div className="flex flex-col bg-[#E6E1E3] items-start justify-start">
+                                            <img
+                                                className="w-full h-[200px] object-cover mb-2"
+                                                src={categImages[index % categImages.length]}
+                                                alt={subItem.name}
+                                            />
+                                            <p className="text-black text-start text-[14px] px-[10px] pb-[10px] font-semibold">
+                                                {subItem.name}
+                                            </p>
+                                        </div>
+                                    </SwiperSlide>
+                                ))
+                    
+                            )}
+                </Swiper>
+                    </div>
+                    <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
                 </div>
-                <div></div>
+
             </div>
         </>
     );

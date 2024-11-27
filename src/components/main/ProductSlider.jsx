@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import { DATA } from '../../context/DataContext';

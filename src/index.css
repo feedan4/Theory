@@ -76,7 +76,3 @@
 .categ:hover + .subcateg {
   opacity: 1; 
 } 
-
-/* .navbar:hover .logo {
-  filter: invert(1);
-} */
