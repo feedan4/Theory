@@ -77,7 +77,7 @@ function Header() {
               </div>
             </div>
             <div className={`flex flex-col gap-4 items-center transition-all duration-1000 pt-[250px] sm:pt-[400px] md:pt-[550px] z-20 xl:pt-[400px] ${showVideo ? 'block' : 'hidden'}`}>
-              <h1 className='text-white text-[20px] sm:text-[34px] font-archivo tracking-wider font-bold capitalize'>let's get together</h1>
+              <h1 className='text-white text-[20px] sm:text-[34px] trade-gothic tracking-wider font-bold capitalize'>let's get together</h1>
               <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
               <div className='flex gap-3 items-center flex-col sm:flex-row'>
                 <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'><Link to={`/category`}>women's shop</Link></button>

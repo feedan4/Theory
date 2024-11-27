@@ -3,20 +3,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import { DATA } from '../../context/DataContext';
 
-export default function ProductSlider2() {
+export default function ProductSlider() {
   const { data } = useContext(DATA)
   console.log(data);
 
 
   return (
-    <div className='w-full pb-[30px]'>
-      <h1 className='text-black text-[20px] sm:text-[34px] font-bold font-archivo tracking-wider px-[20px] py-[30px]'>Men's Essential</h1>
-      <div className='p-[20px] w-full overflow-x-scroll transition-all duration-1000'>
+    <div className='w-full pb-[30px] bg-[#dadada]'>
+      <h1 className='text-black text-[20px] sm:text-[34px] font-bold trade-gothic tracking-wider px-[20px] py-[30px]'>Men's Essential</h1>
+      <div className='p-[20px] w-full transition-all duration-1000'>
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
@@ -59,7 +58,7 @@ export default function ProductSlider2() {
                       {filteredItem.name}
                     </p>
                     <div className='flex flex-col items-start'>
-                      <div className='flex items-start'>
+                      <div className='flex items-center'>
                         <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
                           {(filteredItem.price).toFixed(2)} man
                         </del>

@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'trade-gothic': ['"Trade Gothic"', 'sans-serif'],
+      },
       screens: {
         "mq662":"662px",
         "mq700":"700px",
