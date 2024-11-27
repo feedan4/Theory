@@ -72,7 +72,7 @@ export default function ShopNow() {
                                         <div className="flex flex-col bg-[#E6E1E3] items-start justify-start">
                                             <img
                                                 className="w-full h-[200px] object-cover mb-2"
-                                                src={categImages[index % categImages.length]}
+                                                src={categImages[1]}
                                                 alt={subItem.name}
                                             />
                                             <p className="text-black text-start text-[14px] px-[10px] pb-[10px] font-semibold">
