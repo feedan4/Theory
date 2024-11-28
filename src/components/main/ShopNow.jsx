@@ -62,7 +62,7 @@ export default function ShopNow() {
                     }}
                     className="h-[300px] w-full"
                 >
-                    {category &&
+                    {/* {category &&
                         category
                             .filter((item) => item.category?.name === "Women")
                             .map((filteredItem) =>
@@ -82,7 +82,7 @@ export default function ShopNow() {
                                     </SwiperSlide>
                                 ))
                     
-                            )}
+                            )} */}
                 </Swiper>
                     </div>
                     <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
