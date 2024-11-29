@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaFacebookF, FaInstagramSquare, FaPinterestP, FaYoutube } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
@@ -33,7 +34,9 @@ function Footer() {
                     <div className='w-full md:w-[33%]'>
                         <ul type='none' className='flex flex-col gap-2'>
                             <li className='text-[16px] text-[#212529] tracking-wider font-bold font-archivo'>About Us</li>
-                            <li className='text-[13px] text-[#3b3b3b]'>About Us</li>
+                            <Link to={`/aboutus`}>
+                                <li className='text-[13px] text-[#3b3b3b]'>About Us</li>
+                            </Link>
                             <li className='text-[13px] text-[#3b3b3b]'>Theory At Your Service</li>
                             <li className='text-[13px] text-[#3b3b3b]'>Theory for Good</li>
                             <li className='text-[13px] text-[#3b3b3b]'>Stores</li>

@@ -11,5 +11,10 @@ async function getAllCategories() {
     return res.data
 }
 
+async function getCategoryById(catid) {
+    const res = await axios.get(`https://ecommerse.apasni.me/categories/get/${catid}`)
+    return res.data
+}
 
-export {getAllProducts, getAllCategories}
+
+export {getAllProducts, getAllCategories, getCategoryById}

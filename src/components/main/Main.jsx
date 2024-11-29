@@ -15,7 +15,7 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold trade-gothic'>the women's shop</h1>
-          <Link to={`/shopnow`}>
+          <Link to={`/shopnow/women/1`}>
             <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
           </Link>
         </div>
@@ -26,7 +26,7 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold trade-gothic tracking-wider'>the men's shop</h1>
-          <Link to={`/shopnow`}>
+          <Link to={`/shopnow/men/2`}>
             <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
           </Link>
         </div>
@@ -43,7 +43,9 @@ function Main() {
         style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/InTheory-Mobile?$mediaDesktop$")` }}>
         <h1 className='text-white text-[20px] sm:text-[34px] trade-gothic tracking-wider font-bold '>#InTheory</h1>
         <p className='text-white text-[16px] text-center'>The season's best, styled by our staff.</p>
-        <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>about us</button>
+        <Link to={`/aboutus`}>
+          <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>about us</button>
+        </Link>
       </div>
     </main>
 

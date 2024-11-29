@@ -76,3 +76,8 @@
 .categ:hover + .subcateg {
   opacity: 1; 
 } 
+
+.showswipper {
+  background-color: white;
+  margin: 20px 0;
+}
