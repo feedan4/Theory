@@ -15,31 +15,38 @@ import { getCategoryById } from '../../services/api';
 export default function ShopNow() {
     const [categorybyid, setCategoryById] = useState(null)
     const { catname, catid } = useParams()
-    // console.log(catname, catid);
+    console.log(catname, catid);
 
-    const categImages = [
+    const categImagesWomen = [
         "https://ak-media.theory.com/i/theory/01TOP?$mediaDesktop$",
         "https://ak-media.theory.com/i/theory/01PANT?$mediaDesktop$",
         "https://ak-media.theory.com/i/theory/01SWEATERS?$mediaDesktop$",
         "https://ak-media.theory.com/i/theory/01OUTERWEAR?$mediaDesktop$"
     ]
-    // console.log(categImages);
 
+    const categImagesMen = [
+        "https://ak-media.theory.com/i/theory/11.1.24-M-Outerwear-single-editorial-tile-M?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M-3?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M?$mediaDesktop$",
+        "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M-4?$mediaDesktop$"
+    ]
 
     useEffect(() => {
-        getCategoryById(catid)
-            .then(res => setCategoryById(res))
+        if (catid) {
+            getCategoryById(catid)
+                .then(res => setCategoryById(res))
+        }
     }, [catid, catname])
-    console.log(categorybyid);
+    // console.log(categorybyid);
 
     return (
         <>
             <div className='w-[80%] mx-auto bg-white'>
                 <div className='py-[20px]'>
-                    <h1 className='capitalize text-center text-black font-bold text-[30px] trade-gothic my-[20px]'>the women's shop</h1>
+                    <h1 className='text-center capitalize text-black font-bold text-[30px] trade-gothic my-[20px]'>{catname}'s Shop</h1>
                     <Swiper navigation={true} modules={[Navigation]} className="h-[370px] sm:h-[500px] md:h-[670px] transition-all duration-1000">
                         <SwiperSlide
-                            style={{ backgroundImage: `url(https://ak-media.theory.com/i/theory/110224WCASHMERESHOPGENDERO?$mediaDesktopLarge$) ` }}
+                            style={{ backgroundImage: `url(https://ak-media.theory.com/i/theory/1118-W-Cashmere-Shop-m?$mediaDesktop$)`, backgroundPosition: "center" }}
                         >
                             <div className='z-10 h-[100%] flex flex-col justify-center items-center text-white'>
                                 <h1 className='text-[20px] sm:text-[26px] capitalize trade-gothic font-bold '>the cashmere shop</h1>
@@ -86,13 +93,20 @@ export default function ShopNow() {
                                     <SwiperSlide key={index}>
                                         <Link to={`/productsbyid`}>
                                             <div className="flex flex-col bg-white items-start justify-start">
-                                                {categImages[index] && (
+                                                {catid == 1 ? (
                                                     <img
                                                         className="w-full h-[200px] object-cover mb-2"
-                                                        src={categImages[index]}
+                                                        src={categImagesWomen[index]}
+                                                        alt={subItem.name}
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        className="w-full h-[200px] object-cover mb-2"
+                                                        src={categImagesMen[index]}
                                                         alt={subItem.name}
                                                     />
                                                 )}
+
                                                 <p className="text-black text-start text-[14px] px-[10px] tracking-wider pb-[10px]">
                                                     {subItem.name}
                                                 </p>
@@ -107,7 +121,7 @@ export default function ShopNow() {
                         </Swiper>
                     </div>
                     <Link to={`/productsbyid`}>
-                        <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
+                        <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all {catname}</button>
                     </Link>
                 </div>
 
