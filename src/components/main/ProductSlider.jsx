@@ -55,7 +55,7 @@ export default function ProductSlider() {
                       src={filteredItem.images[0]}
                       alt={filteredItem.name}
                     />
-                    <p className="text-black text-start text-[14px] px-[10px] pb-[10px] font-semibold">
+                    <p className="text-black text-start text-[14px] overflow-hidden text-ellipsis text-nowrap px-[10px] pb-[10px] font-semibold">
                       {filteredItem.name}
                     </p>
                     <div className='flex flex-col items-start'>

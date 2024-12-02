@@ -18,7 +18,7 @@ function App() {
           <Route index element={<Main />} />
           <Route path="/shopnow/:catname/:catid" element={<ShopNow />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/productsbyid" element={<ProductsById />} />
+          <Route path="/productsbyid/:catname/:catid/:subname/:subid" element={<ProductsById />} />
         </Route>
       </Routes>
     </div>
