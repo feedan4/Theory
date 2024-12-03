@@ -8,11 +8,10 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import { DATA } from '../../context/DataContext';
 
-export default function ProductSlider() {
+export default function ProductSlider({type}) {
   const { data } = useContext(DATA)
-  // console.log(data);
-
-
+  console.log(type);
+  
   return (
     <div className='w-full pb-[30px] bg-[#dadada]'>
       <h1 className='text-black text-[20px] sm:text-[34px] font-bold trade-gothic tracking-wider px-[20px] py-[30px]'>Women's Essential</h1>
@@ -46,7 +45,7 @@ export default function ProductSlider() {
 
           {data &&
             data
-              .filter(item => item.category?.name === "Women")
+              .filter(item => item.category?.name === type)
               .map(filteredItem => (
                 <SwiperSlide key={filteredItem.id}>
                   <div className="flex flex-col bg-[#E6E1E3] items-start justify-start">

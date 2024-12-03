@@ -9,7 +9,9 @@ function ProductsById() {
     const { catname, catid } = useParams()
     const [categorybyid, setCategoryById] = useState(null)
     const [filterData, setFilterData] = useState(null)
+    const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
+    const [canvas, setCanvas] = useState('-280')
 
     useEffect(() => {
         if (catid) {
@@ -23,6 +25,18 @@ function ProductsById() {
         setView(width)
     }
 
+    const showCanvas = (left) => {
+        setCanvas(left)
+    }
+
+    onscroll = function () {
+        if (window.scrollY >= 100) {
+            setFixed(true)
+        } else {
+            setFixed(false)
+        }
+    };
+
     function filterBySub(id) {
         if (data) {
             const filterSubProducts = data.filter(item => item.subcategoryId == id);
@@ -31,7 +45,7 @@ function ProductsById() {
     }
 
     return (
-        <>
+        <div className='relative'>
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>{catname}'s view all</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
@@ -48,22 +62,45 @@ function ProductsById() {
                 </div>
             </div>
             <div className='flex mx-[20px] justify-between'>
-                <div className='flex gap-2 items-center'>
-                    <img className='w-[30px]' src='https://theory.a.bigcontent.io/v1/static/filter' />
-                    <p className='uppercase text-[14px]'>filter</p>
-                </div>
-                <div className='flex gap-3 items-center'>
-                    <p className='uppercase text-[14px]'>view:</p>
-                    <div onClick={() => changeWidth('285')} className='flex items-center cursor-pointer'>
-                        <FaRegSquare className='w-[15px]' />
-                        <FaRegSquare className='w-[15px]' />
-                        <FaRegSquare className='w-[15px]' />
-                        <FaRegSquare className='w-[15px]' />
-                        <FaRegSquare className='w-[15px]' />
+                <div className={`z-30 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
+                    <p onClick={() => showCanvas('-280')} className='uppercase inline-block text-[14px] cursor-pointer text-start'>close</p>
+                    <div className='flex flex-col'>
+                        <p className='capitalize text-center text-[24px] my-[20px]'>filter by</p>
+                        <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
+                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                            <p className='text-[13px]'>Size</p>
+                            <p className='text-[20px]'>+</p>
+                        </div>
+                        <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
+                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                            <p className='text-[13px]'>Color</p>
+                            <p className='text-[20px]'>+</p>
+                        </div>
+                        <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
+                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                            <p className='text-[13px]'>Price</p>
+                            <p className='text-[20px]'>+</p>
+                        </div>
                     </div>
-                    <div onClick={() => changeWidth('730')} className='flex items-center cursor-pointer'>
-                        <FaRegSquare className='w-[15px]' />
-                        <FaRegSquare className='w-[15px]' />
+                </div>
+                <div className='flex justify-between w-full'>
+                    <div onClick={() => showCanvas('0')} className='flex gap-2 items-center cursor-pointer'>
+                        <img className='w-[30px]' src='https://theory.a.bigcontent.io/v1/static/filter' />
+                        <p className='uppercase text-[14px]'>filter</p>
+                    </div>
+                    <div className='flex gap-3 items-center'>
+                        <p className='uppercase text-[14px]'>view:</p>
+                        <div onClick={() => changeWidth('285')} className='flex items-center cursor-pointer'>
+                            <FaRegSquare className='w-[15px]' />
+                            <FaRegSquare className='w-[15px]' />
+                            <FaRegSquare className='w-[15px]' />
+                            <FaRegSquare className='w-[15px]' />
+                            <FaRegSquare className='w-[15px]' />
+                        </div>
+                        <div onClick={() => changeWidth('730')} className='flex items-center cursor-pointer'>
+                            <FaRegSquare className='w-[15px]' />
+                            <FaRegSquare className='w-[15px]' />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,7 +162,7 @@ function ProductsById() {
                             ))
                 }
             </div>
-        </>
+        </div>
     )
 }
 

@@ -23,7 +23,7 @@ function Header() {
           ></video>
           <div className='flex flex-col relative w-[100%]'>
             <div className={`flex justify-between items-center w-full z-10 navbar group ${showVideo ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
-              <div className="flex items-center w-[33.3%] ">
+              <div className="flex items-center w-[33.3%] pl-[20px]">
                 <div>
                   <div className='flex lg:hidden gap-3 items-center'>
                     <BsList className='text-[13px] font-bold hamburger' />

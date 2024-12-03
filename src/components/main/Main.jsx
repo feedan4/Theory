@@ -1,6 +1,5 @@
 import React from 'react'
 import ProductSlider from './ProductSlider';
-import ProductSlider2 from './ProductSlider2';
 import { Link } from 'react-router-dom';
 
 function Main() {
@@ -31,14 +30,14 @@ function Main() {
           </Link>
         </div>
       </div>
-      <ProductSlider />
+      <ProductSlider type={"Women"}  />
       <div className='w-full h-[70vh] bg-cover bg-center flex flex-col gap-3 items-center justify-center py-[30px] trade-gothic tracking-wider'
         style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/1101-hp-gg-desktop?$mediaDesktopLarge$")` }}
       >
         <h1 className='text-white text-center text-[26px] sm:text-[34px] capitalize trade-gothic tracking-wider font-bold '>the gift guide</h1>
         <p className='text-white text-[16px] text-center'>Curated with care for everyone on your list.</p>
       </div>
-      <ProductSlider2 />
+      <ProductSlider type={"Men"}/>
       <div className='w-full bg-cover bg-center flex flex-col gap-3 items-center justify-center py-[30px] trade-gothic tracking-wider'
         style={{ backgroundImage: `url("https://ak-media.theory.com/i/theory/InTheory-Mobile?$mediaDesktop$")` }}>
         <h1 className='text-white text-[20px] sm:text-[34px] trade-gothic tracking-wider font-bold '>#InTheory</h1>
