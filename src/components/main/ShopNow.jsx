@@ -91,7 +91,7 @@ export default function ShopNow() {
                                 categorybyid &&
                                 categorybyid.Subcategory?.map((subItem, index) => (
                                     <SwiperSlide key={index}>
-                                        <Link to={`/productsbyid/:catid/:catname/:subname/:subid`}>
+                                        <Link to={`/productsbyid/:catid/:catname`}>
                                             <div className="flex flex-col bg-white items-start justify-start">
                                                 {catid == 1 ? (
                                                     <img
@@ -120,7 +120,7 @@ export default function ShopNow() {
                             }
                         </Swiper>
                     </div>
-                    <Link to={`/productsbyid/:catid/:catname/:subname/:subid`}>
+                    <Link to={`/productsbyid/${catname}/${catid}`}>
                         <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all {catname}</button>
                     </Link>
                 </div>

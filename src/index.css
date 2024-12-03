@@ -81,3 +81,7 @@
   background-color: white;
   margin: 20px 0;
 }
+
+.noscroll::-webkit-scrollbar{
+  display: none;
+}
