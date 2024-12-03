@@ -12,6 +12,7 @@ function ProductsById() {
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
     const [canvas, setCanvas] = useState('-280')
+    const [dropdown, setDropdown] = useState(false)
 
     useEffect(() => {
         if (catid) {
@@ -62,24 +63,30 @@ function ProductsById() {
                 </div>
             </div>
             <div className='flex mx-[20px] justify-between'>
-                <div className={`z-30 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
+                <div className={`z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
                     <p onClick={() => showCanvas('-280')} className='uppercase inline-block text-[14px] cursor-pointer text-start'>close</p>
                     <div className='flex flex-col'>
                         <p className='capitalize text-center text-[24px] my-[20px]'>filter by</p>
                         <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
                             <p className='text-[13px]'>Size</p>
-                            <p className='text-[20px]'>+</p>
+                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
+                        </div>
+                        <div className={`${dropdown ? 'hidden' : 'block'}`}>
+                            udcujschsdsdjdj
                         </div>
                         <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
                             <p className='text-[13px]'>Color</p>
-                            <p className='text-[20px]'>+</p>
+                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
                         <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div className='flex py-[15px] justify-between cursor-pointer'>
+                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
                             <p className='text-[13px]'>Price</p>
-                            <p className='text-[20px]'>+</p>
+                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
                     </div>
                 </div>
