@@ -12,7 +12,10 @@ function ProductsById() {
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
     const [canvas, setCanvas] = useState('-280')
-    const [dropdown, setDropdown] = useState(false)
+    const [dropdownSize, setDropdownSize] = useState(true)
+    const [dropdownColor, setDropdownColor] = useState(true)
+    const [dropdownPrice, setDropdownPrice] = useState(true)
+
 
     useEffect(() => {
         if (catid) {
@@ -36,14 +39,19 @@ function ProductsById() {
         } else {
             setFixed(false)
         }
-    };
+    }
 
     function filterBySub(id) {
-        if (data) {
+        if (!data) return
+        if (id === 'all') {
+            const viewAll = data.filter(item => item.category?.id == catid);
+            setFilterData(viewAll);
+        } else {
             const filterSubProducts = data.filter(item => item.subcategoryId == id);
             setFilterData(filterSubProducts);
         }
     }
+
 
     return (
         <div className='relative'>
@@ -51,6 +59,12 @@ function ProductsById() {
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>{catname}'s view all</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
                 <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
+                    <button
+                        onClick={() => { filterBySub('all') }}
+                        className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
+                        view all
+                    </button>
+
                     {
                         categorybyid &&
                         categorybyid.Subcategory?.map((subItem, i) => (
@@ -68,25 +82,40 @@ function ProductsById() {
                     <div className='flex flex-col'>
                         <p className='capitalize text-center text-[24px] my-[20px]'>filter by</p>
                         <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
-                            <p className='text-[13px]'>Size</p>
-                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
-                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
+                        <div onClick={() => setDropdownSize(!dropdownSize)} className="flex my-[10px] justify-between items-center cursor-pointer">
+                            <p className="text-[13px]">Size</p>
+                            <p className={`${dropdownSize ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdownSize ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
-                        <div className={`${dropdown ? 'hidden' : 'block'}`}>
-                            udcujschsdsdjdj
+                        <div className={`${dropdownSize ? 'hidden' : 'block'}`}>
+                            <div className='flex items-center gap-2'>
+
+                            </div>
                         </div>
-                        <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
-                            <p className='text-[13px]'>Color</p>
-                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
-                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
+                        <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
+
+                        <div onClick={() => setDropdownColor(!dropdownColor)} className="flex my-[10px] justify-between items-center cursor-pointer">
+                            <p className="text-[13px]">Color</p>
+                            <p className={`${dropdownColor ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdownColor ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
-                        <hr className='w-[260px] h-[1px] bg-[#D9D9D9]' />
-                        <div onClick={() => setDropdown(!dropdown)} className='flex py-[15px] justify-between cursor-pointer'>
-                            <p className='text-[13px]'>Price</p>
-                            <p className={`${dropdown ? 'block' : 'hidden'} text-[20px]`}>+</p>
-                            <p className={`${dropdown ? 'hidden' : 'block'} text-[20px]`}>-</p>
+                        <div className={`${dropdownColor ? 'hidden' : 'block'}`}>
+                            {
+                                data?.map((item, index) => (
+                                    item.Colors?.map((color, i) => (
+                                        <p key={i}>{color}</p>
+                                    ))
+                                ))
+                            }
+                        </div>
+                        <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
+                        <div onClick={() => setDropdownPrice(!dropdownPrice)} className="flex my-[10px] justify-between items-center cursor-pointer">
+                            <p className="text-[13px]">Price</p>
+                            <p className={`${dropdownPrice ? 'block' : 'hidden'} text-[20px]`}>+</p>
+                            <p className={`${dropdownPrice ? 'hidden' : 'block'} text-[20px]`}>-</p>
+                        </div>
+                        <div className={`${dropdownPrice ? 'hidden' : 'block'}`}>
+
                         </div>
                     </div>
                 </div>
@@ -139,6 +168,7 @@ function ProductsById() {
                                 </div>
                             </div>
                         ))
+
                         : data &&
                         data
                             .filter(item => item.category?.id == catid)
