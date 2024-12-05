@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'trade-gothic': ['"Trade Gothic"', 'sans-serif'],
+        unbounded: ['"Unbounded"', 'sans-serif'], // Font ailəsini əlavə edin
       },
       screens: {
         "mq662":"662px",

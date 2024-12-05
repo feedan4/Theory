@@ -19,7 +19,7 @@ function Header() {
             muted
             style={{ objectPosition: "center 10%" }}
             className={`absolute top-0 left-0 w-full h-full object-cover ${showVideo ? 'block z-10' : 'hidden'}`}
-            src="https://cdn.static.amplience.net/theory/_vid/dg_holiday_campaign_hp_hero_mobile/2fe64e60-41fb-4ab5-90dc-ab8c4972043a/video/17cb476c-da48-4131-956f-8da09e8a1466.mp4"
+            src="https://ak-media.theory.com/v/theory/DG_Cashmere_HP_Hero_Desktop/fullhd?protocol=https"
           ></video>
           <div className='flex flex-col relative w-[100%]'>
             <div className={`flex justify-between items-center w-full z-10 navbar group ${showVideo ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>

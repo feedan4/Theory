@@ -1,11 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@font-face {
-  font-family: 'Trade Gothic';
-  src: url('public/font/tradegothic/trade-gothic-lt-std-extended.otf');
-}
 
 *{
     margin: 0;
