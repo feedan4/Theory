@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        exo: ['"Exo"', 'sans-serif'], 
+        robotoslab: ['"Roboto Slab"', 'sans-serif'], 
       },
       screens: {
         "mq662":"662px",

@@ -23,21 +23,14 @@ function Header() {
           src="https://ak-media.theory.com/v/theory/DG_Cashmere_HP_Hero_Desktop/fullhd?protocol=https"
         ></video>
         <div className='flex flex-col relative w-[100%]'>
-          <div className={`navbar group relative flex justify-between items-center h-[5vh] lg:h-[10vh] w-full z-10 ${!navbar ? 'bg-white text-black' : ''} ${showVideo ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
+          <div className={`navbar group relative flex justify-between items-center h-[5vh] lg:h-[10vh] w-full z-10 ${showVideo && navbar ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
             <div className={`${navbar ? 'hidden' : 'flex'} bg-white text-black absolute gap-2 p-[20px] top-[5vh] lg:top-[10vh] items-start flex-col w-[100%] transition-all duration-500 `}>
               {category &&
                 category.map((item, index) => {
                   return (
                     <div className="text-[13px] flex flex-col items-center categ">
                       {item.name}
-                      {/* <div className={`subcateg bg-white text-black flex-col p-[20px] text-[13px] gap-2 top-[50px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
-                        {item.Subcategory &&
-                          item.Subcategory.map((elem, subIndex) => (
-                            <div key={subIndex}>
-                              {elem.name}
-                            </div>
-                          ))}
-                      </div> */}
+                      
                     </div>
                   );
                 })}
@@ -69,7 +62,7 @@ function Header() {
               </div>
             </div>
             <div className='flex w-[33.3%] justify-center z-10 logo'>
-              <img className={`${showVideo ? 'group-hover:invert' : 'invert' } w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
+              <img className={`${showVideo && navbar ? 'group-hover:invert' : 'invert' } w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
             </div>
             <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
               <div className="hidden lg:flex items-center">
@@ -93,8 +86,8 @@ function Header() {
               </div>
             </div>
           </div>
-          <div className={`flex flex-col gap-4 items-center transition-all duration-1000 pt-[150px] sm:pt-[250px] md:pt-[350px] z-20 xl:pt- [400px] ${showVideo ? 'block' : 'hidden'}`}>
-            <h1 className='text-white text-[20px] sm:text-[34px] font-exo font-bold capitalize'>let's get together</h1>
+          <div className={`flex flex-col gap-4 items-center tracking-wider transition-all duration-1000 pt-[150px] sm:pt-[250px] md:pt-[350px] z-20 xl:pt- [400px] ${showVideo ? 'block' : 'hidden'}`}>
+            <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>
               <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'><Link to={`/productsbyid/Women/1`}>women's shop</Link></button>
