@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        unbounded: ['"Unbounded"', 'sans-serif'], // Font ailəsini əlavə edin
+        exo: ['"Exo"', 'sans-serif'], 
       },
       screens: {
         "mq662":"662px",
