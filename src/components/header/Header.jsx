@@ -90,8 +90,8 @@ function Header() {
             <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>
-              <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'><Link to={`/productsbyid/Women/1`}>women's shop</Link></button>
-              <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'><Link to={`/productsbyid/Men/2`}>men's shop</Link></button>
+              <Link to={`/productsbyid/Women/1`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>women's shop</button></Link>
+              <Link to={`/productsbyid/Men/2`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link>
             </div>
           </div>
         </div>
