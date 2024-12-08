@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DATA } from '../../context/DataContext'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getCategoryById } from '../../services/api'
 import { FaRegSquare } from 'react-icons/fa'
 
@@ -15,15 +15,16 @@ function ProductsById() {
     const [dropdownSize, setDropdownSize] = useState(true)
     const [dropdownColor, setDropdownColor] = useState(true)
     const [dropdownPrice, setDropdownPrice] = useState(true)
-
+    const navigate = useNavigate()
+    
 
     useEffect(() => {
         if (catid) {
             getCategoryById(catid)
                 .then(res => setCategoryById(res))
         }
+
     }, [catid, catname])
-    // console.log(categorybyid);
 
     const changeWidth = (width) => {
         setView(width)

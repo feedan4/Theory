@@ -5,10 +5,10 @@ async function getAllProducts() {
     return res.data 
 }
 
-async function getProductsById(proid) {
-    const res = await axios.get(`https://ecommerse.apasni.me/products/get/${proid}`)
-    return res.data 
-}
+// async function getProductsById(proid) {
+//     const res = await axios.get(`https://ecommerse.apasni.me/products/get/${proid}`)
+//     return res.data 
+// }
 
 async function getAllCategories() {
     const res = await axios.get("https://ecommerse.apasni.me/categories/all")
@@ -21,4 +21,4 @@ async function getCategoryById(catid) {
 }
 
 
-export {getAllProducts, getAllCategories, getCategoryById, getProductsById}
+export {getAllProducts, getAllCategories, getCategoryById, getProductsByCategory}

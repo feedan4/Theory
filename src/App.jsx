@@ -9,7 +9,7 @@ import ProductsById from './components/main/ProductsById'
 
 function App() {
   const {showVideo} = useContext(DATA)
-  console.log(showVideo);
+  // console.log(showVideo);
   
   return (
     <div className={`relative min-h-screen flex flex-col ${showVideo ? 'bg-[#dadada]' : 'bg-white'}`}>

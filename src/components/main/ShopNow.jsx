@@ -15,7 +15,7 @@ import { getCategoryById } from '../../services/api';
 export default function ShopNow() {
     const [categorybyid, setCategoryById] = useState(null)
     const { catname, catid } = useParams()
-    console.log(catname, catid);
+    // console.log(catname, catid);
 
     const categImagesWomen = [
         "https://ak-media.theory.com/i/theory/01TOP?$mediaDesktop$",

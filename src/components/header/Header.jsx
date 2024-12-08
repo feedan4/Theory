@@ -8,7 +8,15 @@ import { Link } from 'react-router-dom';
 function Header() {
   const { category } = useContext(DATA)
   const { showVideo } = useContext(DATA)
-  const [ navbar, setNavbar ] = useState(true)
+  const [navbar, setNavbar] = useState(true)
+
+  const navbarImages = [
+    "https://ak-media.theory.com/i/theory/11.1.24-W-Nov-Cashmere-Flyout?$mediaTablet$",
+    "https://ak-media.theory.com/i/theory/11.1.24-M-Nov-Sweater-Shop-Flyout?$media$",
+    "https://brendyol.apasni.me/assets/img/header-list3.webp",
+    "https://brendyol.apasni.me/assets/img/header-list4.webp",
+    "https://brendyol.apasni.me/assets/img/header-list5.jpg"
+  ]
 
   return (
     <>
@@ -30,7 +38,7 @@ function Header() {
                   return (
                     <div className="text-[13px] flex flex-col items-center categ">
                       {item.name}
-                      
+
                     </div>
                   );
                 })}
@@ -43,26 +51,33 @@ function Header() {
                 </div>
               </div>
               <div className="gap-4 pl-[20px] items-center hidden lg:flex w-[100%]">
-                {category &&
+                {
+                  category &&
                   category.map((item, index) => {
                     return (
                       <div className="text-[13px] categ">
                         {item.name}
-                        <div className={`subcateg bg-white text-black flex-col p-[20px] text-[13px] gap-2 top-[50px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
-                          {item.Subcategory &&
-                            item.Subcategory.map((elem, subIndex) => (
-                              <div key={subIndex}>
-                                {elem.name}
-                              </div>
-                            ))}
+                        <div className={`subcateg bg-white text-black top-[50px] text-[13px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
+                          <div className='flex flex-col p-[20px] gap-3'>
+                            {item.Subcategory &&
+                              item.Subcategory.map((elem, subIndex) => (
+                                <div key={subIndex}>
+                                  {elem.name}
+                                </div>
+                              ))}
+                          </div>
+                          <div>
+
+                          </div>
                         </div>
                       </div>
                     );
-                  })}
+                  })
+                }
               </div>
             </div>
             <div className='flex w-[33.3%] justify-center z-10 logo'>
-              <img className={`${showVideo && navbar ? 'group-hover:invert' : 'invert' } w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
+              <img className={`${showVideo && navbar ? 'group-hover:invert' : 'invert'} w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
             </div>
             <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
               <div className="hidden lg:flex items-center">

@@ -81,3 +81,13 @@
 .noscroll::-webkit-scrollbar{
   display: none;
 }
+
+.future {
+  height: 550px;
+  background: url("https://cdn.media.amplience.net/i/theory/aboutusrectangle1desktop");
+}
+
+.future img {
+  height: 100%;
+  width: 100%;
+}

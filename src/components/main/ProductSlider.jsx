@@ -10,7 +10,7 @@ import { DATA } from '../../context/DataContext';
 
 export default function ProductSlider({type}) {
   const { data } = useContext(DATA)
-  console.log(type);
+  // console.log(type);
   
   return (
     <div className='w-full pb-[30px] bg-[#dadada]'>

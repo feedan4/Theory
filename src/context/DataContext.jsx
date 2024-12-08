@@ -8,6 +8,7 @@ function DataContext({ children }) {
 
   const [data, setData] = useState(null)
   const [category, setCategory] = useState(null)
+
   // console.log(category);
 
   const location = useLocation()
