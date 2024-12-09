@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DATA } from '../../context/DataContext'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getCategoryById } from '../../services/api'
+import { getCategoryById, getProductsByCategory } from '../../services/api'
 import { FaRegSquare } from 'react-icons/fa'
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 
 function ProductsById() {
     const { data } = useContext(DATA)
+    const { products } = useContext(DATA)
     const { catname, catid } = useParams()
     const [categorybyid, setCategoryById] = useState(null)
+    const { probycat } = useContext(DATA)
     const [filterData, setFilterData] = useState(null)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
@@ -15,8 +18,21 @@ function ProductsById() {
     const [dropdownSize, setDropdownSize] = useState(true)
     const [dropdownColor, setDropdownColor] = useState(true)
     const [dropdownPrice, setDropdownPrice] = useState(true)
+    const [page, setPage] = useState(1)
     const navigate = useNavigate()
-    
+
+    // console.log(catid);
+
+    // console.log(data);
+
+
+    function pageUrl(page) {
+        navigate(`/productsbyid/${catname}/${catid}?page=${page}&limit=10`)
+    }
+
+    useEffect(() => {
+        pageUrl(page)
+    }, [page])
 
     useEffect(() => {
         if (catid) {
@@ -43,12 +59,12 @@ function ProductsById() {
     }
 
     function filterBySub(id) {
-        if (!data) return
+        if (!products) return
         if (id === 'all') {
-            const viewAll = data.filter(item => item.category?.id == catid);
+            const viewAll = products.filter(item => item.category?.id == catid);
             setFilterData(viewAll);
         } else {
-            const filterSubProducts = data.filter(item => item.subcategoryId == id);
+            const filterSubProducts = products.filter(item => item.subcategoryId == id);
             setFilterData(filterSubProducts);
         }
     }
@@ -102,7 +118,7 @@ function ProductsById() {
                         </div>
                         <div className={`${dropdownColor ? 'hidden' : 'block'}`}>
                             {
-                                data?.map((item, index) => (
+                                products?.map((item, index) => (
                                     item.Colors?.map((color, i) => (
                                         <p key={i}>{color}</p>
                                     ))
@@ -170,8 +186,8 @@ function ProductsById() {
                             </div>
                         ))
 
-                        : data &&
-                        data
+                        : products &&
+                        products
                             .filter(item => item.category?.id == catid)
                             .map((filter, i) => (
                                 <div key={i} className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
@@ -199,6 +215,34 @@ function ProductsById() {
                                 </div>
                             ))
                 }
+
+            </div>
+            <div className='flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]'>
+                <div
+                    className='cursor-pointer'
+                    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                >
+                    <MdNavigateBefore />
+                </div>
+                <div className='flex items-center gap-3'>
+                    {
+                        probycat && probycat.meta && Array.from({ length: probycat.meta.totalPages }).map((_, i) => (
+                            <button
+                                key={i}
+                                className={`px-2 py-1 rounded ${page === i + 1 ? 'border border-black' : 'bg-gray-200 text-black'}`}
+                                onClick={() => setPage(i + 1)}
+                            >
+                                {i + 1}
+                            </button>
+                        ))
+                    }
+                </div>
+                <div
+                    className='cursor-pointer'
+                    onClick={() => setPage(prev => Math.min(prev + 1, probycat?.meta?.totalPages || 1))}
+                >
+                    <MdNavigateNext />
+                </div>
             </div>
         </div>
     )

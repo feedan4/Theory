@@ -77,7 +77,9 @@ function Header() {
               </div>
             </div>
             <div className='flex w-[33.3%] justify-center z-10 logo'>
-              <img className={`${showVideo && navbar ? 'group-hover:invert' : 'invert'} w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
+              <Link to="/">
+                <img className={`${showVideo && navbar ? 'group-hover:invert' : 'invert'} w-[130px] lg:w-[200px] `} src="/img/theory.png" alt="Theory Logo" />
+              </Link>
             </div>
             <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
               <div className="hidden lg:flex items-center">
