@@ -58,16 +58,16 @@ function ProductsById() {
         }
     }
 
-    function filterBySub(id) {
-        if (!products) return
-        if (id === 'all') {
-            const viewAll = products.filter(item => item.category?.id == catid);
-            setFilterData(viewAll);
-        } else {
-            const filterSubProducts = products.filter(item => item.subcategoryId == id);
-            setFilterData(filterSubProducts);
-        }
-    }
+    // function filterBySub(id) {
+    //     if (!products) return
+    //     if (id === 'all') {
+    //         const viewAll = products.filter(item => item.category?.id == catid);
+    //         setFilterData(viewAll);
+    //     } else {
+    //         const filterSubProducts = products.filter(item => item.subcategoryId == id);
+    //         setFilterData(filterSubProducts);
+    //     }
+    // }
 
 
     return (

@@ -88,9 +88,9 @@ function Header() {
                   Search
                 </a>
               </div>
-              <a href="#" className=" text-[13px] capitalize hidden lg:block">
+              <Link to={`/login`} className=" text-[13px] capitalize hidden lg:block">
                 Sign in/register
-              </a>
+              </Link>
               <a href="#" className=" text-[13px] hidden lg:block">
                 Wishlist
               </a>
