@@ -1,18 +1,18 @@
 import axios from "axios";
 
-async function getAllData() {
-    const res = await axios.get(`https://ecommerse.apasni.me/products/all`)
-    return res
-}
-
 async function getAllProducts() {
     const res = await axios.get(`https://ecommerse.apasni.me/products/all?limit=102`)
-    return res.data 
+    return res.data
 }
 
-async function getProductsByCategory() {
-    const res = await axios.get(`https://ecommerse.apasni.me/products/all?categoryId`)
-    return res
+async function getProductsByCategory(categid) {
+    const res = await axios.get(`https://ecommerse.apasni.me/products/all?categoryId=${categid}`)
+    return res.data
+}
+
+async function getProductsBySubcategory(subid) {
+    const res = await axios.get(`https://ecommerse.apasni.me/products/all?subCategoryId=${subid}`)
+    return res.data
 }
 
 async function getAllCategories() {
@@ -26,4 +26,4 @@ async function getCategoryById(catid) {
 }
 
 
-export {getAllData, getAllProducts, getAllCategories, getCategoryById, getProductsByCategory}
+export {getAllProducts, getAllCategories, getCategoryById, getProductsByCategory,getProductsBySubcategory}

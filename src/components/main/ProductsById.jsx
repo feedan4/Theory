@@ -6,11 +6,11 @@ import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 
 function ProductsById() {
-    const { data } = useContext(DATA)
-    const { products } = useContext(DATA)
-    const { catname, catid } = useParams()
+    const { data, setData } = useContext(DATA)
+    const { categid, catname } = useParams()
+    const {category, setCategory} = useContext(DATA)
     const [categorybyid, setCategoryById] = useState(null)
-    const { probycat } = useContext(DATA)
+    const { probycat, setProByCat } = useState(null)
     const [filterData, setFilterData] = useState(null)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
@@ -21,13 +21,13 @@ function ProductsById() {
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
-    // console.log(catid);
+    console.log(categid);
 
     // console.log(data);
 
 
     function pageUrl(page) {
-        navigate(`/productsbyid/${catname}/${catid}?page=${page}&limit=10`)
+        navigate(`/productsbyid/${catname}?categoryId=${categid}?page=${page}&limit=10`)
     }
 
     useEffect(() => {
@@ -35,12 +35,19 @@ function ProductsById() {
     }, [page])
 
     useEffect(() => {
-        if (catid) {
-            getCategoryById(catid)
-                .then(res => setCategoryById(res))
+        if (categid) {
+            getProductsByCategory(categid)
+                .then(res => setData(res));
+        }
+    }, [categid]);
+
+    useEffect(() => {
+        if (catname) {
+            getCategoryById(catname)
+                .then(res => setCategory(res))
         }
 
-    }, [catid, catname])
+    }, [catname])
 
     const changeWidth = (width) => {
         setView(width)
@@ -118,7 +125,7 @@ function ProductsById() {
                         </div>
                         <div className={`${dropdownColor ? 'hidden' : 'block'}`}>
                             {
-                                products?.map((item, index) => (
+                                data?.map((item, index) => (
                                     item.Colors?.map((color, i) => (
                                         <p key={i}>{color}</p>
                                     ))
@@ -186,9 +193,9 @@ function ProductsById() {
                             </div>
                         ))
 
-                        : products &&
-                        products
-                            .filter(item => item.category?.id == catid)
+                        : data &&
+                        data
+                            .filter(item => item.category?.id == categid)
                             .map((filter, i) => (
                                 <div key={i} className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
                                     <img

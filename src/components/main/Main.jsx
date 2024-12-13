@@ -3,6 +3,7 @@ import ProductSlider from './ProductSlider';
 import { Link } from 'react-router-dom';
 
 function Main() {
+  
 
   return (
     <main className='w-full flex flex-col items-center'>

@@ -9,7 +9,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { DATA } from '../../context/DataContext';
 
 export default function ProductSlider({type}) {
-  const { products } = useContext(DATA)
+  const { data } = useContext(DATA)
   // console.log(type);
   
   return (
@@ -43,8 +43,8 @@ export default function ProductSlider({type}) {
           className="mySwiper h-[400px]"
         >
 
-          {products &&
-            products
+          {data &&
+            data
               .filter(item => item.category?.name === type)
               .map(filteredItem => (
                 <SwiperSlide key={filteredItem.id}>
