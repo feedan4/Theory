@@ -7,7 +7,7 @@ async function getAllProducts() {
 
 async function getProductsByCategory(categid) {
     const res = await axios.get(`https://ecommerse.apasni.me/products/all?categoryId=${categid}`)
-    return res.data
+    return res
 }
 
 async function getProductsBySubcategory(subid) {

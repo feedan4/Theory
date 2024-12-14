@@ -7,10 +7,11 @@ import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 
 function ProductsById() {
     const { data, setData } = useContext(DATA)
-    const { categid, catname } = useParams()
-    const {category, setCategory} = useContext(DATA)
-    const [categorybyid, setCategoryById] = useState(null)
-    const { probycat, setProByCat } = useState(null)
+    const { catname } = useParams()
+    const [categid, setCategId] = useState('ayan')
+    const { category, setCategory } = useContext(DATA)
+    // const [categorybyid, setCategoryById] = useState(null)
+    const [probycat, setProByCat] = useState(null)
     const [filterData, setFilterData] = useState(null)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
@@ -21,33 +22,23 @@ function ProductsById() {
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
-    console.log(categid);
+    console.log(category);
 
-    // console.log(data);
-
-
-    function pageUrl(page) {
-        navigate(`/productsbyid/${catname}?categoryId=${categid}?page=${page}&limit=10`)
-    }
 
     useEffect(() => {
-        pageUrl(page)
-    }, [page])
-
-    useEffect(() => {
-        if (categid) {
-            getProductsByCategory(categid)
-                .then(res => setData(res));
-        }
-    }, [categid]);
-
-    useEffect(() => {
-        if (catname) {
-            getCategoryById(catname)
-                .then(res => setCategory(res))
-        }
-
+        const findId = category.find((item, i) =>
+            item.name === catname ? item : '')
+        setCategId(findId.id)
     }, [catname])
+
+    useEffect(() => {
+        function pageUrl(page) {
+            setPage(page)
+        }
+
+        navigate(`/productsbyid/${catname}?categoryId=${categid}&page=${page}&limit=10`)
+
+    }, [categid, page])
 
     const changeWidth = (width) => {
         setView(width)
@@ -65,18 +56,6 @@ function ProductsById() {
         }
     }
 
-    // function filterBySub(id) {
-    //     if (!products) return
-    //     if (id === 'all') {
-    //         const viewAll = products.filter(item => item.category?.id == catid);
-    //         setFilterData(viewAll);
-    //     } else {
-    //         const filterSubProducts = products.filter(item => item.subcategoryId == id);
-    //         setFilterData(filterSubProducts);
-    //     }
-    // }
-
-
     return (
         <div className='relative'>
             <div className='flex flex-col gap-4 m-[25px]'>
@@ -84,19 +63,16 @@ function ProductsById() {
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
                 <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
                     <button
-                        onClick={() => { filterBySub('all') }}
                         className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
                         view all
                     </button>
-
                     {
-                        categorybyid &&
-                        categorybyid.Subcategory?.map((subItem, i) => (
-                            <button
-                                key={i}
-                                onClick={() => { filterBySub(subItem.id) }}
-                                className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>{subItem.name}</button>
-                        ))
+                        category && category.Subcategory?.map((item, i) => {
+                            return <button key={i}
+                                className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
+                                {item.name}
+                            </button>
+                        })
                     }
                 </div>
             </div>
@@ -124,13 +100,13 @@ function ProductsById() {
                             <p className={`${dropdownColor ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
                         <div className={`${dropdownColor ? 'hidden' : 'block'}`}>
-                            {
+                            {/* {
                                 data?.map((item, index) => (
                                     item.Colors?.map((color, i) => (
                                         <p key={i}>{color}</p>
                                     ))
                                 ))
-                            }
+                            } */}
                         </div>
                         <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
                         <div onClick={() => setDropdownPrice(!dropdownPrice)} className="flex my-[10px] justify-between items-center cursor-pointer">
@@ -164,7 +140,7 @@ function ProductsById() {
                     </div>
                 </div>
             </div>
-            <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
+            {/* <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
                 {
                     filterData
                         ? filterData.map((filter, i) => (
@@ -223,7 +199,7 @@ function ProductsById() {
                             ))
                 }
 
-            </div>
+            </div> */}
             <div className='flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]'>
                 <div
                     className='cursor-pointer'
