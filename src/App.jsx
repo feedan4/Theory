@@ -6,6 +6,7 @@ import ShopNow from './components/main/ShopNow'
 import { DATA } from './context/DataContext'
 import AboutUs from './components/main/AboutUs'
 import ProductsById from './components/main/ProductsById'
+import Details from './components/main/Details'
 
 function App() {
   const {showVideo} = useContext(DATA)
@@ -16,9 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="/shopnow/:catname" element={<ShopNow />} />
+          <Route path="/shopnow" element={<ShopNow />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/productsbyid/:catname" element={<ProductsById />} />
+          <Route path="/productsbyid" element={<ProductsById />} />
+          <Route path="/details/:proid" element={<Details />} />
         </Route>
       </Routes>
     </div>

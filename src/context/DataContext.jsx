@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getAllCategories, getAllProducts } from '../services/api'
+import { getAllCategories, getAllProducts, getProductById } from '../services/api'
 import { useLocation } from 'react-router-dom'
 
 export const DATA = createContext(null)
@@ -7,10 +7,9 @@ export const DATA = createContext(null)
 function DataContext({ children }) {
   const [category, setCategory] = useState(null)
   const [data, setData] = useState(null)
-  const [probycat, setProByCat] = useState(null)
+  const [probyid, setProById] = useState(null)
 
-  // console.log(probycat);
-  
+  // console.log(data);
 
   const location = useLocation()
   const [showVideo, setShowVideo] = useState(true)
@@ -22,13 +21,14 @@ function DataContext({ children }) {
   useEffect(() => {
     getAllCategories().then(res => { setCategory(res) })
     getAllProducts().then(res => { setData(res.data) })
+    getProductById().then(res => { setProById(res.data) })
   }, [])
 
   return (
     <DATA.Provider value={{
       data, setData,
-      probycat, setProByCat,
       category, setCategory,
+      probyid, setProById,
       showVideo, setShowVideo
     }}>
       {children}

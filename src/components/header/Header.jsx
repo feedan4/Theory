@@ -55,9 +55,9 @@ function Header() {
                   category &&
                   category.map((item, index) => {
                     return (
-                      <div className="text-[13px] categ">
+                      <div className="text-[13px] capitalize categ">
                         {item.name}
-                        <div className={`subcateg bg-white text-black top-[50px] text-[13px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
+                        <div className={`subcateg bg-white text-black capitalize top-[50px] text-[13px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
                           <div className='flex flex-col p-[20px] gap-3'>
                             {item.Subcategory &&
                               item.Subcategory.map((elem, subIndex) => (
@@ -107,8 +107,8 @@ function Header() {
             <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>
-              <Link to={`/productsbyid/Women`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>women's shop</button></Link>
-              <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link>
+              <Link to={`/productsbyid`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>all products</button></Link>
+              {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
             </div>
           </div>
         </div>

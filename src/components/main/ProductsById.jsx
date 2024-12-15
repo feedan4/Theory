@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DATA } from '../../context/DataContext'
-import { useNavigate, useParams } from 'react-router-dom'
-import { getCategoryById, getProductsByCategory } from '../../services/api'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { getCategoryById, getProductById, getProductsByCategory } from '../../services/api'
 import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 
 function ProductsById() {
     const { data, setData } = useContext(DATA)
-    const { catname } = useParams()
-    const [categid, setCategId] = useState('ayan')
+    // const { catname } = useParams()
+    // // const [categid, setCategId] = useState(null)
+    // const { proid } = useParams()
+    // const { probyid, setProById } = useContext(DATA)
     const { category, setCategory } = useContext(DATA)
     // const [categorybyid, setCategoryById] = useState(null)
-    const [probycat, setProByCat] = useState(null)
-    const [filterData, setFilterData] = useState(null)
+    // const [probycat, setProByCat] = useState(null)
+    // const [dataData, setdataData] = useState(null)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
     const [canvas, setCanvas] = useState('-280')
@@ -22,23 +24,29 @@ function ProductsById() {
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
-    console.log(category);
+    // useEffect(() => {
+    //     if (proid) {
+    //         getProductById(proid)
+    //             .then(res => setProById(res))
+    //     }
+    // },[proid])
 
+    // console.log(probyid);
 
-    useEffect(() => {
-        const findId = category.find((item, i) =>
-            item.name === catname ? item : '')
-        setCategId(findId.id)
-    }, [catname])
+    // useEffect(() => {
+    //     const findId = category.find((item, i) =>
+    //         item.name === catname ? item : '')
+    //     setCategId(findId.id)
+    // }, [catname])
 
-    useEffect(() => {
-        function pageUrl(page) {
-            setPage(page)
-        }
+    // useEffect(() => {
+    //     function pageUrl(page) {
+    //         setPage(page)
+    //     }
 
-        navigate(`/productsbyid/${catname}?categoryId=${categid}&page=${page}&limit=10`)
+    //     navigate(`/productsbyid/${catname}?categoryId=${categid}&page=${page}&limit=10`)
 
-    }, [categid, page])
+    // }, [categid, page])
 
     const changeWidth = (width) => {
         setView(width)
@@ -59,7 +67,7 @@ function ProductsById() {
     return (
         <div className='relative'>
             <div className='flex flex-col gap-4 m-[25px]'>
-                <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>{catname}'s view all</h1>
+                <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's view all</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
                 <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
                     <button
@@ -67,16 +75,20 @@ function ProductsById() {
                         view all
                     </button>
                     {
-                        category && category.Subcategory?.map((item, i) => {
-                            return <button key={i}
-                                className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
-                                {item.name}
-                            </button>
-                        })
+                        category && category.map(item => (
+                            item.Subcategory?.map((subitem, i) => {
+                                return (
+                                    <button key={i}
+                                        className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
+                                        {subitem.name}
+                                    </button>
+                                )
+                            })
+                        ))
                     }
                 </div>
             </div>
-            <div className='flex mx-[20px] justify-between'>
+            <div className='flex flex-col mx-[20px] justify-between'>
                 <div className={`z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
                     <p onClick={() => showCanvas('-280')} className='uppercase inline-block text-[14px] cursor-pointer text-start'>close</p>
                     <div className='flex flex-col'>
@@ -119,7 +131,7 @@ function ProductsById() {
                         </div>
                     </div>
                 </div>
-                <div className='flex justify-between w-full'>
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-0 items-start justify-between w-full'>
                     <div onClick={() => showCanvas('0')} className='flex gap-2 items-center cursor-pointer'>
                         <img className='w-[30px]' src='https://theory.a.bigcontent.io/v1/static/filter' />
                         <p className='uppercase text-[14px]'>filter</p>
@@ -140,67 +152,45 @@ function ProductsById() {
                     </div>
                 </div>
             </div>
-            {/* <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
+            <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
                 {
-                    filterData
-                        ? filterData.map((filter, i) => (
+                    data &&
+                    data.map((item, i) => (
+                        <Link to={`/details/${item.id}`}>
                             <div key={i} className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
                                 <img
                                     className="w-full object-cover mb-2"
-                                    src={filter.images[0]}
-                                    alt={filter.name}
+                                    src={item.images[0]}
+                                    alt={item.name}
                                 />
                                 <div className='flex flex-col items-start'>
                                     <div>
                                         <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
-                                            {filter.name}
+                                            {item.name}
                                         </p>
                                     </div>
                                     <div className='flex items-center'>
                                         <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                            {(filter.price).toFixed(2)} man
+                                            {(item.price).toFixed(2)} $
                                         </del>
                                         <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                            {((filter.price * (100 - filter.discount)) / 100).toFixed(2)} man
+                                            {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
                                         </p>
                                     </div>
-                                    <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>{filter.discount}% off applied</p>
+                                    <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>{item.discount}% off applied</p>
                                 </div>
                             </div>
-                        ))
-
-                        : data &&
-                        data
-                            .filter(item => item.category?.id == categid)
-                            .map((filter, i) => (
-                                <div key={i} className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
-                                    <img
-                                        className="w-full object-cover mb-2"
-                                        src={filter.images[0]}
-                                        alt={filter.name}
-                                    />
-                                    <div className='flex flex-col items-start'>
-                                        <div>
-                                            <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
-                                                {filter.name}
-                                            </p>
-                                        </div>
-                                        <div className='flex items-center'>
-                                            <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {(filter.price).toFixed(2)} man
-                                            </del>
-                                            <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {((filter.price * (100 - filter.discount)) / 100).toFixed(2)} man
-                                            </p>
-                                        </div>
-                                        <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>{filter.discount}% off applied</p>
-                                    </div>
-                                </div>
-                            ))
+                        </Link>
+                    ))
                 }
 
-            </div> */}
-            <div className='flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]'>
+            </div>
+        </div>
+    )
+}
+
+export default ProductsById
+{/* <div className='flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]'>
                 <div
                     className='cursor-pointer'
                     onClick={() => setPage(prev => Math.max(prev - 1, 1))}
@@ -226,9 +216,4 @@ function ProductsById() {
                 >
                     <MdNavigateNext />
                 </div>
-            </div>
-        </div>
-    )
-}
-
-export default ProductsById
+            </div> */}
