@@ -138,16 +138,21 @@ function ProductsById() {
                     </div>
                     <div className='flex gap-3 items-center'>
                         <p className='uppercase text-[14px]'>view:</p>
-                        <div onClick={() => changeWidth('285')} className='flex items-center cursor-pointer'>
-                            <FaRegSquare className='w-[15px]' />
-                            <FaRegSquare className='w-[15px]' />
-                            <FaRegSquare className='w-[15px]' />
-                            <FaRegSquare className='w-[15px]' />
-                            <FaRegSquare className='w-[15px]' />
+                        <div onClick={() => changeWidth('285')} className='cursor-pointer flex items-center gap-1'>
+                            {Array(5).fill(null).map((_, id) => (
+                                <div
+                                    key={id}
+                                    className={`w-[12px] h-[12px] pr-[10px] bg-white border rounded-sm border-black ${view ? 'bg-black' : 'bg-white'}`}
+                                ></div>
+                            ))}
                         </div>
-                        <div onClick={() => changeWidth('730')} className='flex items-center cursor-pointer'>
-                            <FaRegSquare className='w-[15px]' />
-                            <FaRegSquare className='w-[15px]' />
+                        <div onClick={() => changeWidth('730')} className='cursor-pointer flex items-center gap-1'>
+                            {Array(2).fill(null).map((_, id) => (
+                                <div
+                                    key={id}
+                                    className={`w-[12px] h-[12px] bg-white border rounded-sm border-black ${view ? 'bg-black' : 'bg-white'}`}
+                                ></div>
+                            ))}
                         </div>
                     </div>
                 </div>

@@ -52,10 +52,6 @@
     object-fit: cover;
   }
 
-  .swiper-pagination {
-    display: none;
-  }
-
 .swiper-button-prev,
 .swiper-button-next {
   color: black !important;
