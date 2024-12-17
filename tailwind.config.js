@@ -6,8 +6,8 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        robotoslab: ['"Roboto Slab"', 'sans-serif'], 
+      fontFamily: { 
+        mont: ['Montserrat', 'sans-serif']
       },
       screens: {
         "mq662":"662px",

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -88,6 +89,10 @@
   width: 100%;
 }
 
+.shopswiper .swiper-pagination {
+  display: none;
+}
+
 .mySwiper2 .swiper-button-next,
 .mySwiper2 .swiper-button-prev {
     opacity: 0;
@@ -99,4 +104,15 @@
 .mySwiper2:hover .swiper-button-prev {
     opacity: 1;
     visibility: visible;
+}
+
+.mySwiper1 .swiper-wrapper {
+  display: none;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .mySwiper1 .swiper-wrapper {
+    display: block;
+  }
 }

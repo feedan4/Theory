@@ -24,6 +24,9 @@ function ProductsById() {
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
+    // console.log(category);
+    
+
     // useEffect(() => {
     //     if (proid) {
     //         getProductById(proid)
@@ -69,7 +72,7 @@ function ProductsById() {
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's view all</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
-                <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
+                {/* <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
                     <button
                         className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
                         view all
@@ -86,7 +89,7 @@ function ProductsById() {
                             })
                         ))
                     }
-                </div>
+                </div> */}
             </div>
             <div className='flex flex-col mx-[20px] justify-between'>
                 <div className={`z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
