@@ -87,3 +87,16 @@
   height: 100%;
   width: 100%;
 }
+
+.mySwiper2 .swiper-button-next,
+.mySwiper2 .swiper-button-prev {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mySwiper2:hover .swiper-button-next,
+.mySwiper2:hover .swiper-button-prev {
+    opacity: 1;
+    visibility: visible;
+}

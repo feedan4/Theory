@@ -14,11 +14,13 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { IoIosStarOutline } from 'react-icons/io';
 
 export default function Details() {
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [color, setColor] = useState(null)
 
     // console.log(probyid);
 
@@ -29,10 +31,11 @@ export default function Details() {
         }
     }, [proid])
 
+
     return (
         <>
-            <div className='m-[20px] flex items-start justify-between'>
-                <div className='flex gap-3 w-[50%]'>
+            <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
+                <div className='flex flex-col md:flex-row w-[100%] md:w-[48%]'>
                     <Swiper
                         direction='vertical'
                         onSwiper={setThumbsSwiper}
@@ -41,20 +44,20 @@ export default function Details() {
                         freeMode={true}
                         watchSlidesProgress={true}
                         modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper1 w-[10%] h-[300px]"
+                        className="mySwiper1 w-[7%] h-[300px] hidden md:block"
                     >
-                        <SwiperSlide>
-                            {
-                                probyid && Object.values(probyid).map((item, i) => (
+                        {
+                            probyid && probyid.images.map((image, i) => (
+                                <SwiperSlide key={i} onClick={() => setColor(i)}>
                                     <img
-                                        key={i}
-                                        className="w-full object-cover mb-2"
-                                        src={item.images}
-                                        alt={item.name}
+                                        className={`w-[100%] object-cover mb-2 ${color === i ? 'border border-black' : 'border-none'}`}
+                                        src={image}
+                                        alt={probyid.name}
                                     />
-                                ))
-                            }
-                        </SwiperSlide>
+                                </SwiperSlide>
+                            ))
+                        }
+
                     </Swiper>
                     <Swiper
                         style={{
@@ -65,19 +68,69 @@ export default function Details() {
                         navigation={true}
                         thumbs={{ swiper: thumbsSwiper }}
                         modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper2 w-[90%]"
+                        className="mySwiper2 w-[85%] h-[700px]"
                     >
                         {
-                            probyid && Object.values(probyid).map((item, i) => (
-                                <img
-                                    key={i}
-                                    className="w-full object-cover mb-2"
-                                    src={item.images}
-                                    alt={item.name}
-                                />
+                            probyid && probyid.images.map((image, id) => (
+                                <SwiperSlide key={id}>
+                                    <img
+                                        className="w-[100%] object-cover object-top"
+                                        src={image}
+                                        alt={probyid.name}
+                                    />
+                                </SwiperSlide>
                             ))
                         }
                     </Swiper>
+                    <Swiper
+                        direction='vertical'
+                        onSwiper={setThumbsSwiper}
+                        spaceBetween={10}
+                        slidesPerView={4}
+                        freeMode={true}
+                        watchSlidesProgress={true}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="mySwiper1 flex w-[7%] h-[300px] md:hidden"
+                    >
+                        {
+                            probyid && probyid.images.map((image, i) => (
+                                <SwiperSlide key={i} onClick={() => setColor(i)}>
+                                    <img
+                                        className={`w-[100%] object-cover mb-2 ${color === i ? 'border border-black' : 'border-none'}`}
+                                        src={image}
+                                        alt={probyid.name}
+                                    />
+                                </SwiperSlide>
+                            ))
+                        }
+
+                    </Swiper>
+                </div>
+                <div className='flex flex-col items-start w-[100%] lg:w-[48%] my-[10px]'>
+                    {probyid && (
+                        <div className="flex flex-col bg-transparent gap-3 items-start justify-start">
+                            <p className="#212529 text-start text-[24px] overflow-hidden text-ellipsis text-nowrap font-semibold">
+                                {probyid.name}
+                            </p>
+                            <div className='flex items-center gap-2'>
+                                <del className='text-black text-[16px]'>
+                                    {(probyid.price).toFixed(2)} man
+                                </del>
+                                <p className='text-black text-[16px]'>
+                                    {((probyid.price * (100 - probyid.discount)) / 100).toFixed(2)} man
+                                </p>
+                            </div>
+                            <p className='text-red-600 text-[16px] capitalize'>
+                                {probyid.discount}% off applied
+                            </p>
+                            <div className='flex gap-1 items-center'>
+                                {Array(5).fill(null).map((_, id) => (
+                                    <IoIosStarOutline key={id} className='text-[17px]'/>
+                                ))}
+                                <a href='#review' className='font-semibold underline pl-[5px]'>Write a review</a>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
