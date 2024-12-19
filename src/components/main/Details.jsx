@@ -27,7 +27,7 @@ export default function Details() {
     const [fixed, setFixed] = useState()
     const [canvas, setCanvas] = useState("-400")
 
-    // console.log(probyid);
+    console.log(sebet);
 
     useEffect(() => {
         if (proid) {
@@ -61,22 +61,27 @@ export default function Details() {
                     <div className='flex flex-col'>
                         <b className='text-[16px] capitalize'>your items</b>
                         {
-                            sebet && sebet.map((item) => {
-                                <div className="flex flex-col bg-transparent gap-3 items-start justify-start">
-                                    <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
-                                        {item.name}
-                                    </p>
-                                    <div className='flex items-center gap-2'>
-                                        <del className='text-black text-[16px]'>
-                                            {(item.price).toFixed(2)} $
-                                        </del>
-                                        <p className='text-black text-[16px]'>
-                                            {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                            sebet && sebet.map((item, i) => {
+                                <div key={i} className="flex flex-col bg-transparent gap-3 items-start justify-start">
+                                    <div className='w-[48%]'>
+                                        <img src={item.images[i]} />
+                                    </div>
+                                    <div className='w-[48%]'>
+                                        <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
+                                            {item.name}
+                                        </p>
+                                        <div className='flex items-center gap-2'>
+                                            <del className='text-black text-[16px]'>
+                                                {(item.price).toFixed(2)} $
+                                            </del>
+                                            <p className='text-black text-[16px]'>
+                                                {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                            </p>
+                                        </div>
+                                        <p className='text-red-600 text-[16px] capitalize'>
+                                            {item.discount}% off applied
                                         </p>
                                     </div>
-                                    <p className='text-red-600 text-[16px] capitalize'>
-                                        {item.discount}% off applied
-                                    </p>
                                 </div>
                             })
                         }
@@ -180,7 +185,7 @@ export default function Details() {
                                         onClick={(e) => {
                                             showCanvas('0')
                                             e.preventDefault()
-                                            addToBasket(probyid.id, probyid.name, probyid.images, probyid.price, probyid.discount, probyid.Size, probyid.Colors)
+                                            addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, probyid.Size, probyid.Colors)
                                         }}
                                         className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]'>Add to bag</button>
                                     <button className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]'>Add to wishlist</button>
