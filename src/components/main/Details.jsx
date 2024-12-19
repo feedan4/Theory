@@ -15,12 +15,17 @@ import 'swiper/css/thumbs';
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
+import { BASKET } from '../../context/BasketContext';
 
 export default function Details() {
+    const { addToBasket } = useContext(BASKET)
+    const { sebet } = useContext(BASKET)
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [color, setColor] = useState(null)
+    const [fixed, setFixed] = useState()
+    const [canvas, setCanvas] = useState("-400")
 
     // console.log(probyid);
 
@@ -31,10 +36,52 @@ export default function Details() {
         }
     }, [proid])
 
+    function showCanvas(right) {
+        setCanvas(right)
+    }
+
+    onscroll = function () {
+        if (window.scrollY >= 0) {
+            setFixed(true)
+        } else {
+            setFixed(false)
+        }
+    }
+
 
     return (
         <>
             <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
+                <div className={`w-[400px] z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-400px]'} bg-white flex flex-col transition-all duration-700 h-[100vh] p-[20px]`}>
+                    <div className='flex justify-between items-center'>
+                        <p></p>
+                        <p className='capitalize text-[24px] my-[20px]'>shopping bag</p>
+                        <p onClick={() => showCanvas('-400')} className='inline-block text-[20px] cursor-pointer'>X</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <b className='text-[16px] capitalize'>your items</b>
+                        {
+                            sebet && sebet.map((item) => {
+                                <div className="flex flex-col bg-transparent gap-3 items-start justify-start">
+                                    <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
+                                        {item.name}
+                                    </p>
+                                    <div className='flex items-center gap-2'>
+                                        <del className='text-black text-[16px]'>
+                                            {(item.price).toFixed(2)} $
+                                        </del>
+                                        <p className='text-black text-[16px]'>
+                                            {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                        </p>
+                                    </div>
+                                    <p className='text-red-600 text-[16px] capitalize'>
+                                        {item.discount}% off applied
+                                    </p>
+                                </div>
+                            })
+                        }
+                    </div>
+                </div>
                 <div className='flex flex-col justify-start md:flex-row w-[100%] md:w-[48%]'>
                     <Swiper
                         direction='vertical'
@@ -83,10 +130,10 @@ export default function Details() {
                         }
                     </Swiper>
                 </div>
-                <div className='flex flex-col items-start w-[100%] lg:w-[48%] my-[10px]'>
+                <div className='flex flex-col items-start w-[100%] md:w-[48%] my-[10px]'>
                     {probyid && (
                         <div className="flex flex-col bg-transparent gap-3 items-start justify-start">
-                            <p className="#212529 text-start text-[24px] overflow-hidden text-ellipsis text-nowrap font-semibold">
+                            <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
                                 {probyid.name}
                             </p>
                             <div className='flex items-center gap-2'>
@@ -100,23 +147,27 @@ export default function Details() {
                             <p className='text-red-600 text-[16px] capitalize'>
                                 {probyid.discount}% off applied
                             </p>
-                            <div className='flex gap-1 items-center'>
-                                {Array(5).fill(null).map((_, id) => (
-                                    <IoIosStarOutline key={id} className='text-[17px]' />
-                                ))}
-                                <a href='#review' className='font-semibold underline pl-[5px]'>Write a review</a>
+                            <div className='flex flex-col sm:flex-row gap-3 items-center'>
+                                <div className='flex gap-1'>
+                                    {Array(5).fill(null).map((_, id) => (
+                                        <IoIosStarOutline key={id} className='text-[17px]' />
+                                    ))}
+                                </div>
+                                <div>
+                                    <a href='#review' className='font-semibold underline pl-[5px]'>Write a review</a>
+                                </div>
                             </div>
                             <div className='flex flex-col items-start mt-[40px]'>
                                 <p className='text-[16px] font-semibold'>Color</p>
                                 <div>
-                                    
+
                                 </div>
                             </div>
                             <div className='flex flex-col mt-[40px]'>
                                 <p className='text-[16px] font-semibold'>Size</p>
                                 <div className='my-[40px] flex flex-wrap gap-2'>
                                     {
-                                        probyid?.Size.map((size,i) => (
+                                        probyid?.Size.map((size, i) => (
                                             <button
                                                 key={i}
                                                 className='w-[100px] border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase py-[5px]'>{size}
@@ -125,9 +176,15 @@ export default function Details() {
                                     }
                                 </div>
                                 <div className='flex w-[100%] gap-2 items-center'>
-                                    <button className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black text-ellipsis text-nowrap uppercase py-[15px]'>Add to bag</button>
-                                    <button className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase py-[15px]'>Add to wishlist</button>
-                                    <button className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center text-ellipsis text-nowrap uppercase py-[15px]'><IoMdHeartEmpty /></button>
+                                    <button
+                                        onClick={(e) => {
+                                            showCanvas('0')
+                                            e.preventDefault()
+                                            addToBasket(probyid.id, probyid.name, probyid.images, probyid.price, probyid.discount, probyid.Size, probyid.Colors)
+                                        }}
+                                        className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]'>Add to bag</button>
+                                    <button className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]'>Add to wishlist</button>
+                                    <button className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
                                 </div>
                             </div>
                         </div>

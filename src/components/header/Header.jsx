@@ -55,7 +55,7 @@ function Header() {
                   category &&
                   category.map((item, index) => {
                     return (
-                      <div className="text-[13px] capitalize categ">
+                      <div className="text-[13px] capitalize text-ellipsis text-nowrap categ">
                         {item.name}
                         <div className={`subcateg bg-white text-black capitalize top-[50px] text-[13px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
                           <div className='flex flex-col p-[20px] gap-3'>
