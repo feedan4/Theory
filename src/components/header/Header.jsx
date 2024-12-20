@@ -36,9 +36,8 @@ function Header() {
               {category &&
                 category.map((item, index) => {
                   return (
-                    <div className="text-[13px] flex flex-col items-center categ">
+                    <div className="text-[13px] capitalize flex flex-col items-center categ">
                       {item.name}
-
                     </div>
                   );
                 })}
@@ -98,7 +97,9 @@ function Header() {
                 <FaHeart />
               </a>
               <div className="relative">
-                <BsBasket3Fill className=" hover:text-black text-[13px]" />
+                <Link to="/basket">
+                  <BsBasket3Fill className=" hover:text-black text-[13px]" />
+                </Link>
                 <div className="absolute text-[13px] top-[-10px] right-[-10px] ">0</div>
               </div>
             </div>
@@ -107,7 +108,7 @@ function Header() {
             <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>
-              <Link to={`/productsbyid`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>all products</button></Link>
+              <Link to={`/productsbyid`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>view all</button></Link>
               {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
             </div>
           </div>

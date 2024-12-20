@@ -60,10 +60,10 @@ function Footer() {
                         <FaPinterestP className='text-[20px]' />
                         <FaYoutube className='text-[20px]' />
                     </div>
-                    <div className='w-full flex items-center gap-3'>
+                    {/* <div className='w-full flex items-center gap-3'>
                         <img className='w-[120px]' loading='lazy' src='https://ak-media.theory.com/i/theory/apple-store-logo?$defaultMedia$' />
                         <img className='w-[120px]' loading='lazy' src='https://ak-media.theory.com/i/theory/google-store-logo?$defaultMedia$' />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <hr className='w-[95%] mx-auto hidden lg:block' />

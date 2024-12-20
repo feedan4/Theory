@@ -13,6 +13,7 @@ export default {
         "mq662":"662px",
         "mq700":"700px",
         "400":"500px",
+        "xs":"400px",
         "xxl":"1380px"
       }
     },

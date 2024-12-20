@@ -139,7 +139,7 @@ function ProductsById() {
                         <img className='w-[30px]' src='https://theory.a.bigcontent.io/v1/static/filter' />
                         <p className='uppercase text-[14px]'>filter</p>
                     </div>
-                    <div className='flex gap-3 items-center'>
+                    <div className='hidden md:flex gap-3 items-center'>
                         <p className='uppercase text-[14px]'>view:</p>
                         <div onClick={() => changeWidth('285')} className='cursor-pointer flex items-center gap-1'>
                             {Array(5).fill(null).map((_, id) => (

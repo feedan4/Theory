@@ -7,6 +7,7 @@ import { DATA } from './context/DataContext'
 import AboutUs from './components/main/AboutUs'
 import ProductsById from './components/main/ProductsById'
 import Details from './components/main/Details'
+import AddToBasket from './components/main/AddToBasket'
 
 function App() {
   const {pathname} = useLocation()
@@ -28,6 +29,7 @@ function App() {
           <Route path="/shopnow" element={<ShopNow />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/productsbyid" element={<ProductsById />} />
+          <Route path="/basket" element={<AddToBasket />} />
           <Route path="/details/:proid" element={<Details />} />
         </Route>
       </Routes>

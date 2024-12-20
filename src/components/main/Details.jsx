@@ -25,7 +25,7 @@ export default function Details() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [color, setColor] = useState(null)
     const [fixed, setFixed] = useState()
-    const [canvas, setCanvas] = useState("-400")
+    const [canvas, setCanvas] = useState("-100")
 
     console.log(sebet);
 
@@ -52,38 +52,41 @@ export default function Details() {
     return (
         <>
             <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
-                <div className={`w-[400px] z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-400px]'} bg-white flex flex-col transition-all duration-700 h-[100vh] p-[20px]`}>
+                <div className={`w-[100%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%] z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100%] noscroll p-[20px]`}>
                     <div className='flex justify-between items-center'>
                         <p></p>
                         <p className='capitalize text-[24px] my-[20px]'>shopping bag</p>
-                        <p onClick={() => showCanvas('-400')} className='inline-block text-[20px] cursor-pointer'>X</p>
+                        <p onClick={() => showCanvas('-100')} className='inline-block text-[20px] cursor-pointer'>X</p>
                     </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-4'>
                         <b className='text-[16px] capitalize'>your items</b>
                         {
-                            sebet && sebet.map((item, i) => {
-                                <div key={i} className="flex flex-col bg-transparent gap-3 items-start justify-start">
-                                    <div className='w-[48%]'>
-                                        <img src={item.images[i]} />
+                            sebet && sebet.map((item, i) => (
+                                <div key={i} className="flex bg-transparent gap-3 items-start">
+                                    <div className='w-[50%] xs:w-[35%] '>
+                                        <img src={item.img[0]} className='w-[100%] h-[100%]'/>
                                     </div>
-                                    <div className='w-[48%]'>
-                                        <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
+                                    <div className='w-[50%] xs:w-[65%] text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
+                                        <p className="#212529 text-start overflow-hidden font-semibold">
                                             {item.name}
                                         </p>
+                                        <p className='#212529 text-start'><b>Color:</b> {item.color[0]}</p>
+                                        <p className='#212529 text-start'><b>Size:</b> {item.size[0]}</p>
                                         <div className='flex items-center gap-2'>
-                                            <del className='text-black text-[16px]'>
+                                            <del className='text-black'>
                                                 {(item.price).toFixed(2)} $
                                             </del>
-                                            <p className='text-black text-[16px]'>
+                                            <p className='text-black'>
                                                 {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
                                             </p>
                                         </div>
-                                        <p className='text-red-600 text-[16px] capitalize'>
+                                        <p className='text-red-600 capitalize'>
                                             {item.discount}% off applied
                                         </p>
+                                        <button className='capitalize'><u>remove</u></button>
                                     </div>
                                 </div>
-                            })
+                            ))
                         }
                     </div>
                 </div>
