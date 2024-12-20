@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 function AddToBasket() {
     const { sebet } = useContext(BASKET)
+    const { removeProduct } = useContext(BASKET)
+    const { totalAllAmount } = useContext(BASKET)
 
     return (
         <>
@@ -31,21 +33,20 @@ function AddToBasket() {
                                                     {(item.price).toFixed(2)} $
                                                 </del>
                                                 <p className='text-black'>
-                                                    {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                                    {(item.totalPrice).toFixed(2)} $
                                                 </p>
                                             </div>
                                             <p className='text-red-600 capitalize'>
                                                 {item.discount}% off applied
                                             </p>
-                                            <button className='capitalize border-none'><u>remove</u></button>
+                                            <div className='flex gap-3 justify-end font-bold  items-center'>
+                                                <button className='capitalize border-none'><u>edit</u></button>
+                                                <button onClick={() => removeProduct(item.id)} className='capitalize border-none'><u>remove</u></button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))
                             }
-                        </div>
-                        <div className='flex gap-3 justify-end font-bold  items-center'>
-                            <button><u>Edit</u></button>
-                            <button><u>Remove</u></button>
                         </div>
                     </div>
                     <div className='w-[40%] flex flex-col gap-3'>
@@ -53,12 +54,12 @@ function AddToBasket() {
                         <p className='text-[20px] capitalize font-bold'>order summary</p>
                         <div className='flex items-center justify-between'>
                             <p className='capitalize text-[13px]'>sub total</p>
-                            <p className='capitalize text-[13px]'>765 man</p>
+                            <p className='capitalize text-[13px]'>{totalAllAmount.toFixed(2)} $</p>
                         </div>
                         <hr className='border-none bg-gray-400  h-[1px]' />
                         <div className='flex items-center justify-between'>
                             <p className='capitalize font-bold text-[15px]'>estimated total</p>
-                            <p className='capitalize font-bold text-[15px]'>765 man</p>
+                            <p className='capitalize font-bold text-[15px]'>{totalAllAmount.toFixed(2)} $</p>
                         </div>
                         <div className='flex flex-col gap-3 mt-[20px]'>
                             <p className='text-[12px] capitalize font-bold'>promo code</p>

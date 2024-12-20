@@ -19,7 +19,9 @@ import { BASKET } from '../../context/BasketContext';
 
 export default function Details() {
     const { addToBasket } = useContext(BASKET)
+    const { removeProduct } = useContext(BASKET)
     const { sebet } = useContext(BASKET)
+    const { totalAllAmount } = useContext(BASKET)
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -48,7 +50,6 @@ export default function Details() {
         }
     }
 
-
     return (
         <>
             <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
@@ -64,7 +65,7 @@ export default function Details() {
                             sebet && sebet.map((item, i) => (
                                 <div key={i} className="flex bg-transparent gap-3 items-start">
                                     <div className='w-[50%] xs:w-[35%] '>
-                                        <img src={item.img[0]} className='w-[100%] h-[100%]'/>
+                                        <img src={item.img[0]} className='w-[100%] h-[100%]' />
                                     </div>
                                     <div className='w-[50%] xs:w-[65%] text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
                                         <p className="#212529 text-start overflow-hidden font-semibold">
@@ -72,22 +73,29 @@ export default function Details() {
                                         </p>
                                         <p className='#212529 text-start'><b>Color:</b> {item.color[0]}</p>
                                         <p className='#212529 text-start'><b>Size:</b> {item.size[0]}</p>
+                                        <p className='#212529 text-start'><b>Quantity:</b>{item.count}</p>
                                         <div className='flex items-center gap-2'>
                                             <del className='text-black'>
                                                 {(item.price).toFixed(2)} $
                                             </del>
                                             <p className='text-black'>
-                                                {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                                {(item.totalPrice).toFixed(2)} $
                                             </p>
                                         </div>
                                         <p className='text-red-600 capitalize'>
                                             {item.discount}% off applied
                                         </p>
-                                        <button className='capitalize'><u>remove</u></button>
+                                        <button onClick={() => removeProduct(item.id)} className='capitalize'><u>remove</u></button>
                                     </div>
                                 </div>
                             ))
                         }
+                        <div className=' flex items-center justify-between'>
+                            <p className='text-black fon-bold'>Total:</p>
+                            <p className='text-black'>
+                                {totalAllAmount.toFixed(2)} $
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div className='flex flex-col justify-start md:flex-row w-[100%] md:w-[48%]'>
@@ -188,7 +196,7 @@ export default function Details() {
                                         onClick={(e) => {
                                             showCanvas('0')
                                             e.preventDefault()
-                                            addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, probyid.Size, probyid.Colors)
+                                            addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, probyid.Size, probyid.Colors, probyid.count, probyid.totalPrice)
                                         }}
                                         className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]'>Add to bag</button>
                                     <button className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]'>Add to wishlist</button>
