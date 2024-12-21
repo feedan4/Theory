@@ -7,12 +7,6 @@ function AddToBasket() {
     const {addToBasket} = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
-    const [sizeButton, setSizeButton] = useState(null)  // Size state
-    const [productColor, setProductColor] = useState(null)  // Color state
-
-    const handleAddToBasket = (id, img, name, price, discount, count) => {
-        addToBasket(id, img, name, price, discount, sizeButton, productColor, count)
-    }
 
     return (
         <>
@@ -33,8 +27,8 @@ function AddToBasket() {
                                             <p className="#212529 text-start overflow-hidden font-semibold">
                                                 {item.name}
                                             </p>
-                                            <p className='#212529 text-start'><b>Color:</b> {item.color}</p>
-                                            <p className='#212529 text-start'><b>Size:</b> {item.size}</p>
+                                            <p className='#212529 text-start'><b>Color:</b></p>
+                                            <p className='#212529 text-start'><b>Size:</b></p>
                                             <div className='flex items-center gap-2'>
                                                 <del className='text-black'>
                                                     {(item.price).toFixed(2)} $
