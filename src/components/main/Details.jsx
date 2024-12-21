@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { DATA } from '../../context/DataContext';
 import { getProductById } from '../../services/api';
 
@@ -18,21 +18,24 @@ import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
 import { BASKET } from '../../context/BasketContext';
 
 export default function Details() {
-    const { addToBasket } = useContext(BASKET)
+    const { addToBasket,sizeButton, setSizeButton, productColor, setProductColor } = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { sebet } = useContext(BASKET)
+    const { wish } = useContext(DATA)
     const { totalAllAmount } = useContext(BASKET)
     const { totalCount } = useContext(BASKET)
+    const { addToWishlist } = useContext(DATA)
+    const { removeWishlist } = useContext(DATA)
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [swipercolor, setSwiperColor] = useState(null)
     const [fixed, setFixed] = useState()
     const [canvas, setCanvas] = useState("-100")
-    const [productColor, setProductColor] = useState()
-    const [sizeButton, setSizeButton] = useState()
+    
+    console.log(productColor)
 
-    console.log(sebet);
+    // console.log(probyid);
 
     useEffect(() => {
         if (proid) {
@@ -53,10 +56,14 @@ export default function Details() {
         }
     }
 
+    useEffect(() => {
+        console.log(wish);
+    }, [wish]);
+
     return (
         <>
             <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
-                <div className={`w-[100%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%] z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100%] noscroll p-[20px]`}>
+                <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[30%] z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100%] noscroll p-[20px]`}>
                     <div className='flex justify-between items-center'>
                         <p></p>
                         <p className='capitalize text-[24px] my-[20px]'>shopping bag</p>
@@ -67,18 +74,18 @@ export default function Details() {
                         {
                             sebet && sebet.map((item, i) => (
                                 <div key={i} className="flex bg-transparent gap-3 items-start">
-                                    <div className='w-[50%] xs:w-[35%] '>
+                                    <div className='w-[170px] h-[200px]'>
                                         <img src={item.img[0]} className='w-[100%] h-[100%]' />
                                     </div>
                                     <div className='w-[50%] xs:w-[65%] text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
-                                        <p className="#212529 text-start overflow-hidden font-semibold">
+                                        <p className="text-[#212529] text-start overflow-hidden font-semibold">
                                             {item.name}
                                         </p>
-                                        <div className='#212529 flex flex-col gap-3'>
+                                        <div className='text-[#212529] flex flex-col gap-3'>
                                             <b>Color: {productColor}</b>
                                         </div>
-                                        <p className='#212529 text-start'><b>Size:</b> {sizeButton}</p>
-                                        <p className='#212529 text-start'><b>Quantity:</b>{item.count}</p>
+                                        <p className='text-[#212529] text-start'><b>Size:</b> {sizeButton}</p>
+                                        <p className='text-[#212529] text-start'><b>Quantity:</b>{item.count}</p>
                                         <div className='flex items-center gap-2'>
                                             <del className='text-black'>
                                                 {(item.price).toFixed(2)} $
@@ -102,6 +109,14 @@ export default function Details() {
                             <p className='text-black'>
                                 Total: {totalAllAmount.toFixed(2)} $
                             </p>
+                        </div>
+                        <div className='flex flex-col items-center gap-3 w-[100%]'>
+                            <Link to="/checkout" className='w-[100%]'>
+                                <button className='w-full py-[10px] text-[13px] text-white bg-black uppercase border border-black'>go to checkout</button>
+                            </Link>
+                            <Link to="/basket" className='w-[100%]'>
+                                <button className='w-full py-[10px] text-[13px] text-black bg-white uppercase border border-black'>go to shopping bag</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -217,11 +232,21 @@ export default function Details() {
                                         onClick={(e) => {
                                             showCanvas('0')
                                             e.preventDefault()
-                                            addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, probyid.Size, probyid.Colors, probyid.count, probyid.totalPrice)
+                                            addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton,productColor, probyid.count, probyid.totalPrice)
                                         }}
                                         className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]'>Add to bag</button>
-                                    <button className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]'>Add to wishlist</button>
-                                    <button className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
+                                        }}
+                                        className='border-2 hidden md:block w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]'>Add to wishlist</button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
+                                        }}
+                                        className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
                                 </div>
                             </div>
                         </div>

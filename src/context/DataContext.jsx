@@ -8,11 +8,26 @@ function DataContext({ children }) {
   const [category, setCategory] = useState(null)
   const [data, setData] = useState(null)
   const [probyid, setProById] = useState(null)
+  const [wish, setWish] = useState([])
 
   // console.log(data);
 
   const location = useLocation()
   const [showVideo, setShowVideo] = useState(true)
+
+  function addToWishlist(id, img, name, price, discount) {
+    if (wish.some(item => item.id === id)) {
+      setWish(wish.filter(item => item.id !== id ? { ...item, id, img, name, price, discount } : item))
+    } else {
+      setWish([...wish, { id, img, name, price, discount }])
+    }
+
+  }
+
+  function removeWish(id) {
+    const newWish = wish.find(item => item.id != id)
+    setWish(newWish)
+  }
 
   useEffect(() => {
     (location.pathname == "/") ? setShowVideo(true) : setShowVideo(false)
@@ -29,7 +44,9 @@ function DataContext({ children }) {
       data, setData,
       category, setCategory,
       probyid, setProById,
-      showVideo, setShowVideo
+      showVideo, setShowVideo,
+      wish, setWish,
+      addToWishlist, removeWish,
     }}>
       {children}
     </DATA.Provider>

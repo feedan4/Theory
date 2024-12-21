@@ -12,6 +12,7 @@ export default {
       screens: {
         "mq662":"662px",
         "mq700":"700px",
+        "bmd": "800px",
         "400":"500px",
         "xs":"400px",
         "xxl":"1380px"

@@ -92,12 +92,17 @@ function Header() {
               <Link to={`/login`} className=" text-[13px] capitalize hidden lg:block">
                 Sign in/register
               </Link>
-              <a href="#" className=" text-[13px] hidden lg:block">
-                Wishlist
-              </a>
-              <a href="#" className=" text-[13px] block lg:hidden">
-                <FaHeart />
-              </a>
+              <Link to="/wishlist">
+                <a href="#" className=" text-[13px] hidden lg:block">
+                  Wishlist
+                </a>
+              </Link>
+              <Link to="/wishlist">
+                <a href="#" className=" text-[13px] block lg:hidden">
+                  <FaHeart />
+                </a>
+              </Link>
+
               <div className="relative">
                 <Link to="/basket">
                   <BsBasket3Fill className=" hover:text-black text-[13px]" />

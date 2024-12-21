@@ -4,31 +4,30 @@ import { Link, useLocation } from 'react-router-dom'
 
 function AddToBasket() {
     const { sebet } = useContext(BASKET)
-    const {addToBasket} = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
 
     return (
         <>
-            <div className='w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
-                <h3 className='text-[32px] font-bold capitalize'>shopping bag</h3>
-                <div className='w-[100%] flex justify-between my-[30px] items-start'>
-                    <div className='w-[58%] flex flex-col gap-3'>
+            <div className='w-[90%] md:w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
+                <h3 className='text-[20px] md:text-[32px] text-center md:text-start font-bold capitalize'>shopping bag</h3>
+                <div className='w-[100%] flex flex-col gap-3 md:flex-row justify-between my-[30px] items-start'>
+                    <div className='md:w-[58%] w-[100%] flex flex-col gap-3'>
                         <hr className='border-none bg-black h-[1px]' />
                         <p className='text-[20px] font-bold'>Ship to Me</p>
                         <div className='flex flex-col gap-4'>
                             {
                                 sebet && sebet.map((item, i) => (
                                     <div key={i} className="flex bg-transparent gap-3 items-start">
-                                        <div className='w-[50%] xs:w-[25%] '>
+                                        <div className='w-[120px] sm:w-[160px] h-[160px] sm:h-[200px]'>
                                             <img src={item.img[0]} className='w-[100%] h-[100%]' />
                                         </div>
-                                        <div className='w-[50%] xs:w-[75%] text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
+                                        <div className='text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
                                             <p className="#212529 text-start overflow-hidden font-semibold">
                                                 {item.name}
                                             </p>
-                                            <p className='#212529 text-start'><b>Color:</b></p>
-                                            <p className='#212529 text-start'><b>Size:</b></p>
+                                            <p className='#212529 text-start'><b>Color: {item.color}</b></p>
+                                            <p className='#212529 text-start'><b>Size: {item.size}</b></p>
                                             <div className='flex items-center gap-2'>
                                                 <del className='text-black'>
                                                     {(item.price).toFixed(2)} $
@@ -50,7 +49,7 @@ function AddToBasket() {
                             }
                         </div>
                     </div>
-                    <div className='w-[40%] flex flex-col gap-3'>
+                    <div className='w-[100%] md:w-[40%] flex flex-col gap-3'>
                         <hr className='border-none bg-black h-[1px]' />
                         <p className='text-[20px] capitalize font-bold'>order summary</p>
                         <div className='flex items-center justify-between'>
