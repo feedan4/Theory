@@ -4,6 +4,7 @@ export const BASKET = createContext(null)
 
 function BasketContext({ children }) {
     const [sebet, setSebet] = useState([])
+    const [totalCount, setTotalCount] = useState(0)
     const totalAllAmount = sebet.reduce((total, item) => total + item.count * ((item.price * (100 - item.discount)) / 100), 0)
 
     function addToBasket(id, img, name, price, discount, size, color, count = 1) {
@@ -19,6 +20,9 @@ function BasketContext({ children }) {
                 id, img, name, price, discount, size, color, count, totalPrice
             }])
         )
+        const newCount = sebet.reduce((total, item) => total + item.count, count)
+        setTotalCount(newCount)
+
     }
 
     function removeProduct(id) {
@@ -29,7 +33,7 @@ function BasketContext({ children }) {
     return (
         <BASKET.Provider
             value={{
-                sebet, setSebet, addToBasket, removeProduct, totalAllAmount
+                sebet, setSebet, addToBasket, removeProduct, totalAllAmount, totalCount
             }}
         >
             {children}

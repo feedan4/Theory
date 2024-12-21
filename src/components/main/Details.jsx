@@ -22,12 +22,15 @@ export default function Details() {
     const { removeProduct } = useContext(BASKET)
     const { sebet } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
+    const { totalCount } = useContext(BASKET)
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [color, setColor] = useState(null)
+    const [thumbsSwiper, setThumbsSwiper] = useState(null)
+    const [swipercolor, setSwiperColor] = useState(null)
     const [fixed, setFixed] = useState()
     const [canvas, setCanvas] = useState("-100")
+    const [productColor, setProductColor] = useState()
+    const [sizeButton, setSizeButton] = useState()
 
     console.log(sebet);
 
@@ -71,8 +74,10 @@ export default function Details() {
                                         <p className="#212529 text-start overflow-hidden font-semibold">
                                             {item.name}
                                         </p>
-                                        <p className='#212529 text-start'><b>Color:</b> {item.color[0]}</p>
-                                        <p className='#212529 text-start'><b>Size:</b> {item.size[0]}</p>
+                                        <div className='#212529 flex flex-col gap-3'>
+                                            <b>Color: {productColor}</b>
+                                        </div>
+                                        <p className='#212529 text-start'><b>Size:</b> {sizeButton}</p>
                                         <p className='#212529 text-start'><b>Quantity:</b>{item.count}</p>
                                         <div className='flex items-center gap-2'>
                                             <del className='text-black'>
@@ -91,9 +96,11 @@ export default function Details() {
                             ))
                         }
                         <div className=' flex items-center justify-between'>
-                            <p className='text-black fon-bold'>Total:</p>
+                            <p className='text-black fon-bold'>
+                                Items: {totalCount}
+                            </p>
                             <p className='text-black'>
-                                {totalAllAmount.toFixed(2)} $
+                                Total: {totalAllAmount.toFixed(2)} $
                             </p>
                         </div>
                     </div>
@@ -111,9 +118,9 @@ export default function Details() {
                     >
                         {
                             probyid && probyid.images.map((image, i) => (
-                                <SwiperSlide key={i} onClick={() => setColor(i)}>
+                                <SwiperSlide key={i} onClick={() => setSwiperColor(i)}>
                                     <img
-                                        className={`w-[100%] object-cover mb-2 ${color === i ? 'border border-black' : 'border-none'}`}
+                                        className={`w-[100%] object-cover mb-2 ${swipercolor === i ? 'border border-black' : 'border-none'}`}
                                         src={image}
                                         alt={probyid.name}
                                     />
@@ -173,10 +180,23 @@ export default function Details() {
                                     <a href='#review' className='font-semibold underline pl-[5px]'>Write a review</a>
                                 </div>
                             </div>
-                            <div className='flex flex-col items-start mt-[40px]'>
-                                <p className='text-[16px] font-semibold'>Color</p>
+                            <div className='flex flex-col gap-3 items-start mt-[40px]'>
                                 <div>
-
+                                    <b>Color: {productColor ? productColor : probyid.Colors[0]}</b>
+                                </div>
+                                <div className="flex gap-2">
+                                    {probyid.Colors.map((elem, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setProductColor(elem)}
+                                        >
+                                            <div
+                                                style={{ backgroundColor: elem }}
+                                                className={`${productColor === elem ? "border-2" : "border"} w-[20px] h-[20px] border border-black rounded-full`}
+                                            >
+                                            </div>
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                             <div className='flex flex-col mt-[40px]'>
@@ -185,8 +205,9 @@ export default function Details() {
                                     {
                                         probyid?.Size.map((size, i) => (
                                             <button
+                                                onClick={() => setSizeButton(size)}
                                                 key={i}
-                                                className='w-[100px] border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase py-[5px]'>{size}
+                                                className={`${sizeButton === size ? 'border-black' : 'border-[#eee]'} w-[100px] border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase py-[5px]`}>{size}
                                             </button>
                                         ))
                                     }
@@ -207,35 +228,6 @@ export default function Details() {
                     )}
                 </div>
             </div>
-
-
-            {/* {
-                probyid && Object.values(probyid).map((item, i) => (
-                    <div key={i} className={`flex flex-col h-full bg-white items-start justify-start`}>
-                        <img
-                            className="w-full object-cover mb-2"
-                            src={item.images[0]}
-                            alt={item.name}
-                        />
-                        <div className='flex flex-col items-start'>
-                            <div>
-                                <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
-                                    {item?.name}
-                                </p>
-                            </div>
-                            <div className='flex items-center'>
-                                <del className='text-black text-[14px] pl-[10px] pb-[10px]'>{(item?.price).toFixed(2)} $</del>
-                                <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                    {((item?.price * (100 - item?.discount)) / 100).toFixed(2)} $
-                                </p>
-                            </div>
-                            <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>
-                                {item?.discount}% off applied
-                            </p>
-                        </div>
-                    </div>
-                ))
-            } */}
         </>
     )
 }

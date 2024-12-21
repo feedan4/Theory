@@ -4,10 +4,12 @@ import { BsBasket3Fill, BsList } from 'react-icons/bs';
 import { SlMagnifier } from 'react-icons/sl';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { BASKET } from '../../context/BasketContext';
 
 function Header() {
   const { category } = useContext(DATA)
   const { showVideo } = useContext(DATA)
+  const { totalCount } = useContext(BASKET)
   const [navbar, setNavbar] = useState(true)
 
   const navbarImages = [
@@ -100,7 +102,7 @@ function Header() {
                 <Link to="/basket">
                   <BsBasket3Fill className=" hover:text-black text-[13px]" />
                 </Link>
-                <div className="absolute text-[13px] top-[-10px] right-[-10px] ">0</div>
+                <div className="absolute text-[13px] top-[-10px] right-[-10px] ">{totalCount}</div>
               </div>
             </div>
           </div>

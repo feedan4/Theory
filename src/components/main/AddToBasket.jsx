@@ -1,11 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { BASKET } from '../../context/BasketContext'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function AddToBasket() {
     const { sebet } = useContext(BASKET)
+    const {addToBasket} = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
+    const [sizeButton, setSizeButton] = useState(null)  // Size state
+    const [productColor, setProductColor] = useState(null)  // Color state
+
+    const handleAddToBasket = (id, img, name, price, discount, count) => {
+        addToBasket(id, img, name, price, discount, sizeButton, productColor, count)
+    }
 
     return (
         <>
@@ -26,8 +33,8 @@ function AddToBasket() {
                                             <p className="#212529 text-start overflow-hidden font-semibold">
                                                 {item.name}
                                             </p>
-                                            <p className='#212529 text-start'><b>Color:</b> {item.color[0]}</p>
-                                            <p className='#212529 text-start'><b>Size:</b> {item.size[0]}</p>
+                                            <p className='#212529 text-start'><b>Color:</b> {item.color}</p>
+                                            <p className='#212529 text-start'><b>Size:</b> {item.size}</p>
                                             <div className='flex items-center gap-2'>
                                                 <del className='text-black'>
                                                     {(item.price).toFixed(2)} $
