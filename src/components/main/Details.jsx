@@ -18,7 +18,7 @@ import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
 import { BASKET } from '../../context/BasketContext';
 
 export default function Details() {
-    const { addToBasket,sizeButton, setSizeButton, productColor, setProductColor } = useContext(BASKET)
+    const { addToBasket } = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { sebet } = useContext(BASKET)
     const { wish } = useContext(DATA)
@@ -32,6 +32,8 @@ export default function Details() {
     const [swipercolor, setSwiperColor] = useState(null)
     const [fixed, setFixed] = useState()
     const [canvas, setCanvas] = useState("-100")
+    const [productColor, setProductColor] = useState('')
+    const [sizeButton, setSizeButton] = useState('')
     
     console.log(productColor)
 
@@ -42,6 +44,7 @@ export default function Details() {
             getProductById(proid)
                 .then(res => setProById(res))
         }
+        
     }, [proid])
 
     function showCanvas(right) {
@@ -58,7 +61,7 @@ export default function Details() {
 
     useEffect(() => {
         console.log(wish);
-    }, [wish]);
+    }, [wish])
 
     return (
         <>
@@ -230,8 +233,8 @@ export default function Details() {
                                 <div className='flex w-[100%] gap-2 items-center'>
                                     <button
                                         onClick={(e) => {
-                                            showCanvas('0')
                                             e.preventDefault()
+                                            showCanvas('0')
                                             addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton,productColor, probyid.count, probyid.totalPrice)
                                         }}
                                         className='border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]'>Add to bag</button>
