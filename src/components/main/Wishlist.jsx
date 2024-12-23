@@ -3,11 +3,11 @@ import { DATA } from '../../context/DataContext'
 import { FaHeart } from 'react-icons/fa'
 
 function Wishlist() {
-   const { wish } = useContext(DATA)
-   const { removeWish } = useContext(DATA)
+    const { wish } = useContext(DATA)
+    const { removeWish } = useContext(DATA)
 
-//    console.log(wish);
-   
+    //    console.log(wish);
+
 
     return (
         <div className='flex flex-col gap-5 bmd:flex-row w-[90%] bmd:w-[80%] mx-auto my-[30px] items-start'>
@@ -24,8 +24,8 @@ function Wishlist() {
                 <hr className='h-[1px] w-[50%] bg-[#c8c7c7] border-none hidden bmd:block' />
                 <li>sign out</li>
             </ul>
-            <div className='w-full'>
-                <h3 className='text-[24px] text-[#212529] font-bold text-center'>Wishlist</h3>
+            <div className={`w-full ${wish.length === 0 ? 'flex flex-col items-center' : 'block'}`}>
+                <h3 className={`text-[24px] text-[#212529] font-bold text-center ${wish.length === 0 ? 'block' : 'hidden'}`}>Wishlist</h3>
                 <div className="flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px]">
                     {
                         wish && wish.map((item, i) => (
@@ -54,6 +54,9 @@ function Wishlist() {
                             </div>
                         ))
                     }
+                    <div className={`${wish.length === 0 ? 'block' : 'hidden'} text-[13px] text-black`}>
+                        You have no items in your wishlist yet
+                    </div>
                 </div>
             </div>
         </div>

@@ -85,9 +85,9 @@ export default function Details() {
                                             {item.name}
                                         </p>
                                         <div className='text-[#212529] flex flex-col gap-3'>
-                                            <b>Color: {productColor}</b>
+                                            <b>Color: {item.color}</b>
                                         </div>
-                                        <p className='text-[#212529] text-start'><b>Size:</b> {sizeButton}</p>
+                                        <p className='text-[#212529] text-start'><b>Size:</b> {item.size}</p>
                                         <p className='text-[#212529] text-start'><b>Quantity:</b>{item.count}</p>
                                         <div className='flex items-center gap-2'>
                                             <del className='text-black'>

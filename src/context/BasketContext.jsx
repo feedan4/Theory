@@ -43,8 +43,8 @@ function BasketContext({ children }) {
         setTotalCount(newCount)
     }
 
-    function removeProduct(id) {
-        const newSebet = sebet.filter(item => item.id !== id)
+    function removeProduct(id,size,color) {
+        const newSebet = sebet.filter(item => !(item.id === id && item.size === size && item.color === color ))
         setSebet(newSebet)
     }
 

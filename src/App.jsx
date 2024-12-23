@@ -9,6 +9,7 @@ import ProductsById from './components/main/ProductsById'
 import Details from './components/main/Details'
 import AddToBasket from './components/main/AddToBasket'
 import Wishlist from './components/main/Wishlist'
+import Checkout from './components/main/Checkout'
 
 function App() {
   const {pathname} = useLocation()
@@ -32,6 +33,7 @@ function App() {
           <Route path="/productsbyid" element={<ProductsById />} />
           <Route path="/basket" element={<AddToBasket />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/details/:proid" element={<Details />} />
         </Route>
       </Routes>

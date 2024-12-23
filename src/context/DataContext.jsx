@@ -16,7 +16,7 @@ function DataContext({ children }) {
   const [showVideo, setShowVideo] = useState(true)
 
   function addToWishlist(id, img, name, price, discount) {
-    if (wish.some(item => item.id === id)) {
+    if (wish.find(item => item.id === id)) {
       setWish(wish.filter(item => item.id !== id ? { ...item, id, img, name, price, discount } : item))
     } else {
       setWish([...wish, { id, img, name, price, discount }])
