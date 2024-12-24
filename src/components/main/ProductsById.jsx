@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'reac
 import { getCategoryById, getProductById, getProductsByCategory } from '../../services/api'
 import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
+import Loader from './Loader'
+
 
 function ProductsById() {
     const { data, setData } = useContext(DATA)
@@ -79,6 +81,9 @@ function ProductsById() {
 
     return (
         <div className='relative'>
+            {
+                data || probycatid ? '' : <Loader />
+            }
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's {!url ? "view all" : ''}</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>

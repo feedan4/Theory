@@ -16,6 +16,7 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
 import { BASKET } from '../../context/BasketContext';
+import Loader from './Loader';
 
 export default function Details() {
     const { addToBasket } = useContext(BASKET)
@@ -62,12 +63,16 @@ export default function Details() {
     }
 
     useEffect(() => {
-        console.log(wish);
+        console.log(wish)
     }, [wish])
 
     return (
         <>
             <div className="relative">
+                {
+                    sebet ? '' : <Loader />
+                }
+                
                 {canvas === '0' && (
                     <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={() => showCanvas('-100')}></div>
                 )}
@@ -255,7 +260,7 @@ export default function Details() {
                                     setWishButton2(true)
                                     addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
                                 }}
-                                className={`${wishButton1 ? "block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Add to wishlist</button>
+                                className={`${wishButton1 ? "md:block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Add to wishlist</button>
                             <button
                                 onClick={() => {
                                     removeWish(probyid.id)
@@ -266,7 +271,7 @@ export default function Details() {
                             <button
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    addToWishlist(probyid.id)
+                                    addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
                                 }}
                                 className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
                         </div>

@@ -15,7 +15,7 @@ function Main() {
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold trade-gothic'>the women's shop</h1>
           <Link to={`/shopnow`}>
-            <button className='hidden sm:block outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+            <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
           </Link>
         </div>
         {/* <div

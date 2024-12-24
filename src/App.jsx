@@ -14,6 +14,7 @@ import Checkout from './components/main/Checkout'
 function App() {
   const {pathname} = useLocation()
   const { showVideo } = useContext(DATA)
+
   // console.log(showVideo);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
       </Routes>
     </div>
   )
+  
 }
 
 export default App
