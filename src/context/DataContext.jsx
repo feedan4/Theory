@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getAllCategories, getAllProducts, getProductById } from '../services/api'
+import { getAllCategories, getAllProducts, getProductById, getProductsByCategory } from '../services/api'
 import { useLocation } from 'react-router-dom'
 
 export const DATA = createContext(null)
@@ -8,6 +8,7 @@ function DataContext({ children }) {
   const [category, setCategory] = useState(null)
   const [data, setData] = useState(null)
   const [probyid, setProById] = useState(null)
+  const [probycatid, setProByCatId] = useState(null)
   const [wish, setWish] = useState([])
 
   // console.log(data);
@@ -15,18 +16,27 @@ function DataContext({ children }) {
   const location = useLocation()
   const [showVideo, setShowVideo] = useState(true)
 
+  useEffect(() => {
+    const savedWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
+    setWish(savedWishlist)
+  }, [])
+
   function addToWishlist(id, img, name, price, discount) {
+    let newWishlist
     if (wish.find(item => item.id === id)) {
-      setWish(wish.filter(item => item.id !== id ? { ...item, id, img, name, price, discount } : item))
+      newWishlist = wish.filter(item => item.id !== id)
     } else {
-      setWish([...wish, { id, img, name, price, discount }])
+      newWishlist = [...wish, { id, img, name, price, discount }]
     }
 
+    setWish(newWishlist)
+    localStorage.setItem('wishlist', JSON.stringify(newWishlist))
   }
-
+  
   function removeWish(id) {
-    const newWish = wish.find(item => item.id != id)
-    setWish(newWish)
+    const newWishlist = wish.filter(item => item.id !== id)
+    setWish(newWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(newWishlist))
   }
 
   useEffect(() => {
@@ -35,8 +45,9 @@ function DataContext({ children }) {
 
   useEffect(() => {
     getAllCategories().then(res => { setCategory(res) })
-    getAllProducts().then(res => { setData(res.data) })
+    getAllProducts().then(res => { setData(res) })
     getProductById().then(res => { setProById(res.data) })
+    getProductsByCategory().then(res => { setProByCatId(res) })
   }, [])
 
   return (
@@ -44,6 +55,7 @@ function DataContext({ children }) {
       data, setData,
       category, setCategory,
       probyid, setProById,
+      probycatid, setProByCatId,
       showVideo, setShowVideo,
       wish, setWish,
       addToWishlist, removeWish,

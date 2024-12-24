@@ -4,18 +4,18 @@ export const BASKET = createContext(null);
 
 function BasketContext({ children }) {
     const [sebet, setSebet] = useState(() => {
-        const savedSebet = localStorage.getItem("sebet");
-        return savedSebet ? JSON.parse(savedSebet) : [];
-    });
+        const savedSebet = localStorage.getItem("sebet")
+        return savedSebet ? JSON.parse(savedSebet) : []
+    })
 
     const [totalCount, setTotalCount] = useState(() => {
-        const savedSebet = localStorage.getItem("sebet");
+        const savedSebet = localStorage.getItem("sebet")
         if (savedSebet) {
-            const parsedSebet = JSON.parse(savedSebet);
-            return parsedSebet.reduce((total, item) => total + item.count, 0);
+            const parsedSebet = JSON.parse(savedSebet)
+            return parsedSebet.reduce((total, item) => total + item.count, 0)
         }
-        return 0;
-    });
+        return 0
+    })
 
     const totalAllAmount = sebet.reduce((total, item) => total + item.count * ((item.price * (100 - item.discount)) / 100), 0)
 
@@ -46,6 +46,7 @@ function BasketContext({ children }) {
     function removeProduct(id,size,color) {
         const newSebet = sebet.filter(item => !(item.id === id && item.size === size && item.color === color ))
         setSebet(newSebet)
+        localStorage.setItem('sebet', JSON.stringify(newSebet))
     }
 
     return (

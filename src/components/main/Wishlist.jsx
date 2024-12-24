@@ -25,7 +25,7 @@ function Wishlist() {
                 <li>sign out</li>
             </ul>
             <div className={`w-full ${wish.length === 0 ? 'flex flex-col items-center' : 'block'}`}>
-                <h3 className={`text-[24px] text-[#212529] font-bold text-center ${wish.length === 0 ? 'block' : 'hidden'}`}>Wishlist</h3>
+                <h3 className="text-[24px] text-[#212529] font-bold text-center">Wishlist</h3>
                 <div className="flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px]">
                     {
                         wish && wish.map((item, i) => (

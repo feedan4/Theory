@@ -92,25 +92,18 @@ export default function ShopNow() {
                             {
 
                                 category &&
-                                category.map((catItem, i) => (
+                                category.map((item, i) => (
                                     <SwiperSlide key={i}>
-                                        <Link to={`/productsbyid`}>
+                                        <Link to={`/productsbyid/all/${item.id}`}>
                                             <div className="flex flex-col bg-white items-start justify-start">
-                                                {
-                                                    catItem.Subcategory && 
-                                                    catItem.Subcategory.map((subItem, id) => ( 
-                                                        <div key={id}>
-                                                            <img
-                                                                className="w-full h-[200px] object-cover mb-2"
-                                                                src={categImagesWomen[i]} 
-                                                                alt={subItem.name}
-                                                            />
-                                                            <p className="text-black text-start capitalize text-[14px] px-[10px] pb-[10px]">
-                                                                {subItem.name}
-                                                            </p>
-                                                        </div>
-                                                    ))
-                                                }
+                                                <img
+                                                    className="w-full h-[200px] object-cover mb-2"
+                                                    src={categImagesWomen[i]}
+                                                    alt={item.name}
+                                                />
+                                                <p className="text-black text-start capitalize text-[14px] px-[10px] pb-[10px]">
+                                                    {item.name}
+                                                </p>
                                             </div>
                                         </Link>
                                     </SwiperSlide>

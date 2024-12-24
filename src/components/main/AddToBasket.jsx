@@ -16,6 +16,9 @@ function AddToBasket() {
                         <hr className='border-none bg-black h-[1px]' />
                         <p className='text-[20px] font-bold'>Ship to Me</p>
                         <div className='flex flex-col gap-4'>
+                            <div className={`w-full ${sebet.length === 0 ? 'block' : 'hidden'} my-[50px] text-center`}>
+                                Your shopping bag is empty
+                            </div>
                             {
                                 sebet && sebet.map((item, i) => (
                                     <div key={i} className="flex bg-transparent gap-3 items-start">

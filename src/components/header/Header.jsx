@@ -12,14 +12,6 @@ function Header() {
   const { totalCount } = useContext(BASKET)
   const [navbar, setNavbar] = useState(true)
 
-  const navbarImages = [
-    "https://ak-media.theory.com/i/theory/11.1.24-W-Nov-Cashmere-Flyout?$mediaTablet$",
-    "https://ak-media.theory.com/i/theory/11.1.24-M-Nov-Sweater-Shop-Flyout?$media$",
-    "https://brendyol.apasni.me/assets/img/header-list3.webp",
-    "https://brendyol.apasni.me/assets/img/header-list4.webp",
-    "https://brendyol.apasni.me/assets/img/header-list5.jpg"
-  ]
-
   return (
     <>
       <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
@@ -33,16 +25,20 @@ function Header() {
           src="https://ak-media.theory.com/v/theory/DG_Cashmere_HP_Hero_Desktop/fullhd?protocol=https"
         ></video>
         <div className='flex flex-col relative w-[100%]'>
-          <div className={`navbar group relative flex justify-between items-center h-[5vh] lg:h-[10vh] w-full z-10 ${showVideo && navbar ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
-            <div className={`${navbar ? 'hidden' : 'flex'} bg-white text-black absolute gap-2 p-[20px] top-[5vh] lg:top-[10vh] items-start flex-col w-[100%] transition-all duration-500 `}>
-              {category &&
+          <div className={`navbar group relative flex justify-between items-center h-[5vh] lg:h-[10vh] w-full z-40 ${showVideo && navbar ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
+            <div className={`${navbar ? 'hidden pointer-events-none' : 'flex pointer-events-auto'} bg-white text-black absolute gap-2 p-[20px] z-50 top-[5vh] lg:top-[10vh] items-start flex-col w-[100%] transition-all duration-500 `}>
+              {
+                category &&
                 category.map((item, index) => {
                   return (
-                    <div key={index} className="text-[13px] capitalize flex flex-col items-center categ">
-                      {item.name}
-                    </div>
-                  );
-                })}
+                    <Link key={index} to={`/productsbyid/all/${item.id}`}>
+                      <div className="cursor-pointer text-[13px] capitalize flex flex-col items-center categ">
+                        {item.name}
+                      </div>
+                    </Link>
+                  )
+                })
+              }
             </div>
             <div className="flex items-center w-[33.3%] pl-[20px]">
               <div>
@@ -56,23 +52,12 @@ function Header() {
                   category &&
                   category.map((item, index) => {
                     return (
-                      <div key={index} className="text-[13px] capitalize text-ellipsis text-nowrap categ">
-                        {item.name}
-                        <div className={`subcateg bg-white text-black capitalize top-[50px] text-[13px] transition-all duration-1000 w-[100%] hidden  ${!showVideo ? 'z-10' : ''}`}>
-                          <div className='flex flex-col p-[20px] gap-3'>
-                            {item.Subcategory &&
-                              item.Subcategory.map((elem, subIndex) => (
-                                <div key={subIndex}>
-                                  {elem.name}
-                                </div>
-                              ))}
-                          </div>
-                          <div>
-
-                          </div>
+                      <Link key={index} to={`/productsbyid/all/${item.id}`}>
+                        <div className="text-[13px] capitalize text-ellipsis text-nowrap categ">
+                          {item.name}
                         </div>
-                      </div>
-                    );
+                      </Link>
+                    )
                   })
                 }
               </div>
@@ -111,11 +96,11 @@ function Header() {
               </div>
             </div>
           </div>
-          <div className={`flex flex-col gap-4 items-center tracking-wider transition-all duration-1000 pt-[150px] sm:pt-[250px] md:pt-[350px] z-20 xl:pt- [400px] ${showVideo ? 'block' : 'hidden'}`}>
+          <div className={`flex flex-col gap-4 items-center tracking-wider transition-all duration-1000 pt-[150px] sm:pt-[250px] md:pt-[350px] z-10 xl:pt- [400px] ${showVideo ? 'block' : 'hidden'}`}>
             <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
             <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
             <div className='flex gap-3 items-center flex-col sm:flex-row'>
-              <Link to={`/productsbyid`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>view all</button></Link>
+              <Link to={`/productsbyid/all`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>view all</button></Link>
               {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
             </div>
           </div>
