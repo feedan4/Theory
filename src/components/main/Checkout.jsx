@@ -4,7 +4,7 @@ import { BASKET } from '../../context/BasketContext'
 function Checkout() {
     const { sebet } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
-    const [dropdown, setDropdown] = useState(true)
+    const [dropdown, setDropdown] = useState(false)
     const [defaultCheck, setDefaultCheck] = useState(true)
 
 
@@ -88,14 +88,28 @@ function Checkout() {
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>delivery address</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='flex gap-2 items-center pl-[10px] pt-[6px]'>
-                        <button onClick={() => setDefaultCheck(!defaultCheck)} className={`${defaultCheck ? 'bg-black' : ''} ${!dropdown ? 'bg-white' : ''} bg-black w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black  rounded-full`}></button>
+                        <button
+                            onClick={() => {
+                                setDefaultCheck(true)
+                                setDropdown(false)
+                            }}
+                            className={`${defaultCheck ? 'bg-black' : 'bg-white'} w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black rounded-full`}
+                        >
+                        </button>
                         <div className='text-[13px]'>Default (same as billing address)</div>
                     </div>
                     <div className='flex gap-2 items-center pl-[10px] pt-[12px]'>
-                        <button onClick={() => setDropdown(dropdown)} className={`${!defaultCheck ? 'bg-white' : ''} ${dropdown ? 'bg-black' : ''} w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black  rounded-full`}></button>
+                        <button
+                            onClick={() => {
+                                setDefaultCheck(false)
+                                setDropdown(true)
+                            }}
+                            className={`${dropdown ? 'bg-black' : 'bg-white'} w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black rounded-full`}
+                        >
+                        </button>
                         <div className='text-[13px]'>Add an alternative delivery address</div>
                     </div>
-                    <div className={`${!dropdown ? 'hidden' : ''} ${!defaultCheck ? "flex" : ''} flex w-full flex-col gap-4 pl-[10px] pt-[30px] items-start`}>
+                    <div className={`${dropdown ? 'flex' : ''} ${defaultCheck ? "hidden" : ''} flex w-full flex-col gap-4 pl-[10px] pt-[30px] items-start`}>
                         <div className='w-full flex items-center justify-between'>
                             <div className='text-[13px] capitalize w-[30%]'>first name *</div>
                             <input className='text-[14px] w-[69%] border border-black p-[5px]' />
@@ -150,11 +164,44 @@ function Checkout() {
                         <div className='text-[10px] font-bold uppercase'>Secure Encrypted Transaction</div>
                     </div>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
+                    <p className='text-[13px] px-[10px]'>Please choose your payment method</p>
+                    <div className='w-[100%] flex gap-5 px-[10px] items-center'>
+                        <img className='w-[50px] h-[50px] cursor-pointer' src='https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/visa-512.png'/>
+                        <img className='w-[80px] h-[80px] cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/196/196566.png'/>
+                        <img className='w-[50px] h-[50px] cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/6124/6124998.png'/>
+                    </div>
+                    <div className='w-full flex items-center px-[10px] justify-between'>
+                        <div className='text-[13px] capitalize w-[30%]'>card number *</div>
+                        <input className='text-[14px] w-[69%] border border-black p-[5px]' />
+                    </div>
+                    <div className='w-full flex items-center px-[10px] justify-between'>
+                        <div className='text-[13px] capitalize w-[30%]'>expire date *</div>
+                        <div className='w-[69%] flex justify-between items-center'>
+                            <select className='text-[14px] w-[49%] border border-black p-[5px]' />
+                            <select className='text-[14px] w-[49%] border border-black p-[5px]' />
+                        </div>
+                    </div>
+                    <div className='w-full flex items-center px-[10px]'>
+                        <div className='text-[13px] capitalize w-[30%]'>security code *</div>
+                        <input className='text-[14px] w-[20%] ml-[4px] border border-black p-[5px]' />
+                    </div>
                 </div>
                 <div className='w-[49%] flex flex-col gap-4 items-start'>
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>billing summary</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
-
+                    <div className='w-full flex justify-between px-[10px] items-center'>
+                        <p className='capitalize text-[14px]'>items total</p>
+                        <p className='capitalize text-[14px]'>{totalAllAmount} $</p>
+                    </div>
+                    <div className='w-full flex justify-between px-[10px] items-center'>
+                        <p className='capitalize text-[14px]'>shipping</p>
+                        <p className='capitalize text-[14px]'>0.00 $</p>
+                    </div>
+                    <div className='w-full flex justify-between pt-[10px] px-[10px] items-center'>
+                        <p className='capitalize font-bold text-[16px]'>total for your order</p>
+                        <p className='capitalize font-bold text-[14px]'>{totalAllAmount} $</p>
+                    </div>
+                    <p className='text-[13px] px-[10px]'>Local taxes, duties or customs clearance fees may apply</p>
                 </div>
             </div>
         </div>

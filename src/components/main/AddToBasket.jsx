@@ -43,7 +43,7 @@ function AddToBasket() {
                                                 {item.discount}% off applied
                                             </p>
                                             <div className='flex gap-3 justify-end font-bold  items-center'>
-                                                <button className='capitalize border-none'><u>edit</u></button>
+                                                {/* <button className='capitalize border-none'><u>edit</u></button> */}
                                                 <button onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize border-none'><u>remove</u></button>
                                             </div>
                                         </div>

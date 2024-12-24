@@ -1,7 +1,7 @@
 import axios from "axios";
 
 async function getAllProducts() {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all`)
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?limit=120`)
     return res
 }
 

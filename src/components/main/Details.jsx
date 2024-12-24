@@ -25,7 +25,7 @@ export default function Details() {
     const { totalAllAmount } = useContext(BASKET)
     const { totalCount } = useContext(BASKET)
     const { addToWishlist } = useContext(DATA)
-    const { removeWishlist } = useContext(DATA)
+    const { removeWish } = useContext(DATA)
     const { probyid, setProById } = useContext(DATA)
     const { proid } = useParams()
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -35,7 +35,7 @@ export default function Details() {
     const [productColor, setProductColor] = useState('')
     const [sizeButton, setSizeButton] = useState('')
     const [wishButton1, setWishButton1] = useState(true)
-    const [wishButton2, setWishButton2] = useState(true)
+    const [wishButton2, setWishButton2] = useState(false)
 
     console.log(productColor)
 
@@ -236,37 +236,40 @@ export default function Details() {
                                             ))
                                         }
                                     </div>
-                                    <div className='flex w-[100%] gap-2 items-center'>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                showCanvas('0')
-                                                addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton, productColor, probyid.count, probyid.totalPrice)
-                                            }}
-                                            className="border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]">Add to bag</button>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                setWishButton1(!wishButton1)
-                                                addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
-                                            }}
-                                            className={`${wishButton1 ? 'block' : ''} ${wishButton2 ? 'block' : ''} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Add to wishlist</button>
-                                        <button
-                                            onClick={() => {
-                                                removeWishlist(probyid.id)
-                                                setWishButton2(!wishButton2)
-                                            }}
-                                            className={`${wishButton1 ? 'block' : ''} ${wishButton2 ? 'hidden' : ''} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Remove from wishlist</button>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
-                                            }}
-                                            className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
-                                    </div>
                                 </div>
+
                             </div>
                         )}
+                        <div className='flex w-[100%] gap-2 items-center'>
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    showCanvas('0')
+                                    addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton, productColor, probyid.count, probyid.totalPrice)
+                                }}
+                                className="border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]">Add to bag</button>
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setWishButton1(false)
+                                    setWishButton2(true)
+                                    addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
+                                }}
+                                className={`${wishButton1 ? "block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Add to wishlist</button>
+                            <button
+                                onClick={() => {
+                                    removeWish(probyid.id)
+                                    setWishButton1(true)
+                                    setWishButton2(false)
+                                }}
+                                className={`${wishButton2 ? "block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Remove from wishlist</button>
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    addToWishlist(probyid.id)
+                                }}
+                                className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
+                        </div>
                     </div>
                 </div>
             </div>

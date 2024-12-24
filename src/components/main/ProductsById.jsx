@@ -45,13 +45,13 @@ function ProductsById() {
     //     setCategId(findId.id)
     // }, [catname])
 
-    useEffect(() => {
-        function pageUrl(page) {
-            setPage(page)
-        }
-        navigate(`/productsbyid/all?page=${page}&limit=10`)
+    // useEffect(() => {
+    //     function pageUrl(page) {
+    //         setPage(page)
+    //     }
+    //     navigate(`/productsbyid/all?page=${page}&limit=10`)
 
-    }, [page])
+    // }, [page])
 
     useEffect(() => {
         if (categid) {
@@ -230,7 +230,7 @@ function ProductsById() {
                     )}
 
             </div>
-            <div className={`${url ? 'hidden' : 'flex'} items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>
+            {/* <div className={`${url ? 'hidden' : 'flex'} items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>
                 <div
                     className='cursor-pointer'
                     onClick={() => setPage(prev => Math.max(prev - 1, 1))}
@@ -256,7 +256,7 @@ function ProductsById() {
                 >
                     <MdNavigateNext />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
