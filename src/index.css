@@ -65,9 +65,13 @@
   left: 0;   
 }
 
-.categ:hover .subcateg,
-.subcateg:hover .subcateg{
-  display: flex; 
+.signdrop {
+  display: none;
+}
+
+.sign:hover .signdrop,
+.signdrop:hover {
+  display: flex;
 }
 
 .showswipper {

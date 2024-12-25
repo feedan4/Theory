@@ -12,6 +12,20 @@ function Header() {
   const { showVideo } = useContext(DATA)
   const { totalCount } = useContext(BASKET)
   const [navbar, setNavbar] = useState(true)
+  const [fixed, setFixed] = useState()
+  const [canvas, setCanvas] = useState("-100")
+
+  function showCanvas(right) {
+    setCanvas(right)
+  }
+
+  onscroll = function () {
+    if (window.scrollY >= 0) {
+      setFixed(true)
+    } else {
+      setFixed(false)
+    }
+  }
 
   return (
     <>
@@ -19,6 +33,42 @@ function Header() {
         {
           category ? '' : <Loader />
         }
+        {canvas === '0' && (
+          <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showCanvas('-100')}></div>
+        )}
+        <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[25%] z-50 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100vh] noscroll py-[20px] px-[40px]`}>
+          <div className='flex justify-between items-center'>
+            <p></p>
+            <p className='capitalize font-bold text-[22px] my-[20px]'>register</p>
+            <p onClick={() => showCanvas('-100')} className='inline-block text-[20px] cursor-pointer'>X</p>
+          </div>
+          <div className='flex flex-col gap-4 text-[11px]'>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>first name *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>last name *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>country *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>Address Line 1 *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>Address Line 2 *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+            <div className='w-full flex flex-col gap-2 items-start justify-between'>
+              <div className='capitalize w-full'>City / Suburb *</div>
+              <input className='w-full border border-[#bebebe] p-[5px]' />
+            </div>
+          </div>
+        </div>
         <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
         <header className={`relative bg-transparent flex flex-col justify-between ${showVideo ? 'h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]' : 'h-full'}`}>
           <video
@@ -45,7 +95,7 @@ function Header() {
                   })
                 }
               </div>
-              <div className="flex items-center w-[33.3%] pl-[20px]">
+              <div className="flex items-center w-[33.3%] pl-[5px] lg:pl-0">
                 <div>
                   <div className='flex lg:hidden gap-3 items-center'>
                     <BsList onClick={() => setNavbar(!navbar)} className='text-[13px] font-bold hamburger' />
@@ -79,8 +129,24 @@ function Header() {
                     Search
                   </a>
                 </div>
-                <Link to={`/login`} className=" text-[13px] capitalize hidden lg:block">
-                  Sign in/register
+                <Link onClick={() => showCanvas('0')}>
+                  <div className="sign text-[13px] h-full capitalize hidden lg:block">
+                    Sign in/register
+                    <div className="signdrop absolute flex-col gap-3 z-50 top-[5vh] lg:top-[10vh] right-[120px] p-[20px] text-black bg-white">
+                      <input type='text' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Email address' />
+                      <input type='password' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Password' />
+                      <div className='flex items-center gap-2'>
+                        <input type='checkbox' />
+                        <p className='capitalize text-[12px]'>remember me</p>
+                      </div>
+                      <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>sign in</button>
+                      <Link to="/forget">
+                        <p className='text-[12px] text-black underline capitalize text-center'>forget password?</p>
+                      </Link>
+                      <p className='text-[12px] text-black uppercase text-center'>or</p>
+                      <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
+                    </div>
+                  </div>
                 </Link>
                 <Link to="/wishlist">
                   <a href="#" className=" text-[13px] hidden lg:block">
@@ -110,7 +176,6 @@ function Header() {
               </div>
             </div>
           </div>
-
         </header>
       </div>
     </>
