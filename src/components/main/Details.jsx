@@ -111,7 +111,7 @@ export default function Details() {
                                             <p className='text-red-600 capitalize'>
                                                 {item.discount}% off applied
                                             </p>
-                                            <button onClick={() => removeProduct(item.id)} className='capitalize'><u>remove</u></button>
+                                            <button onClick={() => removeProduct(item.id,item.size,item.color)} className='capitalize'><u>remove</u></button>
                                         </div>
                                     </div>
                                 ))

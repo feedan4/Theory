@@ -11,8 +11,6 @@ function DataContext({ children }) {
   const [probycatid, setProByCatId] = useState(null)
   const [wish, setWish] = useState([])
 
-  // console.log(data);
-
   const location = useLocation()
   const [showVideo, setShowVideo] = useState(true)
 
