@@ -8,15 +8,22 @@ import { BASKET } from '../../context/BasketContext';
 import Loader from '../main/Loader';
 
 function Header() {
+  const { data } = useContext(DATA)
   const { category } = useContext(DATA)
   const { showVideo } = useContext(DATA)
   const { totalCount } = useContext(BASKET)
   const [navbar, setNavbar] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
   const [fixed, setFixed] = useState()
   const [canvas, setCanvas] = useState("-100")
+  const [search, setSearch] = useState("-100")
 
   function showCanvas(right) {
     setCanvas(right)
+  }
+
+  function showSearch(right) {
+    setSearch(right)
   }
 
   onscroll = function () {
@@ -27,15 +34,53 @@ function Header() {
     }
   }
 
+  const filteredData = searchTerm
+    ? data?.data?.data?.filter(item =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : []
+
+
   return (
     <>
-      <div className='relative'>
+      <div className='relative overflow-hidden'>
         {
           category ? '' : <Loader />
         }
         {canvas === '0' && (
           <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showCanvas('-100')}></div>
         )}
+        {search === '0' && (
+          <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showSearch('-100')}></div>
+        )}
+        <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[25%] z-50 ${fixed ? 'fixed top-0' : 'absolute'} ${search === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col gap-4 transition-all overflow-scroll duration-700 h-[100vh] noscroll py-[20px] px-[40px]`}>
+          <div className='flex justify-between items-center'>
+            <p></p>
+            <p className='capitalize font-bold text-[20px] my-[20px]'>search</p>
+            <p onClick={() => showSearch('-100')} className='inline-block text-[20px] cursor-pointer'>X</p>
+          </div>
+          <input onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} className='w-full border border-[#bebebe] text-[12px] py-[10px] px-[5px] capitalize' placeholder='search' />
+          {
+            filteredData.length > 0 ? (
+              filteredData.map((item, i) => (
+                <Link to={`/details/${item.id}`}>
+                  <div key={i} className="flex bg-transparent gap-3 items-start">
+                    <div className="w-[30px] sm:w-[60px] h-[30px] sm:h-[60px]">
+                      <img src={item.images[0]} className="w-[100%] h-[100%]" alt={item.name} />
+                    </div>
+                    <div className="text-[10px] xs:text-[14px] flex flex-col items-start gap-1">
+                      <p className="#212529 text-start overflow-hidden font-semibold">
+                        {item.name}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p className="text-gray-500">Heç bir nəticə tapılmadı.</p>
+            )
+          }
+        </div>
         <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[25%] z-50 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100vh] noscroll py-[20px] px-[40px]`}>
           <div className='flex justify-between items-center'>
             <p></p>
@@ -97,7 +142,7 @@ function Header() {
               <div className='capitalize text-[11px]'>I'd like to hear from Theory</div>
             </div>
             <div className='text-[9px]'>1By checking this box, you consent to receive emails about Theory's latest collections, exclusive offers, and special events. You may revoke your consent at any time by clicking unsubscribe at the bottom of any email from us. By clicking 'SAVE' below you accept the terms of our Privacy Policy</div>
-            <hr className='w-full h-[1px] border-none bg-[#bebebe]'/>
+            <hr className='w-full h-[1px] border-none bg-[#bebebe]' />
             <button className='w-full text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
           </div>
         </div>
@@ -157,9 +202,9 @@ function Header() {
               <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
                 <div className="hidden lg:flex items-center">
                   <SlMagnifier className=" text-[11px]" />
-                  <a href="#" className=" text-[13px]">
+                  <p onClick={() => showSearch('0')} className=" text-[13px] cursor-pointer">
                     Search
-                  </a>
+                  </p>
                 </div>
                 <Link onClick={() => showCanvas('0')}>
                   <div className="sign text-[13px] h-full capitalize hidden lg:block">

@@ -38,8 +38,8 @@ function Checkout() {
                 <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                 <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount} $</div>
             </div>
-            <div className='flex flex-col xl:flex-row gap-10 xl:gap-0 items-start justify-between'>
-                <div className='w-[100%] xl:w-[49%] flex flex-col gap-4 pr-[10px] items-start'>
+            <div className='flex flex-col mxl:flex-row gap-10 mxl:gap-0 items-start justify-between'>
+                <div className='w-[100%] mxl:w-[49%] flex flex-col gap-4 pr-[10px] items-start'>
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>billing address</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
@@ -83,7 +83,7 @@ function Checkout() {
                         <div className='text-[12px]'>Sign up to receive special offers and promotions from Borderfree.com.</div>
                     </div>
                 </div>
-                <div className='w-[100%] xl:w-[49%] flex flex-col gap-4 items-start'>
+                <div className='w-[100%] mxl:w-[49%] flex flex-col gap-4 items-start'>
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>delivery address</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='flex gap-2 items-center pl-[10px] pt-[6px]'>
@@ -156,8 +156,8 @@ function Checkout() {
                     <div className='cursor-pointer'>5 to 6 business days</div>
                 </div>
             </div>
-            <div className='flex flex-col xl:flex-row gap-10 xl:gap-0 items-start justify-between'>
-                <div className='w-[100%] xl:w-[49%] flex xl:hidden flex-col gap-4 items-start'>
+            <div className='flex flex-col mxl:flex-row gap-10 mxl:gap-0 items-start justify-between'>
+                <div className='w-[100%] mxl:w-[49%] flex mxl:hidden flex-col gap-4 items-start'>
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>billing summary</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full flex justify-between px-[10px] items-center'>
@@ -174,7 +174,7 @@ function Checkout() {
                     </div>
                     <p className='text-[13px] px-[10px]'>Local taxes, duties or customs clearance fees may apply</p>
                 </div>
-                <div className='w-[100%] xl:w-[49%] flex flex-col gap-4 pr-[10px] items-start'>
+                <div className='w-[100%] mxl:w-[49%] flex flex-col gap-4 pr-[10px] items-start'>
                     <div className='w-[100%] flex justify-between items-center'>
                         <div className='text-[16px] pl-[10px] font-bold capitalize'>payment</div>
                         <div className='text-[10px] font-bold uppercase hidden md:block'>Secure Encrypted Transaction</div>
@@ -208,7 +208,7 @@ function Checkout() {
                         <button className='w-full md:w-[60%] border border-black bg-black py-[15px] text-white uppercase mt-[20px] mx-[10px]'>pay and place order</button>
                     </Link>
                 </div>
-                <div className='w-[49%] flex-col hidden xl:flex gap-4 items-start'>
+                <div className='w-[49%] flex-col hidden mxl:flex gap-4 items-start'>
                     <p className='text-[16px] pl-[10px] font-bold capitalize'>billing summary</p>
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full flex justify-between px-[10px] items-center'>

@@ -68,11 +68,11 @@ export default function Details() {
 
     return (
         <>
-            <div className="relative">
+            <div className="relative overflow-hidden">
                 {
                     sebet ? '' : <Loader />
                 }
-                
+
                 {canvas === '0' && (
                     <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={() => showCanvas('-100')}></div>
                 )}
@@ -111,7 +111,7 @@ export default function Details() {
                                             <p className='text-red-600 capitalize'>
                                                 {item.discount}% off applied
                                             </p>
-                                            <button onClick={() => removeProduct(item.id,item.size,item.color)} className='capitalize'><u>remove</u></button>
+                                            <button onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize'><u>remove</u></button>
                                         </div>
                                     </div>
                                 ))
@@ -260,7 +260,7 @@ export default function Details() {
                                     setWishButton2(true)
                                     addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
                                 }}
-                                className={`${wishButton1 ? "md:block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Add to wishlist</button>
+                                className={`${wishButton1 ? "block" : "hidden"} border-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]`}><IoMdHeartEmpty /></button>
                             <button
                                 onClick={() => {
                                     removeWish(probyid.id)
@@ -268,12 +268,6 @@ export default function Details() {
                                     setWishButton2(false)
                                 }}
                                 className={`${wishButton2 ? "block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Remove from wishlist</button>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
-                                }}
-                                className='border-2 flex md:hidden w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]'><IoMdHeartEmpty /></button>
                         </div>
                     </div>
                 </div>
