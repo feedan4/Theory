@@ -11,7 +11,7 @@ function Header() {
   const { data } = useContext(DATA)
   const { category } = useContext(DATA)
   const { showVideo } = useContext(DATA)
-  const { totalCount } = useContext(BASKET)
+  const { sebet } = useContext(BASKET)
   const [navbar, setNavbar] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [fixed, setFixed] = useState()
@@ -34,19 +34,16 @@ function Header() {
     }
   }
 
-  const filteredData = searchTerm
-    ? data?.data?.data?.filter(item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    : []
-
+  const filteredData = searchTerm ? data?.data?.data?.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  ) : []
 
   return (
     <>
+      {
+        category ? '' : <Loader />
+      }
       <div className='relative overflow-hidden'>
-        {
-          category ? '' : <Loader />
-        }
         {canvas === '0' && (
           <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showCanvas('-100')}></div>
         )}
@@ -64,8 +61,8 @@ function Header() {
             filteredData.length > 0 ? (
               filteredData.map((item, i) => (
                 <Link to={`/details/${item.id}`}>
-                  <div key={i} className="flex bg-transparent gap-3 items-start">
-                    <div className="w-[30px] sm:w-[60px] h-[30px] sm:h-[60px]">
+                  <div onClick={() => showSearch('-100')} key={i} className="flex bg-transparent gap-3 items-start">
+                    <div className="w-[30px] sm:w-[50px] h-[30px] sm:h-[60px]">
                       <img src={item.images[0]} className="w-[100%] h-[100%]" alt={item.name} />
                     </div>
                     <div className="text-[10px] xs:text-[14px] flex flex-col items-start gap-1">
@@ -77,7 +74,7 @@ function Header() {
                 </Link>
               ))
             ) : (
-              <p className="text-gray-500">Heç bir nəticə tapılmadı.</p>
+              <p className="text-gray-500">No results found.</p>
             )
           }
         </div>
@@ -240,7 +237,7 @@ function Header() {
                   <Link to="/basket">
                     <BsBasket3Fill className=" hover:text-black text-[13px]" />
                   </Link>
-                  <div className="absolute text-[13px] top-[-10px] right-[-10px] ">{totalCount}</div>
+                  <div className="absolute text-[13px] top-[-10px] right-[-10px] ">{sebet.length}</div>
                 </div>
               </div>
             </div>

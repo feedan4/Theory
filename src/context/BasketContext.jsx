@@ -18,6 +18,7 @@ function BasketContext({ children }) {
     })
 
     const totalAllAmount = sebet.reduce((total, item) => total + item.count * ((item.price * (100 - item.discount)) / 100), 0)
+    const [countOption, setcountOption] = useState("")
 
     useEffect(() => {
         localStorage.setItem("sebet", JSON.stringify(sebet))
@@ -43,16 +44,39 @@ function BasketContext({ children }) {
         setTotalCount(newCount)
     }
 
-    function removeProduct(id,size,color) {
-        const newSebet = sebet.filter(item => !(item.id === id && item.size === size && item.color === color ))
+    function newOptionCount(id, size, color, countOption) {
+        setSebet(sebet.map(item => {
+            if (item.id === id && item.size === size && item.color === color) {
+                const discountedPrice = (item.price * (100 - item.discount)) / 100
+                return {
+                    ...item,
+                    count: countOption,
+                    totalPrice: discountedPrice * countOption
+                }
+            }
+            return item
+        }))
+
+        const newTotalCount = sebet.reduce((total, item) =>
+            total + (item.id === id && item.size === size && item.color === color ? countOption : item.count),
+            0)
+        setTotalCount(newTotalCount)
+
+    }
+
+    function removeProduct(id, size, color) {
+        const newSebet = sebet.filter(item => !(item.id === id && item.size === size && item.color === color))
         setSebet(newSebet)
+        setTotalCount(newSebet.length)
         localStorage.setItem('sebet', JSON.stringify(newSebet))
     }
 
     return (
         <BASKET.Provider
             value={{
-                sebet, setSebet, addToBasket, removeProduct, totalAllAmount, totalCount,
+                sebet, setSebet, addToBasket, removeProduct,
+                totalAllAmount, totalCount,
+                countOption, setcountOption, newOptionCount
             }}
         >
             {children}

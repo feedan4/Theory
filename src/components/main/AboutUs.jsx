@@ -21,7 +21,7 @@ function AboutUs() {
       <div className='mt-[60px] flex flex-col gap-5 items-center mx-auto'>
         <div id='origin' className='flex flex-col lg:flex-row w-[90%] lg:w-[65%] gap-10 items-center text-[#212529]'>
           <img className='w-[90%] lg:w-[50%]' src='https://cdn.media.amplience.net/i/theory/0329-aboutusrectangle11desktop' />
-          <div className='flex flex-col w-[90%] items-center text-center lg:items-start'>
+          <div className='flex flex-col w-[90%] items-center text-center lg:text-start lg:items-start'>
             <p className='text-[50px]'>01</p>
             <p className='text-[32px]'>Origin</p>
             <p className='text-[14px]'>Twenty-five years ago, a pair of pants changed the way American women dress. Recognizing the need for clothes that felt great and fit perfectly, we developed an innovative stretch fabric that would dramatically improve a pant’s performance. These pants had the power to make women feel confident, smart, and stylish. Never before had American sportswear been so easy to wear to work and everywhere else.</p>

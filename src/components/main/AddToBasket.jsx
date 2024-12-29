@@ -6,53 +6,66 @@ function AddToBasket() {
     const { sebet } = useContext(BASKET)
     const { removeProduct } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
+    const { countOption, setcountOption } = useContext(BASKET)
+    const { newOptionCount } = useContext(BASKET)
 
     return (
         <>
-            <div className='w-[90%] md:w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
+            <div className='w-[90%] lg:w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
                 <h3 className='text-[20px] md:text-[32px] text-center md:text-start font-bold capitalize'>shopping bag</h3>
-                <div className='w-[100%] flex flex-col gap-3 md:flex-row justify-between my-[30px] items-start'>
-                    <div className='md:w-[58%] w-[100%] flex flex-col gap-3'>
+                <div className='w-[100%] flex flex-col gap-3 lg:flex-row justify-between my-[30px] items-start'>
+                    <div className='lg:w-[58%] w-[100%] flex flex-col gap-3'>
                         <hr className='border-none bg-black h-[1px]' />
                         <p className='text-[20px] font-bold'>Ship to Me</p>
                         <div className='flex flex-col gap-4'>
                             <div className={`w-full ${sebet.length === 0 ? 'block' : 'hidden'} my-[50px] text-center`}>
                                 Your shopping bag is empty
                             </div>
-                            {
-                                sebet && sebet.map((item, i) => (
-                                    <div key={i} className="flex bg-transparent gap-3 items-start">
-                                        <div className='w-[120px] sm:w-[160px] h-[160px] sm:h-[200px]'>
-                                            <img src={item.img[0]} className='w-[100%] h-[100%]' />
-                                        </div>
-                                        <div className='text-[10px] xs:text-[14px] h-[200px] flex flex-col items-start gap-1'>
-                                            <p className="#212529 text-start overflow-hidden font-semibold">
-                                                {item.name}
-                                            </p>
-                                            <p className='#212529 text-start'><b>Color: {item.color}</b></p>
-                                            <p className='#212529 text-start'><b>Size: {item.size}</b></p>
-                                            <div className='flex items-center gap-2'>
-                                                <del className='text-black'>
-                                                    {(item.price).toFixed(2)} $
-                                                </del>
-                                                <p className='text-black'>
-                                                    {(item.totalPrice).toFixed(2)} $
-                                                </p>
+                            <div className='flex flex-col text-center gap-3'>
+                                <div className={`${sebet.length === 0 ? 'hidden' : 'md:flex'} items-center hidden`}>
+                                    <div className='w-[15%] capitalize font-bold text-nowrap text-[16px]'>order summary</div>
+                                    <div className='w-[40%]'></div>
+                                    <div className='w-[15%] capitalize font-bold text-[16px]'>quantity</div>
+                                    <div className='w-[15%] capitalize font-bold text-[16px]'>price</div>
+                                    <div className='w-[15%] capitalize font-bold text-[16px]'>total</div>
+                                </div>
+                                <hr className={`w-full ${sebet.length === 0 ? 'hidden' : 'flex'} h-[1px] border-none bg-[#B9B9B9]`} />
+                                {
+                                    sebet && sebet.map((item, i) => (
+                                        <div className='flex px-[10px] gap-4 items-start md:items-center'>
+                                            <img className='max-w-[80px] max-h-[110px]' src={`${item.img[0]}`} />
+                                            <div className='w-[80%] md:w-[40%] text-start'>
+                                                <p className='text-[12px] lg:text-[16px]'>{item.name}</p>
+                                                <p className='text-[12px] text-nowrap lg:text-[13px]'>Size: {item.size}</p>
+                                                <p className='text-[12px] text-nowrap lg:text-[13px]'>Color: {item.color}</p>
+                                                <p onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize font-bold cursor-pointer underline'>remove</p>
                                             </div>
-                                            <p className='text-red-600 capitalize'>
-                                                {item.discount}% off applied
-                                            </p>
-                                            <div className='flex gap-3 justify-end font-bold  items-center'>
-                                                {/* <button className='capitalize border-none'><u>edit</u></button> */}
-                                                <button onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize border-none'><u>remove</u></button>
-                                            </div>
+                                            <select
+                                                value={item.count}
+                                                onChange={(e) => {
+                                                    const newCount = parseInt(e.target.value, 10)
+                                                    setcountOption(newCount)
+                                                    newOptionCount(item.id, item.size, item.color, newCount)
+                                                }}
+                                                className='border border-black w-[8%] py-[2px] px-[5px] capitalize font-bold text-[13px]'
+                                            >
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                            <div className='w-[15%] capitalize font-bold hidden md:block text-[13px]'>{item.price} $</div>
+                                            <div className='w-[15%] text-nowrap capitalize font-bold text-[13px]'>{item.totalPrice} $</div>
                                         </div>
-                                    </div>
-                                ))
-                            }
+                                    ))
+                                }
+                                <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
+                                <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount} $</div>
+                            </div>
                         </div>
                     </div>
-                    <div className='w-[100%] md:w-[40%] flex flex-col gap-3'>
+                    <div className='w-[100%] lg:w-[40%] flex flex-col gap-3'>
                         <hr className='border-none bg-black h-[1px]' />
                         <p className='text-[20px] capitalize font-bold'>order summary</p>
                         <div className='flex items-center justify-between'>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { DATA } from '../../context/DataContext';
 import { getProductById } from '../../services/api';
+import toast, { Toaster } from 'react-hot-toast';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -35,8 +36,11 @@ export default function Details() {
     const [canvas, setCanvas] = useState("-100")
     const [productColor, setProductColor] = useState('')
     const [sizeButton, setSizeButton] = useState('')
-    const [wishButton1, setWishButton1] = useState(true)
-    const [wishButton2, setWishButton2] = useState(false)
+
+    const notifyColor = () => toast.error('Please choose color');
+    const notifySize = () => toast.error('Please choose size');
+
+    const checkId = probyid && wish?.find((item) => item.id === probyid.id)
 
     console.log(productColor)
 
@@ -69,15 +73,15 @@ export default function Details() {
     return (
         <>
             <div className="relative overflow-hidden">
-                {
-                    sebet ? '' : <Loader />
-                }
-
+                <Toaster position="top-right" reverseOrder={false}/>
                 {canvas === '0' && (
                     <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={() => showCanvas('-100')}></div>
                 )}
+                {
+                    !probyid ? <Loader /> : ''
+                }
                 <div className='m-[20px] flex flex-col md:flex-row items-center md:items-start justify-between'>
-                    <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[30%] z-50 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white flex flex-col transition-all overflow-scroll duration-700 h-[100vh] noscroll p-[20px]`}>
+                    <div className={`w-[100%] md:w-[60%] lg:w-[40%] xl:w-[30%] z-50 ${fixed ? 'fixed' : 'absolute'} ${canvas === '0' ? 'right-[0px]' : 'right-[-100%]'} bg-white top-0 flex flex-col transition-all overflow-scroll duration-700 h-[100vh] noscroll p-[20px]`}>
                         <div className='flex justify-between items-center'>
                             <p></p>
                             <p className='capitalize text-[24px] my-[20px]'>shopping bag</p>
@@ -85,8 +89,11 @@ export default function Details() {
                         </div>
                         <div className='flex flex-col gap-4'>
                             <b className='text-[16px] capitalize'>your items</b>
-                            {
-                                sebet && sebet.map((item, i) => (
+                            {sebet.length === 0 ?
+                                <div className='h-[200px] flex justify-center items-center'>
+                                    <p className=''>Your shopping bag is empty</p>
+                                </div>
+                                : sebet && sebet.map((item, i) => (
                                     <div key={i} className="flex bg-transparent gap-3 items-start">
                                         <div className='w-[170px] h-[200px]'>
                                             <img src={item.img[0]} className='w-[100%] h-[100%]' />
@@ -245,29 +252,48 @@ export default function Details() {
 
                             </div>
                         )}
-                        <div className='flex w-[100%] gap-2 items-center'>
+                        <div className={`flex w-[100%] gap-2 items-center`}>
                             <button
                                 onClick={(e) => {
+                                    if (!productColor) {
+                                        notifyColor()
+                                        return
+                                    }
+                                    if (!sizeButton) {
+                                        notifySize()
+                                        return
+                                    }
                                     e.preventDefault()
                                     showCanvas('0')
                                     addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton, productColor, probyid.count, probyid.totalPrice)
                                 }}
                                 className="border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]">Add to bag</button>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setWishButton1(false)
-                                    setWishButton2(true)
-                                    addToWishlist(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount)
-                                }}
-                                className={`${wishButton1 ? "block" : "hidden"} border-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center  uppercase py-[15px]`}><IoMdHeartEmpty /></button>
-                            <button
-                                onClick={() => {
-                                    removeWish(probyid.id)
-                                    setWishButton1(true)
-                                    setWishButton2(false)
-                                }}
-                                className={`${wishButton2 ? "block" : "hidden"} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent  uppercase py-[15px]`}>Remove from wishlist</button>
+                            {!checkId ? (
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        addToWishlist(
+                                            probyid.id,
+                                            probyid.images,
+                                            probyid.name,
+                                            probyid.price,
+                                            probyid.discount
+                                        );
+                                    }}
+                                    className="border-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center uppercase py-[15px]"
+                                >
+                                    <IoMdHeartEmpty />
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        removeWish(probyid.id);
+                                    }}
+                                    className="border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent uppercase py-[15px]"
+                                >
+                                    Remove from wishlist
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

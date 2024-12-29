@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { BASKET } from '../../context/BasketContext'
 import { Link } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Checkout() {
     const { sebet } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
     const [dropdown, setDropdown] = useState(false)
     const [defaultCheck, setDefaultCheck] = useState(true)
-
+    // const notify = () => toast.error('Please fill in all')
+    const success = () => toast.success('Your order has been accepted!')
 
     return (
         <div className='mx-auto w-[90%] md:w-[70%] my-[50px] flex flex-col gap-10'>
+            <Toaster position="top-right" reverseOrder={false} />
             <div className='flex flex-col text-center gap-3'>
                 <div className='flex items-center'>
                     <div className='w-[15%] capitalize font-bold text-nowrap text-[16px]'>order summary</div>
@@ -44,39 +47,39 @@ function Checkout() {
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>first name *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>last name *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>email *</div>
-                        <input type='email' className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input type='email' className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>country *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 1 *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 2 *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>City / Suburb *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>Zip / Postcode *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>Mobile Phone *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full pt-[30px] px-[10px] gap-2 flex items-center'>
                         <input type='checkbox' />
@@ -108,38 +111,38 @@ function Checkout() {
                         </button>
                         <div className='text-[13px]'>Add an alternative delivery address</div>
                     </div>
-                    <div className={`${dropdown ? 'flex' : ''} ${defaultCheck ? "hidden" : ''} flex w-full flex-col gap-4 pl-[10px] pt-[30px] items-start`}>
-                        <div className='w-full flex items-center justify-between'>
+                    <div className={`${dropdown ? 'flex' : ''} ${defaultCheck ? "hidden" : ''} flex w-full flex-col gap-4 pl-0 md:pl-[10px] pt-[30px] items-start`}>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>first name *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>last name *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>country *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 1 *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 2 *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>City / Suburb *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>Zip / Postcode *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
-                        <div className='w-full flex items-center justify-between'>
+                        <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>Mobile Phone *</div>
-                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                            <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                         </div>
                     </div>
                 </div>
@@ -188,7 +191,7 @@ function Checkout() {
                     </div>
                     <div className='w-full flex flex-col md:flex-row items-start md:items-center px-[10px] gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>card number *</div>
-                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' />
+                        <input className='text-[14px] w-full md:w-[69%] border border-black p-[5px]' required />
                     </div>
                     <div className='w-full flex flex-col md:flex-row items-start md:items-center px-[10px] gap-2 md:gap-0 justify-between'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>expire date *</div>
@@ -199,13 +202,16 @@ function Checkout() {
                     </div>
                     <div className='w-full flex flex-col md:flex-row items-start md:items-center px-[10px] gap-2 md:gap-0'>
                         <div className='text-[13px] capitalize w-[30%] text-nowrap'>security code *</div>
-                        <input className='text-[14px] w-[50%] md:w-[20%] ml-0 md:ml-[4px] border border-black p-[5px]' />
+                        <input className='text-[14px] w-[50%] md:w-[20%] ml-0 md:ml-[4px] border border-black p-[5px]' required />
                     </div>
                     <div className='w-[100%] text-[10px] px-[10px] pt-[40px] font-bold'>
                         By clicking on ‘Pay and Place Order’, you agree (i) to make your purchase from Global-e as merchant of record for this transaction, subject to Global-e’s Terms of Sale; (ii) that your information will be handled by Global-e in accordance with the Global-e Privacy Policy; and (iii) that Global-e will share your information (excluding the payment details) with Theory.
                     </div>
-                    <Link className='w-full' to="/order">
-                        <button className='w-full md:w-[60%] border border-black bg-black py-[15px] text-white uppercase mt-[20px] mx-[10px]'>pay and place order</button>
+                    <Link
+                        onClick={success}
+                        className='w-full' to="/order">
+                        <button
+                            className='w-full md:w-[60%] border border-black bg-black py-[15px] text-white uppercase mt-[20px] mx-[10px]'>pay and place order</button>
                     </Link>
                 </div>
                 <div className='w-[49%] flex-col hidden mxl:flex gap-4 items-start'>

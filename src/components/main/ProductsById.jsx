@@ -5,6 +5,7 @@ import { getCategoryById, getProductById, getProductsByCategory } from '../../se
 import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 import Loader from './Loader'
+import LittleLoad from './LittleLoad'
 
 
 function ProductsById() {
@@ -81,9 +82,6 @@ function ProductsById() {
 
     return (
         <div className='relative'>
-            {
-                data || probycatid ? '' : <Loader />
-            }
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's {!url ? "view all" : ''}</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
@@ -174,65 +172,86 @@ function ProductsById() {
                 </div>
             </div>
             <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
-                {url
-                    ? (
-                        probycatid?.data?.data?.map((item, i) => (
+                {
+                    !probycatid && !data ? (
+                        <LittleLoad />
+                    ) : probycatid && url ? (
+                        probycatid.data?.data?.map((item, i) => (
                             <Link key={i} to={`/details/${item.id}`}>
-                                <div className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
+                                <div
+                                    className={`procard flex flex-col h-full ${view === "285" ? "w-[285px]" : "w-[730px]"
+                                        } bg-white items-start justify-start`}
+                                >
                                     <img
                                         className="w-full object-cover mb-2"
                                         src={item.images[0]}
                                         alt={item.name}
                                     />
-                                    <div className='flex flex-col items-start'>
+                                    <div className="flex flex-col items-start">
                                         <div>
                                             <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
                                                 {item.name}
                                             </p>
                                         </div>
-                                        <div className='flex items-center'>
-                                            <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {(item.price).toFixed(2)} $
+                                        <div className="flex items-center">
+                                            <del className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                                {item.price.toFixed(2)} $
                                             </del>
-                                            <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                            <p className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                                {(
+                                                    (item.price * (100 - item.discount)) /
+                                                    100
+                                                ).toFixed(2)}{" "}
+                                                $
                                             </p>
                                         </div>
-                                        <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>{item.discount}% off applied</p>
+                                        <p className="text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize">
+                                            {item.discount}% off applied
+                                        </p>
                                     </div>
                                 </div>
                             </Link>
                         ))
-                    )
-                    : (
-                        data && data.data?.data?.map((item, i) => (
+                    ) : data ? (
+                        // probycatid yoxdursa və data varsa, data map edilir
+                        data.data?.data?.map((item, i) => (
                             <Link key={i} to={`/details/${item.id}`}>
-                                <div className={`procard flex flex-col h-full ${view === '285' ? 'w-[285px]' : 'w-[730px]'} bg-white items-start justify-start`}>
+                                <div
+                                    className={`procard flex flex-col h-full ${view === "285" ? "w-[285px]" : "w-[730px]"
+                                        } bg-white items-start justify-start`}
+                                >
                                     <img
                                         className="w-full object-cover mb-2"
                                         src={item.images[0]}
                                         alt={item.name}
                                     />
-                                    <div className='flex flex-col items-start'>
+                                    <div className="flex flex-col items-start">
                                         <div>
                                             <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
                                                 {item.name}
                                             </p>
                                         </div>
-                                        <div className='flex items-center'>
-                                            <del className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {(item.price).toFixed(2)} $
+                                        <div className="flex items-center">
+                                            <del className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                                {item.price.toFixed(2)} $
                                             </del>
-                                            <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                                {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                            <p className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                                {(
+                                                    (item.price * (100 - item.discount)) /
+                                                    100
+                                                ).toFixed(2)}{" "}
+                                                $
                                             </p>
                                         </div>
-                                        <p className='text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize'>{item.discount}% off applied</p>
+                                        <p className="text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize">
+                                            {item.discount}% off applied
+                                        </p>
                                     </div>
                                 </div>
                             </Link>
                         ))
-                    )}
+                    ) : null
+                }
 
             </div>
             {/* <div className={`${url ? 'hidden' : 'flex'} items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>

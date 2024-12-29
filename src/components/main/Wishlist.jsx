@@ -6,9 +6,6 @@ function Wishlist() {
     const { wish } = useContext(DATA)
     const { removeWish } = useContext(DATA)
 
-    //    console.log(wish);
-
-
     return (
         <div className='flex flex-col gap-5 bmd:flex-row w-[90%] bmd:w-[80%] mx-auto my-[30px] items-start'>
             <ul type="none" className='w-[100%] bmd:w-[300px] capitalize text-nowrap text-[13px] gap-4 flex flex-row bmd:flex-col overflow-scroll noscroll items-start'>
