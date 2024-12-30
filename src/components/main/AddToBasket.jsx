@@ -61,7 +61,7 @@ function AddToBasket() {
                                     ))
                                 }
                                 <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
-                                <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount} $</div>
+                                <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount.toFixed(2)} $</div>
                             </div>
                         </div>
                     </div>

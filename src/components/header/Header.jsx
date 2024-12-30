@@ -173,7 +173,7 @@ function Header() {
                 <div>
                   <div className='flex lg:hidden gap-3 items-center'>
                     <BsList onClick={() => setNavbar(!navbar)} className='text-[13px] font-bold hamburger' />
-                    <SlMagnifier className=" text-[11px]" />
+                    <SlMagnifier onClick={() => showSearch('0')} className=" text-[11px]" />
                   </div>
                 </div>
                 <div className="gap-4 pl-[20px] items-center hidden lg:flex w-[100%]">

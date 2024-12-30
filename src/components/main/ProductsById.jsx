@@ -25,13 +25,27 @@ function ProductsById() {
     const [dropdownSize, setDropdownSize] = useState(true)
     const [dropdownColor, setDropdownColor] = useState(true)
     const [dropdownPrice, setDropdownPrice] = useState(true)
-    const [page, setPage] = useState(1)
-    const navigate = useNavigate()
+    // const [page, setPage] = useState(1)
+    // const navigate = useNavigate()
     const location = useLocation()
     const url = location.pathname.includes(`/productsbyid/all/${categid}`)
 
-    console.log(data);
+    console.log(data)
 
+    const [oddColors, setOddColors] = useState([])
+    const [oddSize, setOddSize] = useState([])
+
+    useEffect(() => {
+        if (data?.data?.data) {
+            const allColors = data.data.data.flatMap(item => item.Colors)
+            const oddcolor = [...new Set(allColors.flat())]
+            setOddColors(oddcolor)
+
+            const allSize = data.data.data.flatMap(item => item.Size)
+            const oddsize = [...new Set(allSize.flat())]
+            setOddSize(oddsize)
+        }
+    }, [data])
 
     // useEffect(() => {
     //     if (proid) {
@@ -52,7 +66,7 @@ function ProductsById() {
     //     function pageUrl(page) {
     //         setPage(page)
     //     }
-    //     navigate(`/productsbyid/all?page=${page}&limit=10`)
+    //     navigate(`/productsbyid/all?page=${page}`)
 
     // }, [page])
 
@@ -85,22 +99,6 @@ function ProductsById() {
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's {!url ? "view all" : ''}</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
-                {/* <div className='flex gap-4 overflow-x-scroll md:overflow-visible noscroll '>
-                    <button
-                        className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
-                        view all
-                    </button>
-                    {
-                        probycatid?.data?.data?.category?.map((item,i) => {
-                            return (
-                                <button key={i}
-                                    className='border-2 border-[#eee] text-black bg-transparent text-ellipsis text-nowrap uppercase mt-[20px] px-[10px] py-[5px]'>
-                                    {item.name}
-                                </button>
-                            )
-                        })
-                    }
-                </div> */}
             </div>
             <div className='flex flex-col mx-[20px] justify-between'>
                 <div className={`z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
@@ -113,10 +111,13 @@ function ProductsById() {
                             <p className={`${dropdownSize ? 'block' : 'hidden'} text-[20px]`}>+</p>
                             <p className={`${dropdownSize ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
-                        <div className={`${dropdownSize ? 'hidden' : 'block'}`}>
-                            <div className='flex items-center gap-2'>
-
-                            </div>
+                        <div className={`${dropdownSize ? 'hidden' : 'block'} flex flex-col gap-1 py-[10px]`}>
+                            {oddSize.map((size, i) => (
+                                <div key={i} className='flex items-center gap-2'>
+                                    <div className='w-[20px] h-[20px] border border-black'></div>
+                                    <div>{size}</div>
+                                </div>
+                            ))}
                         </div>
                         <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
 
@@ -125,14 +126,13 @@ function ProductsById() {
                             <p className={`${dropdownColor ? 'block' : 'hidden'} text-[20px]`}>+</p>
                             <p className={`${dropdownColor ? 'hidden' : 'block'} text-[20px]`}>-</p>
                         </div>
-                        <div className={`${dropdownColor ? 'hidden' : 'block'}`}>
-                            {/* {
-                                data?.map((item, index) => (
-                                    item.Colors?.map((color, i) => (
-                                        <p key={i}>{color}</p>
-                                    ))
-                                ))
-                            } */}
+                        <div className={`${dropdownColor ? 'hidden' : 'block'} flex flex-col gap-1 py-[10px]`}>
+                            {oddColors.map((color, i) => (
+                                <div key={i} className='flex items-center gap-2'>
+                                    <div className='w-[20px] h-[20px] border border-black'></div>
+                                    <div>{color}</div>
+                                </div>
+                            ))}
                         </div>
                         <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
                         <div onClick={() => setDropdownPrice(!dropdownPrice)} className="flex my-[10px] justify-between items-center cursor-pointer">
@@ -213,7 +213,6 @@ function ProductsById() {
                             </Link>
                         ))
                     ) : data ? (
-                        // probycatid yoxdursa və data varsa, data map edilir
                         data.data?.data?.map((item, i) => (
                             <Link key={i} to={`/details/${item.id}`}>
                                 <div

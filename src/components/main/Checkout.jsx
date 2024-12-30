@@ -39,7 +39,7 @@ function Checkout() {
                     ))
                 }
                 <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
-                <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount} $</div>
+                <div className='px-[10px] font-bold text-end'><span className='pr-[30px]'>Items total:</span> {totalAllAmount.toFixed(2)} $</div>
             </div>
             <div className='flex flex-col mxl:flex-row gap-10 mxl:gap-0 items-start justify-between'>
                 <div className='w-[100%] mxl:w-[49%] flex flex-col gap-4 pr-[10px] items-start'>
@@ -165,7 +165,7 @@ function Checkout() {
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full flex justify-between px-[10px] items-center'>
                         <p className='capitalize text-[14px]'>items total</p>
-                        <p className='capitalize text-[14px] text-nowrap'>{totalAllAmount} $</p>
+                        <p className='capitalize text-[14px] text-nowrap'>{totalAllAmount.toFixed(2)} $</p>
                     </div>
                     <div className='w-full flex justify-between px-[10px] items-center'>
                         <p className='capitalize text-[14px]'>shipping</p>
@@ -173,7 +173,7 @@ function Checkout() {
                     </div>
                     <div className='w-full flex justify-between pt-[10px] px-[10px] items-center'>
                         <p className='capitalize font-bold text-[16px]'>total for your order</p>
-                        <p className='capitalize font-bold text-[14px] text-nowrap'>{totalAllAmount} $</p>
+                        <p className='capitalize font-bold text-[14px] text-nowrap'>{totalAllAmount.toFixed(2)} $</p>
                     </div>
                     <p className='text-[13px] px-[10px]'>Local taxes, duties or customs clearance fees may apply</p>
                 </div>
@@ -219,7 +219,7 @@ function Checkout() {
                     <hr className='w-full h-[1px] border-none bg-[#B9B9B9]' />
                     <div className='w-full flex justify-between px-[10px] items-center'>
                         <p className='capitalize text-[14px]'>items total</p>
-                        <p className='capitalize text-[14px]'>{totalAllAmount} $</p>
+                        <p className='capitalize text-[14px]'>{totalAllAmount.toFixed(2)} $</p>
                     </div>
                     <div className='w-full flex justify-between px-[10px] items-center'>
                         <p className='capitalize text-[14px]'>shipping</p>
@@ -227,7 +227,7 @@ function Checkout() {
                     </div>
                     <div className='w-full flex justify-between pt-[10px] px-[10px] items-center'>
                         <p className='capitalize font-bold text-[16px]'>total for your order</p>
-                        <p className='capitalize font-bold text-[14px]'>{totalAllAmount} $</p>
+                        <p className='capitalize font-bold text-[14px]'>{totalAllAmount.toFixed(2)} $</p>
                     </div>
                     <p className='text-[13px] px-[10px]'>Local taxes, duties or customs clearance fees may apply</p>
                 </div>
