@@ -16,7 +16,7 @@ import { DATA } from '../../context/DataContext';
 export default function ShopNow() {
     const { category, setCategory } = useContext(DATA)
     // const { catname, catid } = useParams()
-    console.log(category);
+    // console.log(category)
 
     const categImagesWomen = [
         "https://static.zara.net/assets/public/524f/06fc/61324c80a9e0/74a79c470554/03067210800-p/03067210800-p.jpg?ts=1733851345445&w=374",
@@ -111,9 +111,9 @@ export default function ShopNow() {
                             }
                         </Swiper>
                     </div>
-                    <Link to={`/productsbyid`}>
+                    {/* <Link to={`/productsbyid`}>
                         <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
-                    </Link>
+                    </Link> */}
                 </div>
 
             </div >

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DATA } from '../../context/DataContext'
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { getCategoryById, getProductById, getProductsByCategory } from '../../services/api'
+import { getProductById, getProductsByCategory } from '../../services/api'
 import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 import Loader from './Loader'
@@ -14,10 +14,11 @@ function ProductsById() {
     // // const [categid, setCategId] = useState(null)
     // const { proid } = useParams()
     // const { probyid, setProById } = useContext(DATA)
-    // const { category, setCategory } = useContext(DATA)
+    const { category, setCategory } = useContext(DATA)
     // const [categorybyid, setCategoryById] = useState(null)
     // const [dataData, setdataData] = useState(null)
     const { categid } = useParams()
+    // const [catid, setCatId] = useState(categid)
     const { probycatid, setProByCatId } = useContext(DATA)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
@@ -25,15 +26,16 @@ function ProductsById() {
     const [dropdownSize, setDropdownSize] = useState(true)
     const [dropdownColor, setDropdownColor] = useState(true)
     const [dropdownPrice, setDropdownPrice] = useState(true)
-    // const [page, setPage] = useState(1)
-    // const navigate = useNavigate()
+    const [buttonColor, setButtonColor] = useState(true)
+    const [page, setPage] = useState(1)
+    const navigate = useNavigate()
     // const location = useLocation()
     // const url = location.pathname.includes(`/productsbyid/all/${categid}`)
 
-    // console.log(data)
-
     const [oddColors, setOddColors] = useState([])
     const [oddSize, setOddSize] = useState([])
+    const [selectedSizes, setSelectedSizes] = useState([]);
+    const [selectedColors, setSelectedColors] = useState([]);
 
     useEffect(() => {
         if (data?.data?.data) {
@@ -46,6 +48,8 @@ function ProductsById() {
             setOddSize(oddsize)
         }
     }, [data])
+
+
 
     // useEffect(() => {
     //     if (proid) {
@@ -62,13 +66,13 @@ function ProductsById() {
     //     setCategId(findId.id)
     // }, [catname])
 
-    // useEffect(() => {
-    //     function pageUrl(page) {
-    //         setPage(page)
-    //     }
-    //     navigate(`/productsbyid/all?page=${page}`)
+    useEffect(() => {
+        function pageUrl(page) {
+            setCatId(page)
+        }
+        navigate(`/productsbyid/all/${categid}?page=${page}`)
 
-    // }, [page])
+    }, [page])
 
     useEffect(() => {
         if (categid) {
@@ -94,11 +98,80 @@ function ProductsById() {
         }
     }
 
+    // console.log(probycatid);
+
+    useEffect(() => {
+        if (categid) {
+            fetchFilteredProducts()
+        }
+    }, [categid, selectedSizes, selectedColors, page])
+    
+    const handleCheckboxChange = (e, filterType) => {
+        const { value, checked } = e.target
+    
+        if (filterType === "size") {
+            const newSizes = checked
+                ? [...selectedSizes, value]
+                : selectedSizes.filter((item) => item !== value);
+            setSelectedSizes(newSizes)
+    
+            navigate(`/productsbyid/all/${categid}&size=${newSizes.join(",")}}`)
+        } else if (filterType === "color") {
+            const newColors = checked
+                ? [...selectedColors, value]
+                : selectedColors.filter((item) => item !== value)
+            setSelectedColors(newColors)
+    
+            navigate(`/productsbyid/all/${categid}&color=${newColors.join(",")}`)
+        }
+    };
+    
+    const fetchFilteredProducts = async () => {
+        const sizeQuery = selectedSizes.join(",")
+        const colorQuery = selectedColors.join(",")
+        const res = await getProductsByCategory(categid, sizeQuery, colorQuery, page)
+        setProByCatId(res)
+    };
+    
+    const handlePageChange = (direction) => {
+        let newPage = page
+    
+        if (direction === 'prev') {
+            newPage = Math.max(page - 1, 1)
+        } else if (direction === 'next') {
+            newPage = Math.min(page + 1, probycatid?.data?.meta?.totalPages || 1)
+        }
+    
+        setPage(newPage)
+    
+        navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`)
+    };
+
+    // console.log(probycatid);
+
     return (
         <div className='relative'>
             <div className='flex flex-col gap-4 m-[25px]'>
                 <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
+            </div>
+            <div className='noscroll overflow-scroll md:overflow-visible mb-[25px] mx-[22px] flex items-center gap-2'>
+                {
+                    category && category.map((item, i) => (
+                        <button
+                            key={i}
+                            onClick={() => {
+                                navigate(`/productsbyid/all/${item.id}?page=${page}`)
+                                setButtonColor(item.id)
+                                getProductsByCategory(item.id)
+                                    .then(res => setProByCatId(res))
+                            }}
+                            className={`capitalize text-nowrap border border-black px-[10px] py-[5px] bg-transparent ${buttonColor === item.id ? 'border-2' : 'border'}`}
+                        >
+                            {item.name}
+                        </button>
+                    ))
+                }
             </div>
             <div className='flex flex-col mx-[20px] justify-between'>
                 <div className={`z-40 ${fixed ? 'fixed top-0' : 'absolute'} ${canvas === '0' ? 'left-[0px]' : 'left-[-280px]'} bg-white flex flex-col h-[100vh] p-[10px]`}>
@@ -113,10 +186,15 @@ function ProductsById() {
                         </div>
                         <div className={`${dropdownSize ? 'hidden' : 'block'} flex flex-col gap-1 py-[10px]`}>
                             {oddSize.map((size, i) => (
-                                <div key={i} className='flex items-center gap-2'>
-                                    <div className='w-[20px] h-[20px] border border-black'></div>
-                                    <div>{size}</div>
-                                </div>
+                                <label key={i} className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        value={size}
+                                        checked={selectedSizes.includes(size)}
+                                        onChange={(e) => handleCheckboxChange(e, "size")}
+                                    />
+                                    {size}
+                                </label>
                             ))}
                         </div>
                         <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
@@ -128,10 +206,15 @@ function ProductsById() {
                         </div>
                         <div className={`${dropdownColor ? 'hidden' : 'block'} flex flex-col gap-1 py-[10px]`}>
                             {oddColors.map((color, i) => (
-                                <div key={i} className='flex items-center gap-2'>
-                                    <div className='w-[20px] h-[20px] border border-black'></div>
-                                    <div>{color}</div>
-                                </div>
+                                <label key={i} className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        value={color}
+                                        checked={selectedColors.includes(color)}
+                                        onChange={(e) => handleCheckboxChange(e, "color")}
+                                    />
+                                    {color}
+                                </label>
                             ))}
                         </div>
                         <hr className="w-[260px] h-[1px] bg-[#D9D9D9]" />
@@ -216,16 +299,16 @@ function ProductsById() {
                 }
 
             </div>
-            {/* <div className={`${url ? 'hidden' : 'flex'} items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>
+            <div className={`flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>
                 <div
                     className='cursor-pointer'
-                    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                    onClick={() => handlePageChange('prev')}
                 >
                     <MdNavigateBefore />
                 </div>
                 <div className='flex items-center gap-3'>
                     {
-                        data && data.data?.meta && Array.from({ length: data.data.meta.totalPages }).map((_, i) => (
+                        probycatid && probycatid.data?.meta && Array.from({ length: probycatid.data.meta.totalPages }).map((_, i) => (
                             <button
                                 key={i}
                                 className={`px-2 py-1 rounded ${page === i + 1 ? 'border border-black' : 'bg-gray-200 text-black'}`}
@@ -238,11 +321,11 @@ function ProductsById() {
                 </div>
                 <div
                     className='cursor-pointer'
-                    onClick={() => setPage(prev => Math.min(prev + 1, data?.data?.meta?.totalPages || 1))}
+                    onClick={() => handlePageChange('next')}
                 >
                     <MdNavigateNext />
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 }

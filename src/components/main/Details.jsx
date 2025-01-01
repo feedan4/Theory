@@ -42,7 +42,7 @@ export default function Details() {
 
     const checkId = probyid && wish?.find((item) => item.id === probyid.id)
 
-    console.log(productColor)
+    // console.log(productColor)
 
     // console.log(probyid);
 

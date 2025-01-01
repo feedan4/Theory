@@ -1,7 +1,7 @@
 import axios from "axios";
 
 async function getAllProducts() {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?limit=60`)
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?limit=120`)
     return res
 }
 
@@ -11,7 +11,7 @@ async function getProductById(probyid) {
 }
 
 async function getProductsByCategory(categid) {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}`)
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}&limit=10`)
     return res
 }
 
@@ -20,10 +20,4 @@ async function getAllCategories() {
     return res.data
 }
 
-async function getCategoryById(catid) {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/categories/get/${catid}`)
-    return res.data
-}
-
-
-export {getAllProducts, getAllCategories, getCategoryById, getProductsByCategory, getProductById}
+export {getAllProducts, getAllCategories, getProductsByCategory, getProductById}

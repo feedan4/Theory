@@ -14,6 +14,9 @@ function DataContext({ children }) {
   const location = useLocation()
   const [showVideo, setShowVideo] = useState(true)
 
+  console.log(probycatid);
+  
+
   useEffect(() => {
     const savedWishlist = JSON.parse(localStorage.getItem('wishlist')) || []
     setWish(savedWishlist)
