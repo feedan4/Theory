@@ -14,7 +14,7 @@ function ProductsById() {
     // // const [categid, setCategId] = useState(null)
     // const { proid } = useParams()
     // const { probyid, setProById } = useContext(DATA)
-    const { category, setCategory } = useContext(DATA)
+    // const { category, setCategory } = useContext(DATA)
     // const [categorybyid, setCategoryById] = useState(null)
     // const [dataData, setdataData] = useState(null)
     const { categid } = useParams()
@@ -27,10 +27,10 @@ function ProductsById() {
     const [dropdownPrice, setDropdownPrice] = useState(true)
     // const [page, setPage] = useState(1)
     // const navigate = useNavigate()
-    const location = useLocation()
-    const url = location.pathname.includes(`/productsbyid/all/${categid}`)
+    // const location = useLocation()
+    // const url = location.pathname.includes(`/productsbyid/all/${categid}`)
 
-    console.log(data)
+    // console.log(data)
 
     const [oddColors, setOddColors] = useState([])
     const [oddSize, setOddSize] = useState([])
@@ -97,7 +97,7 @@ function ProductsById() {
     return (
         <div className='relative'>
             <div className='flex flex-col gap-4 m-[25px]'>
-                <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's {!url ? "view all" : ''}</h1>
+                <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's</h1>
                 <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
             </div>
             <div className='flex flex-col mx-[20px] justify-between'>
@@ -173,47 +173,10 @@ function ProductsById() {
             </div>
             <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
                 {
-                    !probycatid && !data ? (
+                    !probycatid ? (
                         <LittleLoad />
-                    ) : probycatid && url ? (
+                    ) : probycatid ? (
                         probycatid.data?.data?.map((item, i) => (
-                            <Link key={i} to={`/details/${item.id}`}>
-                                <div
-                                    className={`procard flex flex-col h-full ${view === "285" ? "w-[285px]" : "w-[730px]"
-                                        } bg-white items-start justify-start`}
-                                >
-                                    <img
-                                        className="w-full object-cover mb-2"
-                                        src={item.images[0]}
-                                        alt={item.name}
-                                    />
-                                    <div className="flex flex-col items-start">
-                                        <div>
-                                            <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
-                                                {item.name}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <del className="text-black text-[14px] pl-[10px] pb-[10px]">
-                                                {item.price.toFixed(2)} $
-                                            </del>
-                                            <p className="text-black text-[14px] pl-[10px] pb-[10px]">
-                                                {(
-                                                    (item.price * (100 - item.discount)) /
-                                                    100
-                                                ).toFixed(2)}{" "}
-                                                $
-                                            </p>
-                                        </div>
-                                        <p className="text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize">
-                                            {item.discount}% off applied
-                                        </p>
-                                    </div>
-                                </div>
-                            </Link>
-                        ))
-                    ) : data ? (
-                        data.data?.data?.map((item, i) => (
                             <Link key={i} to={`/details/${item.id}`}>
                                 <div
                                     className={`procard flex flex-col h-full ${view === "285" ? "w-[285px]" : "w-[730px]"

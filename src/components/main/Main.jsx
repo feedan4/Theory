@@ -14,9 +14,9 @@ function Main() {
           }}
         >
           <h1 className='capitalize text-white text-center text-[20px] mq662:text-[34px] font-bold trade-gothic'>the women's shop</h1>
-          <Link to={`/shopnow`}>
+          {/* <Link to={`/shopnow`}>
             <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
-          </Link>
+          </Link> */}
         </div>
         {/* <div
           className="bg-center bg-cover w-[50%] h-[240px] transition-all duration-1000 sm:h-[340px] mq700:h-[500px] md:h-[640px] z-30  flex flex-col gap-4 justify-center items-center"

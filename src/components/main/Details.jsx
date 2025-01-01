@@ -125,7 +125,7 @@ export default function Details() {
                             }
                             <div className=' flex items-center justify-between'>
                                 <p className='text-black fon-bold'>
-                                    Items: {totalCount}
+                                    Items: {sebet.length}
                                 </p>
                                 <p className='text-black'>
                                     Total: {totalAllAmount.toFixed(2)} $

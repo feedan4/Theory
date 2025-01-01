@@ -245,7 +245,9 @@ function Header() {
               <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
               <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
               <div className='flex gap-3 items-center flex-col sm:flex-row'>
-                <Link to={`/productsbyid/all`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>view all</button></Link>
+                <Link to={`/shopnow`}>
+                  <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
+                </Link>                
                 {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
               </div>
             </div>
