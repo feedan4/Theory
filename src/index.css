@@ -97,6 +97,13 @@
   display: none;
 }
 
+
+.orderSwiper .swiper-button-next,
+.orderSwiper .swiper-button-prev,
+.shopSwiper .swiper-button-next,
+.shopSwiper .swiper-button-prev,
+.productsSwiper .swiper-button-next,
+.productsSwiper .swiper-button-prev,
 .mySwiper2 .swiper-button-next,
 .mySwiper2 .swiper-button-prev {
     opacity: 0;
@@ -104,6 +111,12 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+.orderSwiper:hover .swiper-button-next,
+.orderSwiper:hover:hover .swiper-button-prev,
+.shopSwiper:hover .swiper-button-next,
+.shopSwiper:hover .swiper-button-prev,
+.productsSwiper:hover .swiper-button-next,
+.productsSwiper:hover .swiper-button-prev,
 .mySwiper2:hover .swiper-button-next,
 .mySwiper2:hover .swiper-button-prev {
     opacity: 1;

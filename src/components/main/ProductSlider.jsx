@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { DATA } from '../../context/DataContext';
 import { Link } from 'react-router-dom';
 
@@ -16,11 +16,16 @@ export default function ProductSlider() {
       <h1 className='text-black text-[20px] sm:text-[34px] font-bold px-[20px] py-[30px]'>Discover More</h1>
       <div className='p-[20px] w-full transition-all duration-1000'>
         <Swiper
+          loop={true} // Sliderın sonsuz dövr etməsi
+          autoplay={{
+            delay: 1000, // Slaydlar arasında 3 saniyə fasilə
+            disableOnInteraction: false, // İstifadəçi qarşılıqlı əlaqədən sonra autoplay davam edir
+          }}
           slidesPerView={1}
           spaceBetween={30}
           // centeredSlides={true}
           navigation={true}
-          modules={[Navigation]}
+          modules={[Autoplay, Navigation]}
           touchRatio={1}
           scrollbar={{ draggable: true }}
           direction="horizontal"
@@ -39,7 +44,7 @@ export default function ProductSlider() {
               slidesPerView: 6, // For larger screens
             },
           }}
-          className="mySwiper"
+          className="orderSwiper"
         >
 
           {data && data.data?.data?.map((item) => (

@@ -174,13 +174,13 @@ export default function Details() {
                             navigation={true}
                             thumbs={{ swiper: thumbsSwiper }}
                             modules={[FreeMode, Navigation, Thumbs]}
-                            className="mySwiper2 w-[100%] md:w-[85%] transition-all duration-1000 h-[400px] md:h-[400px] lg:h-[550px] xl:h-[700px]"
+                            className="mySwiper2 w-[100%] md:w-[85%] transition-all duration-1000 h-full"
                         >
                             {
                                 probyid && probyid.images.map((image, id) => (
                                     <SwiperSlide key={id}>
                                         <img
-                                            className="w-[100%] object-cover object-top"
+                                            className="w-[100%] object-cover"
                                             src={image}
                                             alt={probyid.name}
                                         />
@@ -192,7 +192,7 @@ export default function Details() {
                     <div className='flex flex-col items-start w-[100%] md:w-[48%] my-[10px]'>
                         {probyid && (
                             <div className="flex flex-col bg-transparent gap-3 items-start justify-start">
-                                <p className="#212529 text-start text-[24px] overflow-hidden font-semibold">
+                                <p className="#212529 text-start text-[17px] md:text-[24px] overflow-hidden font-semibold">
                                     {probyid.name}
                                 </p>
                                 <div className='flex items-center gap-2'>
@@ -267,7 +267,7 @@ export default function Details() {
                                     showCanvas('0')
                                     addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton, productColor, probyid.count, probyid.totalPrice)
                                 }}
-                                className="border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]">Add to bag</button>
+                                className={`${probyid ? 'block' : 'hidden'}  border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]`}>Add to bag</button>
                             {!checkId ? (
                                 <button
                                     onClick={(e) => {
@@ -280,7 +280,7 @@ export default function Details() {
                                             probyid.discount
                                         );
                                     }}
-                                    className="border-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center uppercase py-[15px]"
+                                    className={`${probyid ? 'block' : 'hidden'} order-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center uppercase py-[15px]`}
                                 >
                                     <IoMdHeartEmpty />
                                 </button>
@@ -289,7 +289,7 @@ export default function Details() {
                                     onClick={() => {
                                         removeWish(probyid.id);
                                     }}
-                                    className="border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent uppercase py-[15px]"
+                                    className={`${probyid ? 'block' : 'hidden'} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent uppercase py-[15px]`}
                                 >
                                     Remove from wishlist
                                 </button>

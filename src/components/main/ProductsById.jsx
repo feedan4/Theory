@@ -6,6 +6,15 @@ import { FaRegSquare } from 'react-icons/fa'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 import Loader from './Loader'
 import LittleLoad from './LittleLoad'
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 
 function ProductsById() {
@@ -105,45 +114,45 @@ function ProductsById() {
             fetchFilteredProducts()
         }
     }, [categid, selectedSizes, selectedColors, page])
-    
+
     const handleCheckboxChange = (e, filterType) => {
         const { value, checked } = e.target
-    
+
         if (filterType === "size") {
             const newSizes = checked
                 ? [...selectedSizes, value]
                 : selectedSizes.filter((item) => item !== value);
             setSelectedSizes(newSizes)
-    
+
             navigate(`/productsbyid/all/${categid}&size=${newSizes.join(",")}}`)
         } else if (filterType === "color") {
             const newColors = checked
                 ? [...selectedColors, value]
                 : selectedColors.filter((item) => item !== value)
             setSelectedColors(newColors)
-    
+
             navigate(`/productsbyid/all/${categid}&color=${newColors.join(",")}`)
         }
     };
-    
+
     const fetchFilteredProducts = async () => {
         const sizeQuery = selectedSizes.join(",")
         const colorQuery = selectedColors.join(",")
         const res = await getProductsByCategory(categid, sizeQuery, colorQuery, page)
         setProByCatId(res)
     };
-    
+
     const handlePageChange = (direction) => {
         let newPage = page
-    
+
         if (direction === 'prev') {
             newPage = Math.max(page - 1, 1)
         } else if (direction === 'next') {
             newPage = Math.min(page + 1, probycatid?.data?.meta?.totalPages || 1)
         }
-    
+
         setPage(newPage)
-    
+
         navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`)
     };
 
@@ -262,25 +271,53 @@ function ProductsById() {
                         probycatid.data?.data?.map((item, i) => (
                             <Link key={i} to={`/details/${item.id}`}>
                                 <div
-                                    className={`procard flex flex-col h-full ${view === "285" ? "w-[285px]" : "w-[730px]"
+                                    className={`procard flex flex-col gap-2 w-[150px] h-full ${view === "285" ? "sm:w-[285px]" : "sm:w-[730px]"
                                         } bg-white items-start justify-start`}
                                 >
-                                    <img
-                                        className="w-full object-cover mb-2"
-                                        src={item.images[0]}
-                                        alt={item.name}
-                                    />
+                                    <Swiper
+                                        navigation={true}
+                                        modules={[Navigation]}
+                                        className="productsSwiper sm:h-[400px] w-full">
+                                        <SwiperSlide>
+                                            <img
+                                                className="w-full object-cover mb-2"
+                                                src={item.images[0]}
+                                                alt={item.name}
+                                            />
+                                        </SwiperSlide>
+                                        <SwiperSlide>
+                                            <img
+                                                className="w-full object-cover mb-2"
+                                                src={item.images[1]}
+                                                alt={item.name}
+                                            />
+                                        </SwiperSlide>
+                                        <SwiperSlide>
+                                            <img
+                                                className="w-full object-cover mb-2"
+                                                src={item.images[2]}
+                                                alt={item.name}
+                                            />
+                                        </SwiperSlide>
+                                        <SwiperSlide>
+                                            <img
+                                                className="w-full object-cover mb-2"
+                                                src={item.images[3]}
+                                                alt={item.name}
+                                            />
+                                        </SwiperSlide>
+                                    </Swiper>
                                     <div className="flex flex-col items-start">
                                         <div>
-                                            <p className="text-black text-start overflow-hidden text-ellipsis text-nowrap text-[14px] px-[10px] pb-[10px] font-semibold">
+                                            <p className="text-black text-start text-wrap sm:overflow-hidden sm:text-ellipsis sm:text-nowrap text-[12px] px-[10px] pb-[10px] font-semibold">
                                                 {item.name}
                                             </p>
                                         </div>
                                         <div className="flex items-center">
-                                            <del className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                            <del className="text-black text-[13px] pl-[10px] pb-[10px]">
                                                 {item.price.toFixed(2)} $
                                             </del>
-                                            <p className="text-black text-[14px] pl-[10px] pb-[10px]">
+                                            <p className="text-black text-[13px] pl-[10px] pb-[10px]">
                                                 {(
                                                     (item.price * (100 - item.discount)) /
                                                     100
@@ -288,7 +325,7 @@ function ProductsById() {
                                                 $
                                             </p>
                                         </div>
-                                        <p className="text-red-600 text-[14px] pl-[10px] pb-[10px] capitalize">
+                                        <p className="text-red-600 text-[13px] pl-[10px] pb-[10px] capitalize">
                                             {item.discount}% off applied
                                         </p>
                                     </div>

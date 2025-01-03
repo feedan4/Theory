@@ -155,19 +155,28 @@ function Header() {
           ></video>
           <div className='flex flex-col relative w-[100%]'>
             <div className={`navbar group relative flex justify-between items-center h-[5vh] lg:h-[10vh] w-full z-40 ${showVideo && navbar ? 'text-white hover:text-black hover:bg-white' : 'bg-white text-black'}`}>
-              <div className={`${navbar ? 'hidden pointer-events-none' : 'flex pointer-events-auto'} bg-white text-black absolute gap-2 p-[20px] z-50 top-[5vh] lg:top-[10vh] items-start flex-col w-[100%] transition-all duration-500 `}>
-                {
-                  category &&
-                  category.map((item, index) => {
-                    return (
-                      <Link key={index} to={`/productsbyid/all/${item.id}`}>
-                        <div className="cursor-pointer text-[13px] capitalize flex flex-col items-center categ">
-                          {item.name}
-                        </div>
-                      </Link>
-                    )
-                  })
-                }
+              <div className={`${navbar ? 'hidden pointer-events-none' : 'flex pointer-events-auto'} bg-white text-black absolute gap-10 p-[20px] z-50 top-[5vh] lg:top-[10vh] items-start flex-col w-[100%] transition-all duration-500 `}>
+                <div className='flex flex-col items-start gap-2'>
+                  {
+                    category &&
+                    category.map((item, index) => {
+                      return (
+                        <Link key={index} to={`/productsbyid/all/${item.id}`}>
+                          <div className="cursor-pointer text-[13px] capitalize categ">
+                            {item.name}
+                          </div>
+                        </Link>
+                      )
+                    })
+                  }
+                </div>
+                <div className='flex flex-col items-start gap-2'>
+                  <div className='text-[12px] flex items-center'>
+                    <img src='/img/az.svg' className='w-[14px] inline-block mr-2' />
+                    <div>Azerbaijan (AZN)</div>
+                  </div>
+                  <div className='w-[100%] text-[12px] capitalize text-ellipsis text-nowrap'>sign in/register</div>
+                </div>
               </div>
               <div className="flex items-center w-[33.3%] pl-[5px] lg:pl-0">
                 <div>
@@ -182,7 +191,7 @@ function Header() {
                     category.map((item, index) => {
                       return (
                         <Link key={index} to={`/productsbyid/all/${item.id}`}>
-                          <div className="text-[13px] capitalize text-ellipsis text-nowrap categ">
+                          <div className="text-[12px] capitalize text-ellipsis text-nowrap categ">
                             {item.name}
                           </div>
                         </Link>
@@ -198,46 +207,44 @@ function Header() {
               </div>
               <div className="flex items-center gap-4 w-[33.3%] justify-end pr-[20px]">
                 <div className="hidden lg:flex items-center">
-                  <SlMagnifier className=" text-[11px]" />
-                  <p onClick={() => showSearch('0')} className=" text-[13px] cursor-pointer">
+                  <SlMagnifier className=" text-[10px]" />
+                  <p onClick={() => showSearch('0')} className=" text-[12px] cursor-pointer">
                     Search
                   </p>
                 </div>
-                <Link onClick={() => showCanvas('0')}>
-                  <div className="sign text-[13px] h-full capitalize hidden lg:block">
-                    Sign in/register
-                    <div className="signdrop absolute shadow-lg flex-col gap-3 z-50 top-[5vh] lg:top-[10vh] right-[120px] p-[20px] text-black bg-white">
-                      <input type='text' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Email address' />
-                      <input type='password' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Password' />
-                      <div className='flex items-center gap-2'>
-                        <input type='checkbox' />
-                        <p className='capitalize text-[12px]'>remember me</p>
-                      </div>
-                      <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>sign in</button>
-                      <Link to="/forget">
-                        <p className='text-[12px] text-black underline capitalize text-center'>forget password?</p>
-                      </Link>
-                      <p className='text-[12px] text-black uppercase text-center'>or</p>
-                      <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
+                <div className="sign text-[12px] h-full capitalize hidden lg:block">
+                  Sign in/register
+                  <div className="signdrop absolute shadow-lg flex-col gap-3 z-50 top-[5vh] lg:top-[6vh] right-[120px] pb-[20px] pt-[35px] px-[20px] text-black bg-white">
+                    <input type='text' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Email address' />
+                    <input type='password' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Password' />
+                    <div className='flex items-center gap-2'>
+                      <input type='checkbox' />
+                      <p className='capitalize text-[12px]'>remember me</p>
                     </div>
+                    <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>sign in</button>
+                    <Link to="/forget">
+                      <p className='text-[12px] text-black underline capitalize text-center'>forget password?</p>
+                    </Link>
+                    <p className='text-[12px] text-black uppercase text-center'>or</p>
+                    <button onClick={() => showCanvas('0')} className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
                   </div>
-                </Link>
+                </div>
                 <Link to="/wishlist">
-                  <a href="#" className=" text-[13px] hidden lg:block">
+                  <a href="#" className=" text-[12px] hidden lg:block">
                     Wishlist
                   </a>
                 </Link>
                 <Link to="/wishlist">
-                  <a href="#" className=" text-[13px] block lg:hidden">
+                  <a href="#" className=" text-[12px] block lg:hidden">
                     <FaHeart />
                   </a>
                 </Link>
 
                 <div className="relative">
                   <Link to="/basket">
-                    <BsBasket3Fill className=" hover:text-black text-[13px]" />
+                    <BsBasket3Fill className=" hover:text-black text-[12px]" />
                   </Link>
-                  <div className="absolute text-[13px] top-[-10px] right-[-10px] ">{sebet.length}</div>
+                  <div className="absolute text-[12px] top-[-10px] right-[-10px] ">{sebet.length}</div>
                 </div>
               </div>
             </div>
@@ -247,7 +254,7 @@ function Header() {
               <div className='flex gap-3 items-center flex-col sm:flex-row'>
                 <Link to={`/shopnow`}>
                   <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
-                </Link>                
+                </Link>
                 {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
               </div>
             </div>

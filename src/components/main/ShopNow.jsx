@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 // import { getCategoryById } from '../../services/api';
 import { DATA } from '../../context/DataContext';
@@ -44,10 +44,18 @@ export default function ShopNow() {
 
     return (
         <>
-            <div className='w-[80%] mx-auto bg-white'>
+            <div className='w-[90%] md:w-[80%] mx-auto bg-white'>
                 <div className='py-[20px]'>
                     <h1 className='text-center capitalize text-black font-bold text-[30px] trade-gothic my-[20px]'>women's Shop</h1>
-                    <Swiper navigation={true} modules={[Navigation]} className="h-[370px] sm:h-[500px] md:h-[670px] transition-all duration-1000">
+                    <Swiper
+                        loop={true} 
+                        autoplay={{
+                            delay: 3000, 
+                            disableOnInteraction: false, 
+                        }}
+                        navigation={true}
+                        modules={[Autoplay, Navigation]}
+                        className="h-[370px] sm:h-[500px] md:h-[670px] transition-all duration-1000 shopSwiper">
                         <SwiperSlide
                             style={{ backgroundImage: `url(https://ak-media.theory.com/i/theory/110224WGIFTGUIDEHEROGENDERPAGE?$mediaDesktopLarge$)` }}
                         >
@@ -83,7 +91,7 @@ export default function ShopNow() {
                             scrollbar={{ draggable: true }}
                             direction="horizontal"
                             breakpoints={{
-                                400: { slidesPerView: 2, spaceBetween: 20 },
+                                300: { slidesPerView: 2, spaceBetween: 20 },
                                 768: { slidesPerView: 3 },
                                 1024: { slidesPerView: 4 },
                             }}
