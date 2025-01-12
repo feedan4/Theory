@@ -16,10 +16,10 @@ export default function ProductSlider() {
       <h1 className='text-black text-[20px] sm:text-[34px] font-bold px-[20px] py-[30px]'>Discover More</h1>
       <div className='p-[20px] w-full transition-all duration-1000'>
         <Swiper
-          loop={true} // Sliderın sonsuz dövr etməsi
+          loop={true} 
           autoplay={{
-            delay: 1000, // Slaydlar arasında 3 saniyə fasilə
-            disableOnInteraction: false, // İstifadəçi qarşılıqlı əlaqədən sonra autoplay davam edir
+            delay: 1000, 
+            disableOnInteraction: false,
           }}
           slidesPerView={1}
           spaceBetween={30}

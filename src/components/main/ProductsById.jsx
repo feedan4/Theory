@@ -58,6 +58,8 @@ function ProductsById() {
         }
     }, [data])
 
+    // console.log(probycatid);
+
 
 
     // useEffect(() => {
@@ -75,13 +77,6 @@ function ProductsById() {
     //     setCategId(findId.id)
     // }, [catname])
 
-    useEffect(() => {
-        function pageUrl(page) {
-            setCatId(page)
-        }
-        navigate(`/productsbyid/all/${categid}?page=${page}`)
-
-    }, [page])
 
     useEffect(() => {
         if (categid) {
@@ -109,52 +104,84 @@ function ProductsById() {
 
     // console.log(probycatid);
 
+    const handlePageChange = (direction) => {
+        let newPage = page;
+        const totalPages = probycatid?.data?.meta?.totalPages || 1;
+
+        if (direction === 'prev') {
+            newPage = Math.max(page - 1, 1);
+        } else if (direction === 'next') {
+            newPage = Math.min(page + 1, totalPages);
+        }
+
+        setPage(newPage);
+
+        // Dinamik URL ilə yönləndirmə
+        navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`);
+    };
+
     useEffect(() => {
         if (categid) {
-            fetchFilteredProducts()
+            fetchFilteredProducts();
         }
-    }, [categid, selectedSizes, selectedColors, page])
+    }, [categid, selectedSizes, selectedColors, page]);
 
     const handleCheckboxChange = (e, filterType) => {
-        const { value, checked } = e.target
+        const { value, checked } = e.target;
 
         if (filterType === "size") {
             const newSizes = checked
                 ? [...selectedSizes, value]
                 : selectedSizes.filter((item) => item !== value);
-            setSelectedSizes(newSizes)
+            setSelectedSizes(newSizes);
 
-            navigate(`/productsbyid/all/${categid}&size=${newSizes.join(",")}}`)
+            // Dinamik URL ilə yönləndirmə
+            navigate(`/productsbyid/all/${categid}?page=${page}&size=${newSizes.join(",")}&color=${selectedColors.join(",")}`);
         } else if (filterType === "color") {
             const newColors = checked
                 ? [...selectedColors, value]
-                : selectedColors.filter((item) => item !== value)
-            setSelectedColors(newColors)
+                : selectedColors.filter((item) => item !== value);
+            setSelectedColors(newColors);
 
-            navigate(`/productsbyid/all/${categid}&color=${newColors.join(",")}`)
+            // Dinamik URL ilə yönləndirmə
+            navigate(`/productsbyid/all/${categid}?page=${page}&size=${selectedSizes.join(",")}&color=${newColors.join(",")}`);
         }
     };
 
-    const fetchFilteredProducts = async () => {
-        const sizeQuery = selectedSizes.join(",")
-        const colorQuery = selectedColors.join(",")
-        const res = await getProductsByCategory(categid, sizeQuery, colorQuery, page)
-        setProByCatId(res)
+    // Page dəyişdikdə URL-də page parametrinin düzgün göstərilməsi
+
+
+
+    const fetchFilteredProducts = () => {
+        const sizeQuery = selectedSizes.join(",");
+        const colorQuery = selectedColors.join(",");
+        const limit = 10;
+
+        const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}`;
+
+        // URL-dəki query parametrləri istifadə edirik
+        getProductsByCategory(`${categid}`, queryParams)
+            .then(res => {
+                setProByCatId(res); // Yenilənmiş məlumatı təqdim edirik
+            })
+            .catch(error => {
+                console.error("Məhsullar yüklənərkən xəta baş verdi:", error);
+            });
     };
 
-    const handlePageChange = (direction) => {
-        let newPage = page
+    const updateURL = () => {
+        const sizeQuery = selectedSizes.length ? `size=${selectedSizes.join(",")}` : '';
+        const colorQuery = selectedColors.length ? `color=${selectedColors.join(",")}` : '';
+        const queryParams = [sizeQuery, colorQuery].filter(Boolean).join('&');
 
-        if (direction === 'prev') {
-            newPage = Math.max(page - 1, 1)
-        } else if (direction === 'next') {
-            newPage = Math.min(page + 1, probycatid?.data?.meta?.totalPages || 1)
-        }
-
-        setPage(newPage)
-
-        navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`)
+        // Dinamik URL ilə yönləndirmə
+        navigate(`/productsbyid/all/${categid}?page=${page}${queryParams ? `&${queryParams}` : ''}`);
     };
+
+    useEffect(() => {
+        // URL hər dəfə filterlər dəyişəndə yenilənir
+        updateURL();
+    }, [selectedSizes, selectedColors, page]);
 
     // console.log(probycatid);
 
@@ -170,10 +197,15 @@ function ProductsById() {
                         <button
                             key={i}
                             onClick={() => {
+                                // Seçilmiş kateqoriyanı URL-də yeniləyirik
                                 navigate(`/productsbyid/all/${item.id}?page=${page}`)
-                                setButtonColor(item.id)
-                                getProductsByCategory(item.id)
-                                    .then(res => setProByCatId(res))
+
+                                // Seçdiyimiz buttonun rəngini dəyişirik
+                                setButtonColor(item.id);
+
+                                // Yeni məhsullar üçün API-ni çağırırıq (filter və page ilə)
+                                getProductsByCategory(item.id, `page=${page}`)
+                                    .then(res => setProByCatId(res));
                             }}
                             className={`capitalize text-nowrap border border-black px-[10px] py-[5px] bg-transparent ${buttonColor === item.id ? 'border-2' : 'border'}`}
                         >
@@ -264,77 +296,57 @@ function ProductsById() {
                 </div>
             </div>
             <div className={`flex flex-wrap gap-3 justify-evenly xxl:justify-start mx-[20px] my-[30px] ${view === '730' ? '' : ''}`}>
-                {
-                    !probycatid ? (
-                        <LittleLoad />
-                    ) : probycatid ? (
-                        probycatid.data?.data?.map((item, i) => (
-                            <Link key={i} to={`/details/${item.id}`}>
-                                <div
-                                    className={`procard flex flex-col gap-2 w-[150px] h-full ${view === "285" ? "sm:w-[285px]" : "sm:w-[730px]"
-                                        } bg-white items-start justify-start`}
+                {!probycatid ? (
+                    <LittleLoad />
+                ) : probycatid.data?.data?.length === 0 ? (
+                    <div className='flex h-[200px] w-full px-[40%] items-center text-[30px] text-black'>No products found!</div>
+                ) : (
+                    probycatid.data?.data?.map((item, i) => (
+                        <Link key={i} to={`/details/${item.id}`}>
+                            <div
+                                className={`procard flex flex-col gap-2 w-[150px] h-full ${view === "285" ? "sm:w-[285px]" : "sm:w-[730px]"} bg-white items-start justify-start`}
+                            >
+                                <Swiper
+                                    navigation={true}
+                                    modules={[Navigation]}
+                                    className="productsSwiper sm:h-[400px] w-full"
                                 >
-                                    <Swiper
-                                        navigation={true}
-                                        modules={[Navigation]}
-                                        className="productsSwiper sm:h-[400px] w-full">
-                                        <SwiperSlide>
+                                    {item.images.slice(0, 4).map((image, index) => (
+                                        <SwiperSlide key={index}>
                                             <img
                                                 className="w-full object-cover mb-2"
-                                                src={item.images[0]}
+                                                src={image}
                                                 alt={item.name}
                                             />
                                         </SwiperSlide>
-                                        <SwiperSlide>
-                                            <img
-                                                className="w-full object-cover mb-2"
-                                                src={item.images[1]}
-                                                alt={item.name}
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <img
-                                                className="w-full object-cover mb-2"
-                                                src={item.images[2]}
-                                                alt={item.name}
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <img
-                                                className="w-full object-cover mb-2"
-                                                src={item.images[3]}
-                                                alt={item.name}
-                                            />
-                                        </SwiperSlide>
-                                    </Swiper>
-                                    <div className="flex flex-col items-start">
-                                        <div>
-                                            <p className="text-black text-start text-wrap sm:overflow-hidden sm:text-ellipsis sm:text-nowrap text-[12px] px-[10px] pb-[10px] font-semibold">
-                                                {item.name}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <del className="text-black text-[13px] pl-[10px] pb-[10px]">
-                                                {item.price.toFixed(2)} $
-                                            </del>
-                                            <p className="text-black text-[13px] pl-[10px] pb-[10px]">
-                                                {(
-                                                    (item.price * (100 - item.discount)) /
-                                                    100
-                                                ).toFixed(2)}{" "}
-                                                $
-                                            </p>
-                                        </div>
-                                        <p className="text-red-600 text-[13px] pl-[10px] pb-[10px] capitalize">
-                                            {item.discount}% off applied
+                                    ))}
+                                </Swiper>
+                                <div className="flex flex-col items-start">
+                                    <div>
+                                        <p className="text-black text-start text-wrap sm:overflow-hidden sm:text-ellipsis sm:text-nowrap text-[12px] px-[10px] pb-[10px] font-semibold">
+                                            {item.name}
                                         </p>
                                     </div>
+                                    <div className="flex items-center">
+                                        <del className="text-black text-[13px] pl-[10px] pb-[10px]">
+                                            {item.price.toFixed(2)} $
+                                        </del>
+                                        <p className="text-black text-[13px] pl-[10px] pb-[10px]">
+                                            {(
+                                                (item.price * (100 - item.discount)) /
+                                                100
+                                            ).toFixed(2)}{" "}
+                                            $
+                                        </p>
+                                    </div>
+                                    <p className="text-red-600 text-[13px] pl-[10px] pb-[10px] capitalize">
+                                        {item.discount}% off applied
+                                    </p>
                                 </div>
-                            </Link>
-                        ))
-                    ) : null
-                }
-
+                            </div>
+                        </Link>
+                    ))
+                )}
             </div>
             <div className={`flex items-center gap-3 justify-center text-black text-[14px] mb-[30px]`}>
                 <div

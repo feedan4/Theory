@@ -10,9 +10,9 @@ async function getProductById(probyid) {
     return res.data
 }
 
-async function getProductsByCategory(categid) {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}&limit=10`)
-    return res
+async function getProductsByCategory(categid, queryParams) {
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}&${queryParams}`);
+    return res;
 }
 
 async function getAllCategories() {
