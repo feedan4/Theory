@@ -175,9 +175,7 @@ function Header() {
                     <img src='/img/az.svg' className='w-[14px] inline-block mr-2' />
                     <div>Azerbaijan (AZN)</div>
                   </div>
-                  <Link to='/register'>
-                    <div className='w-[100%] text-[12px] capitalize text-ellipsis text-nowrap'>sign in/register</div>
-                  </Link>
+                  <div onClick={() => showCanvas('0')} className={`w-[100%] text-[12px] cursor-pointer capitalize text-ellipsis text-nowrap`}>sign in/register</div>
                 </div>
               </div>
               <div className="flex items-center w-[33.3%] pl-[5px] lg:pl-0">

@@ -11,7 +11,6 @@ import AddToBasket from './components/main/AddToBasket'
 import Wishlist from './components/main/Wishlist'
 import Checkout from './components/main/Checkout'
 import Order from './components/main/Order'
-import Register from './components/main/Register'
 
 function App() {
   const {pathname} = useLocation()
@@ -37,7 +36,6 @@ function App() {
           <Route path="/basket" element={<AddToBasket />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/order" element={<Order />} />
           <Route path="/details/:proid" element={<Details />} />
         </Route>

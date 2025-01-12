@@ -105,83 +105,77 @@ function ProductsById() {
     // console.log(probycatid);
 
     const handlePageChange = (direction) => {
-        let newPage = page;
-        const totalPages = probycatid?.data?.meta?.totalPages || 1;
+        let newPage = page
+        const totalPages = probycatid?.data?.meta?.totalPages || 1
 
         if (direction === 'prev') {
-            newPage = Math.max(page - 1, 1);
+            newPage = Math.max(page - 1, 1)
         } else if (direction === 'next') {
-            newPage = Math.min(page + 1, totalPages);
+            newPage = Math.min(page + 1, totalPages)
         }
 
-        setPage(newPage);
+        setPage(newPage)
 
-        // Dinamik URL ilə yönləndirmə
-        navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`);
+        navigate(`/productsbyid/all/${categid}?page=${newPage}&size=${selectedSizes.join(",")}&color=${selectedColors.join(",")}`)
     };
 
     useEffect(() => {
         if (categid) {
-            fetchFilteredProducts();
+            fetchFilteredProducts()
         }
-    }, [categid, selectedSizes, selectedColors, page]);
+    }, [categid, selectedSizes, selectedColors, page])
 
     const handleCheckboxChange = (e, filterType) => {
-        const { value, checked } = e.target;
+        const { value, checked } = e.target
 
         if (filterType === "size") {
             const newSizes = checked
                 ? [...selectedSizes, value]
-                : selectedSizes.filter((item) => item !== value);
-            setSelectedSizes(newSizes);
+                : selectedSizes.filter((item) => item !== value)
+            setSelectedSizes(newSizes)
 
-            // Dinamik URL ilə yönləndirmə
-            navigate(`/productsbyid/all/${categid}?page=${page}&size=${newSizes.join(",")}&color=${selectedColors.join(",")}`);
+           
+            navigate(`/productsbyid/all/${categid}?page=${page}&size=${newSizes.join(",")}&color=${selectedColors.join(",")}`)
         } else if (filterType === "color") {
             const newColors = checked
                 ? [...selectedColors, value]
-                : selectedColors.filter((item) => item !== value);
-            setSelectedColors(newColors);
+                : selectedColors.filter((item) => item !== value)
+            setSelectedColors(newColors)
 
-            // Dinamik URL ilə yönləndirmə
-            navigate(`/productsbyid/all/${categid}?page=${page}&size=${selectedSizes.join(",")}&color=${newColors.join(",")}`);
+           
+            navigate(`/productsbyid/all/${categid}?page=${page}&size=${selectedSizes.join(",")}&color=${newColors.join(",")}`)
         }
     };
 
-    // Page dəyişdikdə URL-də page parametrinin düzgün göstərilməsi
-
-
-
     const fetchFilteredProducts = () => {
-        const sizeQuery = selectedSizes.join(",");
-        const colorQuery = selectedColors.join(",");
-        const limit = 10;
+        const sizeQuery = selectedSizes.join(",")
+        const colorQuery = selectedColors.join(",")
+        const limit = 10
 
-        const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}`;
+        const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}`
 
-        // URL-dəki query parametrləri istifadə edirik
+        
         getProductsByCategory(`${categid}`, queryParams)
             .then(res => {
-                setProByCatId(res); // Yenilənmiş məlumatı təqdim edirik
+                setProByCatId(res); 
             })
             .catch(error => {
-                console.error("Məhsullar yüklənərkən xəta baş verdi:", error);
+                console.error("Dramaaaa", error)
             });
     };
 
     const updateURL = () => {
-        const sizeQuery = selectedSizes.length ? `size=${selectedSizes.join(",")}` : '';
-        const colorQuery = selectedColors.length ? `color=${selectedColors.join(",")}` : '';
-        const queryParams = [sizeQuery, colorQuery].filter(Boolean).join('&');
+        const sizeQuery = selectedSizes.length ? `size=${selectedSizes.join(",")}` : ''
+        const colorQuery = selectedColors.length ? `color=${selectedColors.join(",")}` : ''
+        const queryParams = [sizeQuery, colorQuery].filter(Boolean).join('&')
 
-        // Dinamik URL ilə yönləndirmə
-        navigate(`/productsbyid/all/${categid}?page=${page}${queryParams ? `&${queryParams}` : ''}`);
+       
+        navigate(`/productsbyid/all/${categid}?page=${page}${queryParams ? `&${queryParams}` : ''}`)
     };
 
     useEffect(() => {
-        // URL hər dəfə filterlər dəyişəndə yenilənir
-        updateURL();
-    }, [selectedSizes, selectedColors, page]);
+        updateURL()
+    }, [selectedSizes, selectedColors, page])
 
     // console.log(probycatid);
 
@@ -197,15 +191,10 @@ function ProductsById() {
                         <button
                             key={i}
                             onClick={() => {
-                                // Seçilmiş kateqoriyanı URL-də yeniləyirik
                                 navigate(`/productsbyid/all/${item.id}?page=${page}`)
-
-                                // Seçdiyimiz buttonun rəngini dəyişirik
-                                setButtonColor(item.id);
-
-                                // Yeni məhsullar üçün API-ni çağırırıq (filter və page ilə)
+                                setButtonColor(item.id)
                                 getProductsByCategory(item.id, `page=${page}`)
-                                    .then(res => setProByCatId(res));
+                                    .then(res => setProByCatId(res))
                             }}
                             className={`capitalize text-nowrap border border-black px-[10px] py-[5px] bg-transparent ${buttonColor === item.id ? 'border-2' : 'border'}`}
                         >
