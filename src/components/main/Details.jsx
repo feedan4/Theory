@@ -45,6 +45,7 @@ export default function Details() {
 
     // console.log(totalAllAmount)
 
+    // console.log(proid);
     // console.log(probyid);
 
     useEffect(() => {

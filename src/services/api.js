@@ -5,8 +5,8 @@ async function getAllProducts() {
     return res
 }
 
-async function getProductById(probyid) {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/get/${probyid}`)
+async function getProductById(proid) {
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/get/${proid}`)
     return res.data
 }
 
