@@ -6,6 +6,7 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { BASKET } from '../../context/BasketContext';
 import Loader from '../main/Loader';
+import { Helmet } from 'react-helmet';
 
 function Header() {
   const { data } = useContext(DATA)
@@ -144,7 +145,7 @@ function Header() {
           </div>
         </div>
         <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
-        <header className={`relative bg-transparent flex flex-col justify-between ${showVideo ? 'h-[60vh] transition-all duration-1000 sm:h-[80vh] md:h-[100vh]' : 'h-full'}`}>
+        <header className={`relative bg-transparent flex flex-col justify-between ${showVideo ? 'h-[60vh] sm:h-[80vh] md:h-[100vh]' : 'h-full'}`}>
           <video
             autoPlay
             loop
@@ -248,7 +249,8 @@ function Header() {
                 </div>
               </div>
             </div>
-            <div className={`flex flex-col gap-4 items-center tracking-wider transition-all duration-1000 pt-[150px] sm:pt-[250px] md:pt-[350px] z-10 xl:pt- [400px] ${showVideo ? 'block' : 'hidden'}`}>
+          </div>
+          <div className={`flex flex-col gap-4 items-center transition-all duration-1000 pb-[100px] z-10 ${showVideo ? 'block' : 'hidden'}`}>
               <h1 className='text-white text-[20px] sm:text-[34px] font-bold capitalize'>let's get together</h1>
               <p className='text-white text-[16px] text-center'>Cozy up to a season of celebration.</p>
               <div className='flex gap-3 items-center flex-col sm:flex-row'>
@@ -258,7 +260,6 @@ function Header() {
                 {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
               </div>
             </div>
-          </div>
         </header>
       </div>
     </>

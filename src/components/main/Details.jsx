@@ -18,6 +18,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
 import { BASKET } from '../../context/BasketContext';
 import Loader from './Loader';
+import { Helmet } from 'react-helmet';
 
 export default function Details() {
     const { addToBasket } = useContext(BASKET)
@@ -42,7 +43,7 @@ export default function Details() {
 
     const checkId = probyid && wish?.find((item) => item.id === probyid.id)
 
-    // console.log(productColor)
+    // console.log(totalAllAmount)
 
     // console.log(probyid);
 
@@ -66,12 +67,18 @@ export default function Details() {
         }
     }
 
-    useEffect(() => {
-        console.log(wish)
-    }, [wish])
+    // useEffect(() => {
+    //     console.log(wish)
+    // }, [wish])
+
+    // console.log(proid);
+    
 
     return (
         <>
+        <Helmet>
+            <title>{probyid?.name}</title>
+        </Helmet>
             <div className="relative overflow-hidden">
                 <Toaster position="top-right" reverseOrder={false}/>
                 {canvas === '0' && (
@@ -116,7 +123,7 @@ export default function Details() {
                                                 </p>
                                             </div>
                                             <p className='text-red-600 capitalize'>
-                                                {item.discount}% off applied
+                                                {item.discount}$ off applied
                                             </p>
                                             <button onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize'><u>remove</u></button>
                                         </div>
@@ -200,11 +207,11 @@ export default function Details() {
                                         {(probyid.price).toFixed(2)} $
                                     </del>
                                     <p className='text-black text-[16px]'>
-                                        {((probyid.price * (100 - probyid.discount)) / 100).toFixed(2)} $
+                                        {(probyid.price - probyid.discount).toFixed(2)} $
                                     </p>
                                 </div>
                                 <p className='text-red-600 text-[16px] capitalize'>
-                                    {probyid.discount}% off applied
+                                    {probyid.discount}$ off applied
                                 </p>
                                 <div className='flex flex-col sm:flex-row gap-3 items-center'>
                                     <div className='flex gap-1'>

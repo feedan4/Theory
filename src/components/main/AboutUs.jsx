@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 
 function AboutUs() {
+
+  // const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   const handlePopState = () => {
+  //     navigate("/", { replace: true });
+  //   }
+
+  //   window.addEventListener("popstate", handlePopState);
+
+  //   return () => {
+  //     window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [navigate])
+
   return (
     <>
+    <Helmet>
+      <title>About Us</title>
+    </Helmet>
       <div className='w-full h-[70vh] bg-cover bg-center bg-white flex flex-col gap-3 items-center justify-center py-[30px] trade-gothic tracking-wider'
         style={{ backgroundImage: `url("https://i1.adis.ws/i/theory/ABOUT_US_HERO")` }}
       >

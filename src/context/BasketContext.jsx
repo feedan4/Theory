@@ -17,7 +17,7 @@ function BasketContext({ children }) {
         return 0
     })
 
-    const totalAllAmount = sebet.reduce((total, item) => total + item.count * ((item.price * (100 - item.discount)) / 100), 0)
+    const totalAllAmount = sebet.reduce((total, item) => total + item.count * ((item.price - item.discount)), 0)
     const [countOption, setcountOption] = useState("")
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function BasketContext({ children }) {
     }, [sebet])
 
     function addToBasket(id, img, name, price, discount, size, color, count = 1) {
-        const discountedPrice = (price * (100 - discount)) / 100
+        const discountedPrice = (price - discount)
         const totalPrice = discountedPrice * count
 
         if (sebet.find(item => item.id === id && item.size === size && item.color === color)) {
@@ -47,7 +47,7 @@ function BasketContext({ children }) {
     function newOptionCount(id, size, color, countOption) {
         setSebet(sebet.map(item => {
             if (item.id === id && item.size === size && item.color === color) {
-                const discountedPrice = (item.price * (100 - item.discount)) / 100
+                const discountedPrice = item.price - item.discount
                 return {
                     ...item,
                     count: countOption,

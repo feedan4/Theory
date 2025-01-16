@@ -8,7 +8,7 @@ function Footer() {
 
     const [dropdown1, setDropdown1] = useState(true)
     const [dropdown2, setDropdown2] = useState(true)
-    const [dropdown3, setDropdown3] = useState(true)
+    const [dropdown3, setDropdown3] = useState(true)   // bunlari birlesdir
 
     return (
         <footer className='relative z-30 flex flex-col'>

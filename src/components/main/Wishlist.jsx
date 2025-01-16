@@ -44,7 +44,7 @@ function Wishlist() {
                                             {(item.price).toFixed(2)} $
                                         </del>
                                         <p className='text-black text-[14px] pl-[10px] pb-[10px]'>
-                                            {((item.price * (100 - item.discount)) / 100).toFixed(2)} $
+                                            {(item.price - item.discount).toFixed(2)} $
                                         </p>
                                     </div>
                                 </div>

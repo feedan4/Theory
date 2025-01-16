@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { BASKET } from '../../context/BasketContext'
 import { Link, useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 function AddToBasket() {
     const { sebet } = useContext(BASKET)
@@ -11,6 +12,9 @@ function AddToBasket() {
 
     return (
         <>
+        <Helmet>
+            <title>Cart</title>
+        </Helmet>
             <div className='w-[90%] lg:w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
                 <h3 className='text-[20px] md:text-[32px] text-center md:text-start font-bold capitalize'>shopping bag</h3>
                 <div className='w-[100%] flex flex-col gap-3 lg:flex-row justify-between my-[30px] items-start'>

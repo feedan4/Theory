@@ -11,9 +11,10 @@ import AddToBasket from './components/main/AddToBasket'
 import Wishlist from './components/main/Wishlist'
 import Checkout from './components/main/Checkout'
 import Order from './components/main/Order'
+import { Helmet } from 'react-helmet'
 
 function App() {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const { showVideo } = useContext(DATA)
 
   // console.log(showVideo);
@@ -26,23 +27,28 @@ function App() {
   }, [pathname])
 
   return (
-    <div className={`relative min-h-screen font-mont flex flex-col ${showVideo ? 'bg-[#dadada]' : 'bg-white'}`}>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Main />} />
-          <Route path="/shopnow" element={<ShopNow />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/productsbyid/all/:categid" element={<ProductsById />} />
-          <Route path="/basket" element={<AddToBasket />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/details/:proid" element={<Details />} />
-        </Route>
-      </Routes>
-    </div>
+    <>
+    <Helmet>
+      <title>Theory</title>
+    </Helmet>
+      <div className={`relative min-h-screen font-mont flex flex-col ${showVideo ? 'bg-[#dadada]' : 'bg-white'}`}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Main />} />
+            <Route path="/shopnow" element={<ShopNow />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/productsbyid/all/:categid" element={<ProductsById />} />
+            <Route path="/basket" element={<AddToBasket />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/details/:proid" element={<Details />} />
+          </Route>
+        </Routes>
+      </div>
+    </>
   )
-  
+
 }
 
 export default App
