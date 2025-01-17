@@ -15,7 +15,7 @@ function AddToBasket() {
             <Helmet>
                 <title>Cart</title>
             </Helmet>
-            <div className='w-[90%] lg:w-[67%] flex flex-col items-center mx-auto py-[30px] bg-white'>
+            <div className='w-[90%] xl:w-[75%] flex flex-col items-center mx-auto py-[30px] bg-white'>
                 <h3 className='text-[20px] md:text-[32px] text-center md:text-start font-bold capitalize'>shopping bag</h3>
                 <div className='w-[100%] flex flex-col gap-3 lg:flex-row justify-between my-[30px] items-start'>
                     <div className='lg:w-[58%] w-[100%] flex flex-col gap-3'>
@@ -36,30 +36,33 @@ function AddToBasket() {
                                 <hr className={`w-full ${sebet.length === 0 ? 'hidden' : 'flex'} h-[1px] border-none bg-[#B9B9B9]`} />
                                 {
                                     sebet && sebet.map((item, i) => (
-                                        <Link to={`/details/${item.id}`}>
+                                        <Link
+                                            key={i} to={`/details/${item.id}`}>
                                             <div className='flex px-[10px] gap-4 items-start md:items-center'>
                                                 <img className='max-w-[80px] max-h-[110px]' src={`${item.img[0]}`} />
                                                 <div className='w-[80%] md:w-[40%] text-start'>
-                                                    <p className='text-[12px] lg:text-[16px]'>{item.name}</p>
+                                                    <p className='text-[12px] lg:text-[14px]'>{item.name}</p>
                                                     <p className='text-[12px] text-nowrap lg:text-[13px]'>Size: {item.size}</p>
                                                     <p className='text-[12px] text-nowrap lg:text-[13px]'>Color: {item.color}</p>
                                                     <p onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize font-bold cursor-pointer underline'>remove</p>
                                                 </div>
-                                                <select
-                                                    value={item.count}
-                                                    onChange={(e) => {
-                                                        const newCount = parseInt(e.target.value, 10)
-                                                        setcountOption(newCount)
-                                                        newOptionCount(item.id, item.size, item.color, newCount)
-                                                    }}
-                                                    className='border border-black w-[8%] py-[2px] px-[5px] capitalize font-bold text-[13px]'
-                                                >
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
+                                                <div className='w-[12%] md:w-[9%]' onClick={(e) => e.preventDefault()}>
+                                                    <select
+                                                        value={item.count}
+                                                        onChange={(e) => {
+                                                            const newCount = parseInt(e.target.value, 10)
+                                                            setcountOption(newCount)
+                                                            newOptionCount(item.id, item.size, item.color, newCount)
+                                                        }}
+                                                        className='border border-black w-full py-[2px] px-[5px] capitalize font-bold text-[13px]'
+                                                    >
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
                                                 <div className='w-[15%] capitalize font-bold hidden md:block text-[13px]'>{item.price} $</div>
                                                 <div className='w-[15%] text-nowrap capitalize font-bold text-[13px]'>{item.totalPrice} $</div>
                                             </div>

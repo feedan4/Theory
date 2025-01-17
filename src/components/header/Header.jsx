@@ -6,7 +6,6 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { BASKET } from '../../context/BasketContext';
 import Loader from '../main/Loader';
-import { Helmet } from 'react-helmet';
 
 function Header() {
   const { data } = useContext(DATA)
@@ -231,14 +230,14 @@ function Header() {
                   </div>
                 </div>
                 <Link to="/wishlist">
-                  <a href="#" className=" text-[12px] hidden lg:block">
+                  <div className=" text-[12px] hidden lg:block">
                     Wishlist
-                  </a>
+                  </div>
                 </Link>
                 <Link to="/wishlist">
-                  <a href="#" className=" text-[12px] block lg:hidden">
+                  <div className=" text-[12px] block lg:hidden">
                     <FaHeart />
-                  </a>
+                  </div>
                 </Link>
 
                 <div className="relative">
@@ -257,7 +256,6 @@ function Header() {
                 <Link to={`/shopnow`}>
                   <button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>shop now</button>
                 </Link>
-                {/* <Link to={`/productsbyid/Men`}><button className='outline outline-1 outline-white text-white bg-black bg-opacity-10 hover:outline-2 uppercase w-[200px] py-[8px]'>men's shop</button></Link> */}
               </div>
             </div>
         </header>

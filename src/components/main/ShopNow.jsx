@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,13 +10,10 @@ import 'swiper/css/pagination';
 // import required modules
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-// import { getCategoryById } from '../../services/api';
 import { DATA } from '../../context/DataContext';
 
 export default function ShopNow() {
     const { category, setCategory } = useContext(DATA)
-    // const { catname, catid } = useParams()
-    // console.log(category)
 
     const categImagesWomen = [
         "https://static.zara.net/assets/public/524f/06fc/61324c80a9e0/74a79c470554/03067210800-p/03067210800-p.jpg?ts=1733851345445&w=374",
@@ -26,21 +23,6 @@ export default function ShopNow() {
         "https://static.zara.net/assets/public/8044/4e9e/59164e69b598/09a7770d3349/04424811800-15-p/04424811800-15-p.jpg?ts=1734350710627&w=888",
         "https://static.zara.net/assets/public/31d2/eda4/db284538a7e2/eb68b2a87111/08862319712-p/08862319712-p.jpg?ts=1725614016391&w=888"
     ]
-
-    // const categImagesMen = [
-    //     "https://ak-media.theory.com/i/theory/11.1.24-M-Outerwear-single-editorial-tile-M?$mediaDesktop$",
-    //     "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M-3?$mediaDesktop$",
-    //     "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M?$mediaDesktop$",
-    //     "https://ak-media.theory.com/i/theory/11.1.24-M-Holiday-single-editorial-tile-M-4?$mediaDesktop$"
-    // ]
-
-    // useEffect(() => {
-    //     if (catid) {
-    //         getCategoryById(catid)
-    //             .then(res => setCategory(res))
-    //     }
-    // }, [catid, catname])
-    // console.log(categorybyid);
 
     return (
         <>
@@ -119,9 +101,6 @@ export default function ShopNow() {
                             }
                         </Swiper>
                     </div>
-                    {/* <Link to={`/productsbyid`}>
-                        <button className='border border-black text-black bg-transparent uppercase w-[200px] py-[8px]'>show all women</button>
-                    </Link> */}
                 </div>
 
             </div >

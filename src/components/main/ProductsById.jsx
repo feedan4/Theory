@@ -1,37 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DATA } from '../../context/DataContext'
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { getProductById, getProductsByCategory } from '../../services/api'
-import { FaRegSquare } from 'react-icons/fa'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
-import Loader from './Loader'
 import LittleLoad from './LittleLoad'
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules'
 import { Helmet } from 'react-helmet'
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box'
+import Slider from '@mui/material/Slider'
 
 
 function ProductsById() {
-    const { data, setData } = useContext(DATA)
-    // const { catname } = useParams()
-    // // const [categid, setCategId] = useState(null)
-    // const { proid } = useParams()
-    // const { probyid, setProById } = useContext(DATA)
-    const { category, setCategory } = useContext(DATA)
-    // const [categorybyid, setCategoryById] = useState(null)
-    // const [dataData, setdataData] = useState(null)
+    const { data, probycatid, setProByCatId, category } = useContext(DATA)
     const { categid } = useParams()
-    // const [catid, setCatId] = useState(categid)
-    const { probycatid, setProByCatId } = useContext(DATA)
     const [fixed, setFixed] = useState()
     const [view, setView] = useState('285')
     const [canvas, setCanvas] = useState('-280')
@@ -41,29 +29,29 @@ function ProductsById() {
     const [buttonColor, setButtonColor] = useState(true)
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
-    // const url = location.pathname.includes(`/productsbyid/all/${categid}`)
-
     const [oddColors, setOddColors] = useState([])
     const [oddSize, setOddSize] = useState([])
-    const [selectedSizes, setSelectedSizes] = useState([]);
-    const [selectedColors, setSelectedColors] = useState([]);
+    const [selectedSizes, setSelectedSizes] = useState([])
+    const [selectedColors, setSelectedColors] = useState([])
 
     const catname = category?.find((item) => item.id === categid)?.name || ''
-    const [value, setValue] = useState([0, 10000]); // Slider üçün dəyərlər
-    const [minPrice, setMinPrice] = useState(0); // Default min dəyəri
-    const [maxPrice, setMaxPrice] = useState(10000); // Default max dəyəri
+    // console.log(catname)
+    
+    const [value, setValue] = useState([0, 10000])
+    const [minPrice, setMinPrice] = useState(0)
+    const [maxPrice, setMaxPrice] = useState(10000)
 
-    useEffect(() => {
-        const handlePopState = () => {
-            navigate("/shopnow", { replace: true });
-        };
+    // useEffect(() => {
+    //     const handlePopState = () => {
+    //         navigate("/shopnow", { replace: true })
+    //     }
 
-        window.addEventListener("popstate", handlePopState);
+    //     window.addEventListener("popstate", handlePopState)
 
-        return () => {
-            window.removeEventListener("popstate", handlePopState);
-        };
-    }, [navigate]);
+    //     return () => {
+    //         window.removeEventListener("popstate", handlePopState)
+    //     }
+    // }, [navigate])
 
     useEffect(() => {
         if (data?.data?.data) {
@@ -77,24 +65,7 @@ function ProductsById() {
         }
     }, [data])
 
-    // console.log(category);
-
-    // useEffect(() => {
-    //     if (proid) {
-    //         getProductById(proid)
-    //             .then(res => setProById(res))
-    //     }
-    // },[proid])
-
-    // console.log(probyid);
-
-    // useEffect(() => {
-    //     const findId = category.find((item, i) =>
-    //         item.name === catname ? item : '')
-    //     setCategId(findId.id)
-    // }, [catname])
-
-
+    
     useEffect(() => {
         if (categid) {
             getProductsByCategory(categid)
@@ -119,95 +90,91 @@ function ProductsById() {
         }
     }
 
-    // console.log(probycatid);
+    // console.log(probycatid)
 
     const valuetext = (value) => {
-        return `${value} $`;
-    };
+        return `${value} $`
+    }
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
-        setMinPrice(newValue[0]);
-        setMaxPrice(newValue[1]);
-    };
+        setValue(newValue)
+        setMinPrice(newValue[0])
+        setMaxPrice(newValue[1])
+    }
 
     const handlePageChange = (direction) => {
-        const totalPages = probycatid?.data?.meta?.totalPages || 1;
-        let newPage = page;
+        const totalPages = probycatid?.data?.meta?.totalPages || 1
+        let newPage = page
 
         if (direction === 'prev') {
-            newPage = Math.max(page - 1, 1); // Əvvəlki səhifəyə keçid
+            newPage = Math.max(page - 1, 1) 
         } else if (direction === 'next') {
-            newPage = Math.min(page + 1, totalPages); // Növbəti səhifəyə keçid
+            newPage = Math.min(page + 1, totalPages) 
         }
 
-        setPage(newPage);
-
-        updateURL(newPage); // URL-i yeniləyir
-    };
+        setPage(newPage)
+        updateURL(newPage) 
+    }
 
     useEffect(() => {
         if (categid) {
-            fetchFilteredProducts(); // Məhsulları gətirir
+            fetchFilteredProducts() 
         }
-    }, [categid, selectedSizes, selectedColors, page, minPrice, maxPrice]); // Min və Max qiymət də əlavə edildi
+    }, [categid, selectedSizes, selectedColors, page, minPrice, maxPrice]) 
 
     const handleCheckboxChange = (e, filterType) => {
-        const { value, checked } = e.target;
+        const { value, checked } = e.target
 
         if (filterType === "size") {
             const newSizes = checked
                 ? [...selectedSizes, value]
-                : selectedSizes.filter((item) => item !== value);
+                : selectedSizes.filter((item) => item !== value)
 
-            setSelectedSizes(newSizes);
-            updateURL(page, newSizes, selectedColors); // URL-i yeniləyir
+            setSelectedSizes(newSizes)
+            updateURL(page, newSizes, selectedColors)
         } else if (filterType === "color") {
             const newColors = checked
                 ? [...selectedColors, value]
-                : selectedColors.filter((item) => item !== value);
+                : selectedColors.filter((item) => item !== value)
 
-            setSelectedColors(newColors);
-            updateURL(page, selectedSizes, newColors); // URL-i yeniləyir
+            setSelectedColors(newColors)
+            updateURL(page, selectedSizes, newColors)
         }
-    };
+    }
 
     const fetchFilteredProducts = () => {
-        const sizeQuery = selectedSizes.join(",");
-        const colorQuery = selectedColors.join(",");
-        const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}`; // Min və Max qiymət əlavə edildi
-        const limit = 10;
+        const sizeQuery = selectedSizes.join(",")
+        const colorQuery = selectedColors.join(",")
+        const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}` 
+        const limit = 10
 
-        const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}&${priceQuery}`;
+        const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}&${priceQuery}`
 
         getProductsByCategory(`${categid}`, queryParams)
             .then(res => {
-                setProByCatId(res); // Məlumatları yeniləyir
+                setProByCatId(res) 
             })
             .catch(error => {
-                console.error("Dramaaaa", error); // Xəta mesajı
-            });
-    };
+                console.error("Dramaaaa", error) 
+            })
+    }
 
     const updateURL = () => {
-        const sizeQuery = selectedSizes.length ? `size=${selectedSizes.join(",")}` : '';
-        const colorQuery = selectedColors.length ? `color=${selectedColors.join(",")}` : '';
-        let queryParams = [sizeQuery, colorQuery].filter(Boolean).join('&');
+        const sizeQuery = selectedSizes.length ? `size=${selectedSizes.join(",")}` : ''
+        const colorQuery = selectedColors.length ? `color=${selectedColors.join(",")}` : ''
+        let queryParams = [sizeQuery, colorQuery].filter(Boolean).join('&')
 
-        // Yalnız qiymətlər dəyişdikdə URL-də əlavə et
         if (minPrice !== 0 || maxPrice !== 10000) {
-            const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}`;
-            queryParams += queryParams ? `&${priceQuery}` : priceQuery;
+            const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}`
+            queryParams += queryParams ? `&${priceQuery}` : priceQuery
         }
 
-        navigate(`/productsbyid/all/${categid}?page=${page}${queryParams ? `&${queryParams}` : ''}`);
-    };
+        navigate(`/productsbyid/all/${categid}?page=${page}${queryParams ? `&${queryParams}` : ''}`)
+    }
 
     useEffect(() => {
-        updateURL(page); // URL-i hər seçilənə görə yeniləyir
-    }, [selectedSizes, selectedColors, page, minPrice, maxPrice]); // Qiymət filtrləri əlavə edildi
-
-    // console.log(probycatid);
+        updateURL(page)
+    }, [selectedSizes, selectedColors, page, minPrice, maxPrice]) 
 
     return (
         <>

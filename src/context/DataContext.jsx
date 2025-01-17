@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getAllCategories, getAllProducts, getProductById, getProductsByCategory } from '../services/api'
+import { getAllCategories, getAllProducts } from '../services/api'
 import { useLocation } from 'react-router-dom'
 
 export const DATA = createContext(null)
@@ -46,8 +46,6 @@ function DataContext({ children }) {
   useEffect(() => {
     getAllCategories().then(res => { setCategory(res) })
     getAllProducts().then(res => { setData(res) })
-    getProductById().then(res => { setProById(res.data) })
-    getProductsByCategory().then(res => { setProByCatId(res) })
   }, [])
 
   return (

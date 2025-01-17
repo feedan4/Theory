@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { DATA } from '../../context/DataContext';
-import { getProductById } from '../../services/api';
-import toast, { Toaster } from 'react-hot-toast';
+import { DATA } from '../../context/DataContext'
+import { getProductById } from '../../services/api'
+import toast, { Toaster } from 'react-hot-toast'
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io';
-import { BASKET } from '../../context/BasketContext';
-import Loader from './Loader';
-import { Helmet } from 'react-helmet';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io'
+import { BASKET } from '../../context/BasketContext'
+import Loader from './Loader'
+import { Helmet } from 'react-helmet'
 
 export default function Details() {
     const { addToBasket } = useContext(BASKET)
@@ -38,15 +38,15 @@ export default function Details() {
     const [productColor, setProductColor] = useState('')
     const [sizeButton, setSizeButton] = useState('')
 
-    const notifyColor = () => toast.error('Please choose color');
-    const notifySize = () => toast.error('Please choose size');
+    const notifyColor = () => toast.error('Please choose color')
+    const notifySize = () => toast.error('Please choose size')
 
     const checkId = probyid && wish?.find((item) => item.id === probyid.id)
 
     // console.log(totalAllAmount)
 
-    // console.log(proid);
-    // console.log(probyid);
+    // console.log(proid)
+    // console.log(probyid)
 
     useEffect(() => {
         if (proid) {
@@ -68,20 +68,13 @@ export default function Details() {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(wish)
-    // }, [wish])
-
-    // console.log(proid);
-    
-
     return (
         <>
-        <Helmet>
-            <title>{probyid?.name}</title>
-        </Helmet>
+            <Helmet>
+                <title>{probyid?.name}</title>
+            </Helmet>
             <div className="relative overflow-hidden">
-                <Toaster position="top-right" reverseOrder={false}/>
+                <Toaster position="top-right" reverseOrder={false} />
                 {canvas === '0' && (
                     <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={() => showCanvas('-100')}></div>
                 )}
@@ -220,13 +213,11 @@ export default function Details() {
                                             <IoIosStarOutline key={id} className='text-[17px]' />
                                         ))}
                                     </div>
-                                    <div>
-                                        <a href='#review' className='font-semibold underline pl-[5px]'>Write a review</a>
-                                    </div>
+                                    <div className='font-semibold underline pl-[5px] cursor-pointer'>Write a review</div>
                                 </div>
                                 <div className='flex flex-col gap-3 items-start mt-[40px]'>
                                     <div>
-                                        <b>Color: {productColor ? productColor : probyid.Colors[0]}</b>
+                                        <b>Color: {productColor}</b>
                                     </div>
                                     <div className="flex gap-2">
                                         {probyid.Colors.map((elem, i) => (
@@ -260,7 +251,7 @@ export default function Details() {
 
                             </div>
                         )}
-                        <div className={`flex w-[100%] gap-2 items-center`}>
+                        <div className={`flex w-[100%] flex-col gap-2 items-start`}>
                             <button
                                 onClick={(e) => {
                                     if (!productColor) {
@@ -275,29 +266,29 @@ export default function Details() {
                                     showCanvas('0')
                                     addToBasket(probyid.id, probyid.images, probyid.name, probyid.price, probyid.discount, sizeButton, productColor, probyid.count, probyid.totalPrice)
                                 }}
-                                className={`${probyid ? 'block' : 'hidden'}  border-2 w-[87%] md:w-[68%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]`}>Add to bag</button>
+                                className={`${probyid ? 'block' : 'hidden'}  border-2 w-[100%] md:w-[80%] text-[13px] border-[#000] text-white bg-black  uppercase py-[15px]`}>Add to bag</button>
                             {!checkId ? (
                                 <button
                                     onClick={(e) => {
-                                        e.preventDefault();
+                                        e.preventDefault()
                                         addToWishlist(
                                             probyid.id,
                                             probyid.images,
                                             probyid.name,
                                             probyid.price,
                                             probyid.discount
-                                        );
+                                        )
                                     }}
-                                    className={`${probyid ? 'block' : 'hidden'} order-2 flex w-[10%] text-[20px] border-[#eee] text-black bg-transparent justify-center items-center uppercase py-[15px]`}
+                                    className={`${probyid ? 'block' : 'hidden'} border-2 flex w-[100%] md:w-[80%] text-[13px] border-[#eee] text-black bg-transparent justify-center items-center uppercase py-[15px]`}
                                 >
-                                    <IoMdHeartEmpty />
+                                    Add to wishlist
                                 </button>
                             ) : (
                                 <button
                                     onClick={() => {
-                                        removeWish(probyid.id);
+                                        removeWish(probyid.id)
                                     }}
-                                    className={`${probyid ? 'block' : 'hidden'} border-2 w-[30%] text-[13px] border-[#eee] text-black bg-transparent uppercase py-[15px]`}
+                                    className={`${probyid ? 'block' : 'hidden'} border-2 w-[100%] md:w-[80%] text-ellipsis text-nowrap text-[13px] border-[#eee] text-black bg-transparent uppercase px-[5px] py-[15px]`}
                                 >
                                     Remove from wishlist
                                 </button>

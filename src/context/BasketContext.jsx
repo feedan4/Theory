@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react'
 
-export const BASKET = createContext(null);
+export const BASKET = createContext(null)
 
 function BasketContext({ children }) {
     const [sebet, setSebet] = useState(() => {
@@ -40,7 +40,7 @@ function BasketContext({ children }) {
             }])
         }
 
-        const newCount = sebet.reduce((total, item) => total + item.count, 0) + count;
+        const newCount = sebet.reduce((total, item) => total + item.count, 0) + count
         setTotalCount(newCount)
     }
 
@@ -81,7 +81,7 @@ function BasketContext({ children }) {
         >
             {children}
         </BASKET.Provider>
-    );
+    )
 }
 
-export default BasketContext;
+export default BasketContext
