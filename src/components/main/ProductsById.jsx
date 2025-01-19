@@ -15,6 +15,7 @@ import { Navigation } from 'swiper/modules'
 import { Helmet } from 'react-helmet'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
+import { getProductsByCategory } from '../../services/api'
 
 
 function ProductsById() {
@@ -34,9 +35,6 @@ function ProductsById() {
     const [selectedSizes, setSelectedSizes] = useState([])
     const [selectedColors, setSelectedColors] = useState([])
 
-    const catname = category?.find((item) => item.id === categid)?.name || ''
-    // console.log(catname)
-    
     const [value, setValue] = useState([0, 10000])
     const [minPrice, setMinPrice] = useState(0)
     const [maxPrice, setMaxPrice] = useState(10000)
@@ -179,11 +177,11 @@ function ProductsById() {
     return (
         <>
             <Helmet>
-                <title>{catname}</title>
+                <title>Women's Clothing</title>
             </Helmet>
             <div className='relative'>
                 <div className='flex flex-col gap-4 m-[25px]'>
-                    <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's {catname}</h1>
+                    <h1 className='text-black text-[20px] sm:text-[34px] capitalize trade-gothic tracking-wider'>women's clothing</h1>
                     <p className='text-[13px] text-[#212529]'>Cyber Monday: Up to 40% Off Sitewide + Extra 10%*</p>
                 </div>
                 <div className='noscroll overflow-scroll md:overflow-visible mb-[25px] mx-[22px] flex items-center gap-2'>
@@ -255,7 +253,7 @@ function ProductsById() {
                                 <p className={`${dropdownPrice ? 'hidden' : 'block'} text-[20px]`}>-</p>
                             </div>
                             <div className={`${dropdownPrice ? 'hidden' : 'block'} flex justify-center`}>
-                                <Box sx={{ width: 240 }}>
+                                <Box sx={{ width: 235 }}>
                                     <Slider
                                         getAriaLabel={() => 'Price range'}
                                         value={value}

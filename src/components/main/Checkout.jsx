@@ -37,7 +37,7 @@ function Checkout() {
                                     <p className='text-[12px] md:text-[13px]'>Color: {item.color}</p>
                                 </div>
                                 <div className='w-[15%] capitalize font-bold text-[16px] hidden sm:block'>{item.count}</div>
-                                <div className='w-[15%] capitalize font-bold text-[16px] hidden sm:block'>{item.price} $</div>
+                                <div className='w-[15%] capitalize font-bold text-[16px] hidden sm:block'>{item.price - item.discount} $</div>
                                 <div className='w-[15%] capitalize font-bold text-[16px] hidden sm:block'>{item.totalPrice} $</div>
                             </div>
                         ))
@@ -70,7 +70,7 @@ function Checkout() {
                             <input className='text-[14px] w-full md:w-[65%] border border-black p-[5px]' required />
                         </div>
                         <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
-                            <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 2 *</div>
+                            <div className='text-[13px] capitalize w-[30%] text-nowrap'>Address Line 2 </div>
                             <input className='text-[14px] w-full md:w-[65%] border border-black p-[5px]' required />
                         </div>
                         <div className='w-full px-[10px] flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between'>
@@ -200,8 +200,22 @@ function Checkout() {
                         <div className='w-full flex flex-col md:flex-row items-start md:items-center px-[10px] gap-2 md:gap-0 justify-between'>
                             <div className='text-[13px] capitalize w-[30%] text-nowrap'>expire date *</div>
                             <div className='w-full md:w-[65%] flex justify-between items-center'>
-                                <select className='text-[14px] w-[49%] border border-black p-[5px]' />
-                                <select className='text-[14px] w-[49%] border border-black p-[5px]' />
+                                <select className='text-[14px] w-[49%] border border-black p-[5px]'>
+                                    <option></option>
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                </select>
+                                <select className='text-[14px] w-[49%] border border-black p-[5px]'>
+                                    <option></option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                    <option>2026</option>
+                                    <option>2027</option>
+                                    <option>2028</option>
+                                </select>
                             </div>
                         </div>
                         <div className='w-full flex flex-col md:flex-row items-start md:items-center px-[10px] gap-2 md:gap-0 justify-between'>

@@ -63,7 +63,7 @@ function AddToBasket() {
                                                         <option value="5">5</option>
                                                     </select>
                                                 </div>
-                                                <div className='w-[15%] capitalize font-bold hidden md:block text-[13px]'>{item.price} $</div>
+                                                <div className='w-[15%] capitalize font-bold hidden md:block text-[13px]'>{item.price - item.discount} $</div>
                                                 <div className='w-[15%] text-nowrap capitalize font-bold text-[13px]'>{item.totalPrice} $</div>
                                             </div>
                                         </Link>

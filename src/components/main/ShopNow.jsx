@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import { DATA } from '../../context/DataContext';
+import { Helmet } from 'react-helmet';
 
 export default function ShopNow() {
     const { category, setCategory } = useContext(DATA)
@@ -26,6 +27,9 @@ export default function ShopNow() {
 
     return (
         <>
+        <Helmet>
+            <title>Shop Now</title>
+        </Helmet>
             <div className='w-[90%] md:w-[80%] mx-auto bg-white'>
                 <div className='py-[20px]'>
                     <h1 className='text-center capitalize text-black font-bold text-[30px] trade-gothic my-[20px]'>women's Shop</h1>

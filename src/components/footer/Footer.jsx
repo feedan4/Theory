@@ -8,7 +8,7 @@ function Footer() {
 
     const [dropdown1, setDropdown1] = useState(true)
     const [dropdown2, setDropdown2] = useState(true)
-    const [dropdown3, setDropdown3] = useState(true)   // bunlari birlesdir
+    const [dropdown3, setDropdown3] = useState(true)
 
     return (
         <footer className='relative z-30 flex flex-col'>
@@ -140,7 +140,7 @@ function Footer() {
                         <img src='/img/az.svg' className='w-[13px] inline-block mr-2' />
                         <span>Azerbaijan (AZN)</span>
                     </li>
-                    <li className='text-[11px] text-[#3b3b3b]'>&copy; 2024 Theory</li>
+                    <li className='text-[11px] text-[#3b3b3b]'>&copy; 2025 Theory</li>
                     <li className='text-[11px] text-[#3b3b3b]'>Site Map</li>
                     <li className='text-[11px] text-[#3b3b3b]'>Accessibility Statement</li>
                     <li className='text-[11px] text-[#3b3b3b]'>Your California Privacy Rights</li>
@@ -164,7 +164,7 @@ function Footer() {
                 </div>
                 <div>
                     <ul className="flex xl:hidden gap-4 whitespace-nowrap">
-                        <li className="text-[13px] text-[#3b3b3b]">&copy; 2024 Theory</li>
+                        <li className="text-[13px] text-[#3b3b3b]">&copy; 2025 Theory</li>
                         <li className="text-[13px] text-[#3b3b3b]">Site Map</li>
                     </ul>
                 </div>
