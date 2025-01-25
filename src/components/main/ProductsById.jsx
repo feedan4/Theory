@@ -39,18 +39,6 @@ function ProductsById() {
     const [minPrice, setMinPrice] = useState(0)
     const [maxPrice, setMaxPrice] = useState(10000)
 
-    // useEffect(() => {
-    //     const handlePopState = () => {
-    //         navigate("/shopnow", { replace: true })
-    //     }
-
-    //     window.addEventListener("popstate", handlePopState)
-
-    //     return () => {
-    //         window.removeEventListener("popstate", handlePopState)
-    //     }
-    // }, [navigate])
-
     useEffect(() => {
         if (data?.data?.data) {
             const allColors = data.data.data.flatMap(item => item.Colors)

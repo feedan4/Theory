@@ -43,7 +43,7 @@ function Header() {
       {
         category ? '' : <Loader />
       }
-      <div className={`relative`}>
+      <div className={`head relative`}>
         {canvas === '0' && (
           <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showCanvas('-100')}></div>
         )}
@@ -218,20 +218,8 @@ function Header() {
                   Search
                 </p>
               </div>
-              <div className="sign text-[12px] h-full capitalize hidden lg:block cursor-pointer">
+              <div onClick={() => showCanvas('0')} className="sign text-[12px] h-full capitalize hidden lg:block cursor-pointer">
                 Sign in/register
-                <div className="signdrop absolute shadow-lg flex-col gap-3 z-50 top-[5vh] lg:top-[6vh] right-[120px] pb-[20px] pt-[35px] px-[20px] text-black bg-white">
-                  <input type='text' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Email address' />
-                  <input type='password' className='w-[170px]  text-[12px] px-[5px] py-[2px] border border-[#AFAFAF]' placeholder='Password' />
-                  <div className='flex items-center gap-2'>
-                    <input type='checkbox' />
-                    <p className='capitalize text-[12px]'>remember me</p>
-                  </div>
-                  <button className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>sign in</button>
-                  <p className='text-[12px] text-black underline capitalize text-center cursor-pointer'>forget password?</p>
-                  <p className='text-[12px] text-black uppercase text-center'>or</p>
-                  <button onClick={() => showCanvas('0')} className='w-[170px] text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
-                </div>
               </div>
               <Link to="/wishlist">
                 <div className=" text-[12px] hidden lg:block">

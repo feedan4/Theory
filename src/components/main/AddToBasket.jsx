@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext} from 'react'
 import { BASKET } from '../../context/BasketContext'
-import { Link, useLocation } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 function AddToBasket() {

@@ -15,7 +15,7 @@ import 'swiper/css/thumbs'
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
-import { IoIosStarOutline, IoMdHeartEmpty } from 'react-icons/io'
+import { IoIosStarOutline} from 'react-icons/io'
 import { BASKET } from '../../context/BasketContext'
 import Loader from './Loader'
 import { Helmet } from 'react-helmet'
@@ -26,7 +26,6 @@ export default function Details() {
     const { sebet } = useContext(BASKET)
     const { wish } = useContext(DATA)
     const { totalAllAmount } = useContext(BASKET)
-    const { totalCount } = useContext(BASKET)
     const { addToWishlist } = useContext(DATA)
     const { removeWish } = useContext(DATA)
     const { probyid, setProById } = useContext(DATA)

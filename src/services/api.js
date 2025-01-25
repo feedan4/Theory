@@ -11,7 +11,7 @@ async function getProductById(proid) {
 }
 
 async function getProductsByCategory(categid, queryParams) {
-    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}&${queryParams}`);
+    const res = await axios.get(`https://ecommerse.davidhtml.xyz/products/all?categoryId=${categid}&${queryParams}`)
     return res
 }
 

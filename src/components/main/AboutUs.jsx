@@ -1,22 +1,6 @@
-import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
 
 function AboutUs() {
-
-  // const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   const handlePopState = () => {
-  //     navigate("/", { replace: true });
-  //   }
-
-  //   window.addEventListener("popstate", handlePopState);
-
-  //   return () => {
-  //     window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [navigate])
 
   return (
     <>
