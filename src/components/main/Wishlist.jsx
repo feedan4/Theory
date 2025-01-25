@@ -36,7 +36,7 @@ function Wishlist() {
                                     <div className={`relative w-[285px] flex flex-col h-full bg-white items-start justify-start`}>
                                         <FaHeart onClick={() => removeWish(item.id)} className="w-[20px] h-[20px] absolute top-3 right-4 cursor-pointer" />
                                         <img
-                                            className="w-full object-cover mb-2"
+                                            className="w-full h-[380px] object-cover mb-2"
                                             src={item.img && item.img[0]}
                                             alt={item.name}
                                         />

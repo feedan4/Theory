@@ -44,7 +44,7 @@ export default function ProductSlider() {
               slidesPerView: 6, // For larger screens
             },
           }}
-          className="orderSwiper"
+          className="orderSwiper h-full"
         >
 
           {data && data.data?.data?.map((item) => (

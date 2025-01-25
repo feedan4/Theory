@@ -69,12 +69,11 @@ export default function ShopNow() {
                             slidesPerView={1}
                             spaceBetween={30}
                             navigation={true}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            modules={[Pagination, Navigation]}
+                            modules={[Navigation]}
                             touchRatio={1}
                             scrollbar={{ draggable: true }}
+                            simulateTouch={true}
+                            freeMode={true} 
                             direction="horizontal"
                             breakpoints={{
                                 300: { slidesPerView: 2, spaceBetween: 20 },

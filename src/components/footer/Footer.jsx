@@ -19,8 +19,10 @@ function Footer() {
                         <p className='text-[12px] text-[#494949]'>Join our mailing list for our latest updates and enjoy 15% off your first full price order. Learn more about our privacy policy here</p>
                     </div>
                     <div className='flex lg:flex-row flex-col gap-5 w-full lg:w-auto'>
-                        <input type='text' placeholder='enter email address' className='w-full lg:w-[277px] px-[10px] h-[40px] text-[13px] border border-[#808080] text-[#000] capitalize' />
-                        <button className='bg-[#7D7D7D] font-archivo h-[40px] lg:w-[110px] w-full text-white text-[12px] uppercase border border-[#7D7D7D]'>sign up</button>
+                        <input type='text' placeholder='Enter email address' className='w-full lg:w-[277px] px-[10px] h-[40px] text-[13px] border border-[#808080] text-[#000]' />
+                        <Link to="/">
+                            <button className='bg-[#7D7D7D] font-archivo h-[40px] lg:w-[110px] w-full text-white text-[12px] uppercase border border-[#7D7D7D]'>sign up</button>
+                        </Link>
                     </div>
                 </div>
             </div>

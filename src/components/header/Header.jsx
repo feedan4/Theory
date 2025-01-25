@@ -43,7 +43,7 @@ function Header() {
       {
         category ? '' : <Loader />
       }
-      <div className='relative'>
+      <div className={`relative`}>
         {canvas === '0' && (
           <div className="fixed inset-0 bg-black opacity-70 z-50" onClick={() => showCanvas('-100')}></div>
         )}
@@ -90,49 +90,61 @@ function Header() {
           <div className='flex flex-col gap-4 text-[11px]'>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>* first name</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='first name' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='First name' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>* last name</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='last name' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='Last name' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>* email address</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='email address' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='Email address' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>confirm email address</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='confirm email address' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='Confirm email address' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>* password</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='password (8-255 characters)' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='Password (8-255 characters)' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>* confirm password</div>
-              <input className='w-full border border-[#bebebe] p-[5px] capitalize' placeholder='confirm password' />
+              <input className='w-full border border-[#bebebe] p-[5px]' placeholder='Confirm password' />
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>birth date</div>
               <div className='w-full flex items-center justify-between'>
                 <select className='w-[30%] border text-black border-[#bebebe] p-[5px] capitalize'>
                   <option>mon</option>
+                  <option>tue</option>
+                  <option>wed</option>
+                  <option>thur</option>
+                  <option>fri</option>
+                  <option>sat</option>
+                  <option>sun</option>
                 </select>
                 <select className='w-[30%] border text-black border-[#bebebe] p-[5px] capitalize'>
                   <option>day</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
                 </select>
-                <input type='text' className='w-[30%] border border-[#bebebe] p-[5px] capitalize' placeholder='year' />
+                <input type='text' className='w-[30%] border border-[#bebebe] p-[5px] capitalize' placeholder='Year' />
               </div>
             </div>
             <div className='w-full flex flex-col gap-2 items-start justify-between'>
               <div className='capitalize w-full'>gender</div>
               <div className='w-full flex items-center justify-between'>
                 <div className='w-[49%] border border-[#bebebe] p-[5px] flex items-center gap-2'>
-                  <button className={`w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black rounded-full`}></button>
+                  <input type='radio' name='sex' className={`w-[15px] h-[15px] border-1 border-black`} />
                   <div className='capitalize'>female</div>
                 </div>
                 <div className='w-[49%] border border-[#bebebe] p-[5px] flex items-center gap-2'>
-                  <button className={`w-[10px] h-[10px] border-2 border-white outline outline-1 outline-black rounded-full`}></button>
+                  <input type='radio' name='sex' className={`w-[15px] h-[15px] border-1 border-black`} />
                   <div className='capitalize'>male</div>
                 </div>
               </div>
@@ -143,7 +155,7 @@ function Header() {
             </div>
             <div className='text-[9px]'>1By checking this box, you consent to receive emails about Theory's latest collections, exclusive offers, and special events. You may revoke your consent at any time by clicking unsubscribe at the bottom of any email from us. By clicking 'SAVE' below you accept the terms of our Privacy Policy</div>
             <hr className='w-full h-[1px] border-none bg-[#bebebe]' />
-            <button className='w-full text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
+            <button onClick={() => showCanvas('-100')} className='w-full text-center text-[12px] bg-black border border-black text-white uppercase py-[5px]'>register</button>
           </div>
         </div>
         <div className='bg-black py-[5px] text-center text-white text-[13px]'>Black Friday: 25% Off Sitewide + Up to 40% Off Select Outerwear*</div>
@@ -231,7 +243,6 @@ function Header() {
                   <FaHeart />
                 </div>
               </Link>
-
               <div className="relative">
                 <Link to="/basket">
                   <BsBasket3Fill className=" hover:text-black text-[12px]" />

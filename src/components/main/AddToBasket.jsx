@@ -44,7 +44,14 @@ function AddToBasket() {
                                                     <p className='text-[12px] lg:text-[14px]'>{item.name}</p>
                                                     <p className='text-[12px] text-nowrap lg:text-[13px]'>Size: {item.size}</p>
                                                     <p className='text-[12px] text-nowrap lg:text-[13px]'>Color: {item.color}</p>
-                                                    <p onClick={() => removeProduct(item.id, item.size, item.color)} className='capitalize font-bold cursor-pointer underline'>remove</p>
+                                                    <p
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            removeProduct(item.id, item.size, item.color);
+                                                        }}
+                                                        className="capitalize font-bold cursor-pointer underline">
+                                                        remove
+                                                    </p>
                                                 </div>
                                                 <div className='w-[12%] md:w-[9%]' onClick={(e) => e.preventDefault()}>
                                                     <select
@@ -98,7 +105,7 @@ function AddToBasket() {
                 <Link to="/checkout" className='w-[100%]'>
                     <button className='w-[100%] py-[10px] text-white uppercase border border-black text-[14px] font-bold text-center bg-black'>continue to checkout</button>
                 </Link>
-            </div>
+            </div >
         </>
     )
 }

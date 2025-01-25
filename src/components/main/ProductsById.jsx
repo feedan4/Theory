@@ -63,7 +63,7 @@ function ProductsById() {
         }
     }, [data])
 
-    
+
     useEffect(() => {
         if (categid) {
             getProductsByCategory(categid)
@@ -105,20 +105,20 @@ function ProductsById() {
         let newPage = page
 
         if (direction === 'prev') {
-            newPage = Math.max(page - 1, 1) 
+            newPage = Math.max(page - 1, 1)
         } else if (direction === 'next') {
-            newPage = Math.min(page + 1, totalPages) 
+            newPage = Math.min(page + 1, totalPages)
         }
 
         setPage(newPage)
-        updateURL(newPage) 
+        updateURL(newPage)
     }
 
     useEffect(() => {
         if (categid) {
-            fetchFilteredProducts() 
+            fetchFilteredProducts()
         }
-    }, [categid, selectedSizes, selectedColors, page, minPrice, maxPrice]) 
+    }, [categid, selectedSizes, selectedColors, page, minPrice, maxPrice])
 
     const handleCheckboxChange = (e, filterType) => {
         const { value, checked } = e.target
@@ -143,17 +143,17 @@ function ProductsById() {
     const fetchFilteredProducts = () => {
         const sizeQuery = selectedSizes.join(",")
         const colorQuery = selectedColors.join(",")
-        const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}` 
+        const priceQuery = `minPrice=${minPrice}&maxPrice=${maxPrice}`
         const limit = 10
 
         const queryParams = `page=${page}&limit=${limit}${colorQuery ? `&color=${colorQuery}` : ''}${sizeQuery ? `&size=${sizeQuery}` : ''}&${priceQuery}`
 
         getProductsByCategory(`${categid}`, queryParams)
             .then(res => {
-                setProByCatId(res) 
+                setProByCatId(res)
             })
             .catch(error => {
-                console.error("Dramaaaa", error) 
+                console.error("Dramaaaa", error)
             })
     }
 
@@ -172,7 +172,7 @@ function ProductsById() {
 
     useEffect(() => {
         updateURL(page)
-    }, [selectedSizes, selectedColors, page, minPrice, maxPrice]) 
+    }, [selectedSizes, selectedColors, page, minPrice, maxPrice])
 
     return (
         <>
@@ -305,7 +305,10 @@ function ProductsById() {
                                     className={`procard flex flex-col gap-2 w-[150px] h-full ${view === "285" ? "sm:w-[285px]" : "sm:w-[730px]"} bg-white items-start justify-start`}
                                 >
                                     <Swiper
-                                        navigation={true}
+                                        navigation={{
+                                            nextEl: `.swiper-button-next-${i}`,
+                                            prevEl: `.swiper-button-prev-${i}`,
+                                        }}
                                         modules={[Navigation]}
                                         className={`productsSwiper ${view === '285' ? 'sm:h-[400px]' : 'sm:h-full'} w-full`}
                                     >
@@ -318,6 +321,14 @@ function ProductsById() {
                                                 />
                                             </SwiperSlide>
                                         ))}
+                                        <div
+                                            className={`swiper-button-next swiper-button-next-${i}`}
+                                            onClick={(e) => e.stopPropagation()}
+                                        ></div>
+                                        <div
+                                            className={`swiper-button-prev swiper-button-prev-${i}`}
+                                            onClick={(e) => e.stopPropagation()}
+                                        ></div>
                                     </Swiper>
                                     <div className="flex flex-col items-start">
                                         <div>
